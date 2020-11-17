@@ -1,0 +1,122 @@
+﻿@page "/Offices/Assign"
+
+
+@inject OfficesService Service
+
+
+<h3>Assign Office</h3>
+<br />
+
+<div class="container">
+    <fieldset>
+        <EditForm Model="office" OnValidSubmit="Assignoffice">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            @*<div class="form-group">
+                    <label for="first-name">First Name:*</label>
+                    <InputText id="name" @bind-Value="office." class="form-control" placeholder="Enter Fisrt Name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name">Last Name:*</label>
+                    <InputText id="last-name" @bind-Value="office.LastName" class="form-control" placeholder="Enter Last Name" />
+                </div>*@
+
+            @*<div class="form-group">
+                    <label for="positionTitle">Position Title:*</label>
+                    <InputText id="positionTitle" @bind-Value="office.PositionTitle" class="form-control" placeholder="Enter Position Title" />
+                </div>*@
+
+            <label>Job Type:*</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="type" value="option1" checked>
+                <label class="form-check-label" for="type">
+                    Full-Time
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="type2" value="option2">
+                <label class="form-check-label" for="type2">
+                    Part-Time
+                </label>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label for="officeNumber">Office Number:*</label>
+                <InputText id="officeNumber" @bind-Value="office.OfficeNumber" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="officeArea">Office Area:*</label>
+                <InputText id="officeArea" @bind-Value="office.OfficeArea" class="form-control" />
+            </div>
+
+            @*<div class="form-group">
+                    <label for="phoneExtension">Phone Extension:*</label>
+                    <InputText id="phoneExtension" @bind-Value="office." class="form-control" placeholder="Ext 230" />
+                </div>*@
+
+            <label>Available Resources:*</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option1" id="availableResources1">
+                <label class="form-check-label" for="availableResources1">Desk</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option2" id="availableResources2">
+                <label class="form-check-label" for="availableResources2">Chairs</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option2" id="availableResources3">
+                <label class="form-check-label" for="availableResources3">Cabinets</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option3" id="availableResources4">
+                <label class="form-check-label" for="availableResources4">
+                    Door Sign
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option5" id="availableResources5">
+                <label class="form-check-label" for="availableResources5">Phone</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option6" id="availableResources6">
+                <label class="form-check-label" for="availableResources6">Computer</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="option7" id="availableResources7">
+                <label class="form-check-label" for="availableResources7">
+                    Printer
+                </label>
+            </div>
+            @*<div class="form-group">
+                    <InputText id="other" @bind-Value="office.OfficeArea" class="form-control" placeholder="Other" />
+                </div>*@
+            <br />
+            <br />
+
+            <div class="mt-2"></div>
+            <br>
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+            <a href="Offices/List" class="btn btn-outline-secondary" role="button">Cancel</a>
+
+        </EditForm>
+    </fieldset>
+</div>
+
+
+
+@code {
+    OFFICE office = new OFFICE();
+
+    private void Assignoffice()
+    {
+
+        Service.Assignoffice(office);
+
+        office = new OFFICE();
+
+    }
+}

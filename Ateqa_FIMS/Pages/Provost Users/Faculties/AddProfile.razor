@@ -1,0 +1,218 @@
+﻿@page "/Profile/Add"
+
+@using DAH_FIMS.Data
+@using DAH_FIMS.Services
+ 
+
+@inject FacultyService Service
+@inject NavigationManager NavigationManager 
+
+<h4>Add Profile</h4>
+<br />
+<div class="container">
+    <fieldset>
+        <EditForm Model="faculty" OnValidSubmit="AddProfile">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="firstName">First Name:*</label>
+                <InputText type="text" id="firstName" @bind-Value="faculty.FirstName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:*</label>
+                <InputText type="text" id="lastName" @bind-Value="faculty.LastName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number:*</label>
+                <InputText id="mobile" @bind-Value="faculty.FACULTY.MobileNumber" class="form-control" placeholder="00966000000000" />
+            </div>
+
+            <div class="form-group">
+                <label for="emailAddress" class="control-label">Email Address:*</label>
+                <InputText type="email" id="emailAddress" @bind-Value="faculty.EmailAdress" class="form-control" placeholder="sam@example.com" />
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfBirth">Date Of Birth:*</label>
+                <InputDate id="dateOfBirth" @bind-Value="faculty.FACULTY.DateOfBirth" class="form-control" />
+            </div>
+
+            <label class="mr-2">Marital status:* </label>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="single" name="maritalStatus" value="Single" @onchange="SelectStatus" checked />
+                <label class="form-check-label" for="single">
+                    Single
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="married" name="maritalStatus" value="Married" @onchange="SelectStatus"/>
+                <label class="form-check-label" for="married">
+                    Married
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="nationality">Nationality:*</label>
+                <InputText type="text" id="nationality" @bind-Value="faculty.FACULTY.Nationality" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="highestEducation">Highest Education:*</label>
+                <InputText type="text" id="highestEducation" @bind-Value="faculty.FACULTY.HighestEducation" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="institution">Institution:*</label>
+                <InputText type="text" id="institution" @bind-Value="faculty.FACULTY.Institution" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="division">Division:*</label>
+                <InputText type="text" id="division" @bind-Value="faculty.FACULTY.Division" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="schoolName">School Name:*</label>
+                <select id="schoolName" class="form-control">
+                    <option selected>---Select a School---</option>
+                    <option>School of Business & Law</option>
+                    <option>School of Design & Architecture</option>
+                    <option>School of Health, Behavioral Sciences & Education</option>
+                    <option>School of Engineering, Computing & Informatics</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department Name:*</label>
+                <InputSelect @bind-Value="departmentId" id="department" class="form-control">
+                    <option value="">---Select a Department---</option>
+                    @foreach (var department in departments)
+                    {
+                        <option value="@department.DepartmentId">@department.DepartmentName</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <div class="form-group">
+                <label for="positionTitle">Position Title:*</label>
+                <InputText type="text" id="positionTitle" @bind-Value="faculty.Position.PositionTitle" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="typeOfContract">Type of Contract:*</label>
+                <InputText type="text" id="typeOfContract" @bind-Value="faculty.FACULTY.TypeOfContract" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="phoneExtension">Phone Extension:*</label>
+                <InputNumber id="phoneExtension" @bind-Value="faculty.PhoneExtension" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                    <label for="officeNumber">Office Number</label>
+                    <InputText id="officeNumber" @bind-Value="faculty.Office.OfficeNumber" class="form-control"  />
+                </div>
+
+            <div class="form-group">
+                <label for="dateNeeded">Date Needed:*</label>
+                <InputDate id="dateNeeded" @bind-Value="faculty.FACULTY.DateNeeded" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="reqruitmentStatus">Reqruitment Status:*</label>
+                <select id="reqruitmentStatus" class="form-control">
+                    <option selected>---Choose---</option>
+                    <option>Pending</option>
+                    <option>Cancelled</option>
+                    <option>Approved</option>
+                    <option>Rejected</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="applicationDate">Application Date:*</label>
+                <InputDate id="applicationDate" @bind-Value="faculty.FACULTY.ApplicationDate" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="hiringDate">Hiring Date: </label>
+                <InputDate id="hiringDate" @bind-Value="faculty.FACULTY.HiringDate" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="rank">Rank:*</label>
+                <select id="rank" class="form-control">
+                    <option selected>---Choose---</option>
+                    <option>Professor</option>
+                    <option>Associate Professor</option>
+                    <option>Assistant Professor</option>
+                    <option>Lecturer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="requiredLoad">Required Load:</label>
+                <InputNumber id="requiredLoad" @bind-Value="faculty.FACULTY.RequiredLoad" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="conversionRate">Conversion Rate:</label>
+                <InputNumber id="requiredLoad" @bind-Value="faculty.FACULTY.ConversionRate" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="releaseDate">Relesse Date: </label>
+                <InputDate id="releaseDate" @bind-Value="faculty.FACULTY.ReleaseDate" class="form-control" />
+            </div>
+
+            <div class="file-field">
+                <label for="hiringDocuments">Hiring Documents Copy:*</label>
+                <br />
+                <div class="btn btn-primary btn-sm float-left">
+                    <span>Choose file</span>
+                    <input type="file">
+                </div>
+            </div>
+            <br /><br />
+        </EditForm>
+    </fieldset>
+</div>
+
+<button type="submit" class="btn btn-outline-primary">Save</button>
+<a href="Visitor/List" class="btn btn-outline-secondary">Cancel</a>
+<div class="mt-4"></div>
+
+@code {
+    EMPLOYEE faculty = new EMPLOYEE();
+
+    private List<EMPLOYEE> faculties = new List<EMPLOYEE>();
+
+    protected override void OnInitialized()
+    {
+        faculties = Service.GetFaculties();
+    }
+
+    // Used to handle faculty martial status using radio buttons
+    private FACULTY status
+
+    private void SelectLanguage(ChangeEventArgs args)
+    {
+        Enum.TryParse(args.Value.ToString(), out language);
+    }
+
+
+    private string departmentId = String.Empty;
+
+    private List<DEPARTMENT> departments = new List<DEPARTMENT>();
+
+    private void Addprofile()
+    {
+        Service.Addprofile(faculty);
+
+        faculty = new EMPLOYEE();
+    }
+}

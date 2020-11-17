@@ -1,0 +1,607 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: arial, sans-serif;
+    color: #4d0000;
+}
+
+
+a, .btn-link {
+    color: #4d0000;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #4d0000;
+    border-color: #4d0000;
+}
+
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #ffe6b3;
+        border-color: #4d0000;
+    }
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.topnav {
+    overflow: hidden;
+    background-color: #4d0000;
+    height: 80px;
+    width: 1366px;
+}
+
+.header {
+    background-color: #ffe6b3;
+    height: 40px;
+    width: 1366px;
+    padding-top: 1px;
+}
+
+hr {
+    height: 1px;
+    background-color: #fff;
+    border: none;
+}
+
+/* Style the content*/
+.content {
+    background-color: white;
+    padding: 10px;
+    height: 50px;
+}
+
+div.relative {
+    position: relative;
+    left: 30px;
+}
+
+th {
+    text-align: left;
+    padding: 8px;
+}
+
+.login-reg-panel {
+    position: relative;
+    top: 1000%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 70%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 400px;
+    background-color: #4d0000;
+}
+
+.white-panel {
+    background-color: #ffe6b3;
+    height: 500px;
+    position: absolute;
+    top: -50px;
+    width: 50%;
+    right: calc(50% - 50px);
+    transition: .3s ease-in-out;
+    z-index: 0;
+    box-shadow: 0 0 15px 9px #00000096;
+}
+
+.login-reg-panel {
+    color: darkred;
+    text-align: left;
+}
+
+.register-info-box {
+    width: 30%;
+    padding: 0 50px;
+    top: 20%;
+    right: 0;
+    position: absolute;
+    text-align: center;
+    color: white;
+}
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,0.24);
+    margin-bottom: 30px;
+}
+
+.input100 {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px 0 38px;
+}
+
+/*---------------------------------------------*/
+.focus-input100 {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+    .focus-input100::before {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        background: #fff;
+    }
+
+    .focus-input100::after {
+        font-family: Material-Design-Iconic-Font;
+        font-size: 22px;
+        color: #fff;
+        content: attr(data-placeholder);
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 6px;
+        left: 0px;
+        padding-left: 5px;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+    }
+
+.input100:focus {
+    padding-left: 5px;
+}
+
+    .input100:focus + .focus-input100::after {
+        top: -22px;
+        font-size: 18px;
+    }
+
+    .input100:focus + .focus-input100::before {
+        width: 100%;
+    }
+
+.has-val.input100 + .focus-input100::after {
+    top: -22px;
+    font-size: 18px;
+}
+
+.has-val.input100 + .focus-input100::before {
+    width: 100%;
+}
+
+.has-val.input100 {
+    padding-left: 5px;
+}
+
+
+
+/*==================================================================
+[ Restyle Checkbox ]*/
+
+.contact100-form-checkbox {
+    padding-left: 20px;
+    padding-top: 1px;
+    padding-bottom: 35px;
+}
+
+.input-checkbox100 {
+    display: none;
+}
+
+.label-checkbox100 {
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    color: #4d0000;
+    line-height: 1.2;
+    display: block;
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+}
+
+    .label-checkbox100::before {
+        content: "\f2";
+        font-family: arial, sans-serif;
+        font-size: 13px;
+        color: transparent;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+        background: #fff;
+        left: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+.input-checkbox100:checked + .label-checkbox100::before {
+    color: #4d0000;
+}
+
+/*==================================================================
+[ Button ]*/
+.container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login100-form-btn {
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    color: #ffe6b3;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    background: #ffe6b3;
+    background: -webkit-linear-gradient(bottom, #ffe6b3, #4d0000);
+    background: -o-linear-gradient(bottom, #4d0000, #ffe6b3);
+    background: -moz-linear-gradient(bottom, #4d0000, #ffe6b3);
+    background: linear-gradient(bottom, #4d0000, #ffe6b3);
+    position: relative;
+    z-index: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+    .login100-form-btn::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        background-color: #4d0000;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+    }
+
+    .login100-form-btn:hover {
+        color: #4d0000;
+    }
+
+     .login100-form-btn:hover:before {
+            opacity: 0;
+     }
+
+
+.txt1 {
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    color: #4d0000;
+    line-height: 5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.main {
+    flex: 1;
+}
+
+    .main .top-row {
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #d6d5d5;
+        justify-content: flex-end;
+    }
+
+        .main .top-row > a, .main .top-row .btn-link {
+            white-space: nowrap;
+            margin-left: 1.5rem;
+        }
+
+.main .top-row a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+    .sidebar .top-row {
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .sidebar .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .sidebar .oi {
+        width: 2rem;
+        font-size: 1.1rem;
+        vertical-align: text-top;
+        top: -2px;
+    }
+
+    .sidebar .nav-item {
+        font-size: 0.9rem;
+        padding-bottom: 0.5rem;
+    }
+
+        .sidebar .nav-item:first-of-type {
+            padding-top: 1rem;
+        }
+
+        .sidebar .nav-item:last-of-type {
+            padding-bottom: 1rem;
+        }
+
+        .sidebar .nav-item a {
+            color: #d7d7d7;
+            border-radius: 4px;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            line-height: 3rem;
+        }
+
+            .sidebar .nav-item a.active {
+                background-color: rgba(255,255,255,0.25);
+                color: white;
+            }
+
+            .sidebar .nav-item a:hover {
+                background-color: rgba(255,255,255,0.1);
+                color: white;
+            }
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+@media (max-width: 767.98px) {
+    .main .top-row:not(.auth) {
+        display: none;
+    }
+
+    .main .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .main .top-row a, .main .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    app {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .main .top-row {
+        position: sticky;
+        top: 0;
+    }
+
+    .main > div {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .sidebar .collapse {*/
+        /* Never collapse the sidebar for wide screens */
+        /*display: block;
+    }
+}*/
