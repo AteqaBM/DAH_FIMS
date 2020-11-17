@@ -30,7 +30,7 @@ namespace DAH_FIMS.Services
         /// <returns>List of all faculties</returns>
         public List<EMPLOYEE> GetFaculties()
         {
-            return db.EMPLOYEEs.Include("FACULTY").Include("SCHOOL")/*.Include("DEPARTMENT")*/.ToList();
+            return db.EMPLOYEEs.Include("FACULTY").ToList();
         }
 
         public EMPLOYEE GetFaculty (int id)
@@ -38,7 +38,7 @@ namespace DAH_FIMS.Services
             return db.EMPLOYEEs.SingleOrDefault(c => c.EmployeeId == id);
         }
 
-        public bool AddProfile(EMPLOYEE faculty)
+        public bool Addprofile(EMPLOYEE faculty)
         {
             if (faculty != null)
             {

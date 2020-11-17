@@ -74,3 +74,8 @@ namespace DAH_FIMS.Data
         public virtual ICollection<WORKLOAD> WORKLOADs { get; set; }
     }
 }
+
+public enum FacultyStatus
+{
+    Single = 1, Married 
+}

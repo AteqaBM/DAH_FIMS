@@ -36,7 +36,7 @@ namespace DAH_FIMS
 
             services.AddDbContext<DahFIMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<OfficesService>();
-            //services.AddScoped<FacultyService>();
+            services.AddScoped<FacultyService>();
 
         }
 

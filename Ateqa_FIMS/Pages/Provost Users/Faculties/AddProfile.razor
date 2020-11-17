@@ -2,16 +2,16 @@
 
 @using DAH_FIMS.Data
 @using DAH_FIMS.Services
- 
+
 
 @inject FacultyService Service
-@inject NavigationManager NavigationManager 
+@inject NavigationManager NavigationManager
 
 <h4>Add Profile</h4>
 <br />
 <div class="container">
     <fieldset>
-        <EditForm Model="faculty" OnValidSubmit="AddProfile">
+        <EditForm Model="faculty" OnValidSubmit="Addprofile">
             <DataAnnotationsValidator />
             <ValidationSummary />
 
@@ -49,7 +49,7 @@
                 </label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="married" name="maritalStatus" value="Married" @onchange="SelectStatus"/>
+                <input class="form-check-input" type="radio" id="married" name="maritalStatus" value="Married" @onchange="SelectStatus" />
                 <label class="form-check-label" for="married">
                     Married
                 </label>
@@ -113,9 +113,9 @@
             </div>
 
             <div class="form-group">
-                    <label for="officeNumber">Office Number</label>
-                    <InputText id="officeNumber" @bind-Value="faculty.Office.OfficeNumber" class="form-control"  />
-                </div>
+                <label for="officeNumber">Office Number</label>
+                <InputText id="officeNumber" @bind-Value="faculty.Office.OfficeNumber" class="form-control" />
+            </div>
 
             <div class="form-group">
                 <label for="dateNeeded">Date Needed:*</label>
@@ -197,11 +197,11 @@
     }
 
     // Used to handle faculty martial status using radio buttons
-    private FACULTY status
+    private FacultyStatus status = FacultyStatus.Single;
 
-    private void SelectLanguage(ChangeEventArgs args)
+    private void SelectStatus(ChangeEventArgs args)
     {
-        Enum.TryParse(args.Value.ToString(), out language);
+        Enum.TryParse(args.Value.ToString(), out status);
     }
 
 
@@ -209,10 +209,13 @@
 
     private List<DEPARTMENT> departments = new List<DEPARTMENT>();
 
+
     private void Addprofile()
     {
         Service.Addprofile(faculty);
 
         faculty = new EMPLOYEE();
+
+        NavigationManager.NavigateTo("Faculties");
     }
 }
