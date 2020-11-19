@@ -1,7 +1,6 @@
 ﻿@page "/signin"
-
-
-@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager 
+@using DAH_FIMS.Data
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 
 <div class="login-reg-panel">
     <div class="register-info-box">
@@ -15,7 +14,7 @@
         <center>
             <h5>
                 <br /> <br />
-                Sign in to Account
+                <label style="color: darkred; font-size: 16px;"> @message </label> Sign in to Account
             </h5>
         </center>
         <hr style="width: 50%; background-color: #4d0000">
@@ -37,24 +36,24 @@
                 <label class="label-checkbox100" for="ckb1">
                     Remember me
                 </label>
-                
+
                 <a class="txt1" href="#">
                     Forgot Password?
                 </a>
             </div>
 
             <div class="container-login100-form-btn">
-                <button class="login100-form-btn" @onclick ="signinButtonClicked">
+                <button class="login100-form-btn" @onclick="signinButtonClicked">
                     Sign In
                 </button>
             </div>
-            <label style="color: white; font-size: 16px;"> @message </label>
+
 
             @*<div class="text-center p-t-90">
-                <a class="txt1" href="#">
-                    Forgot Password?
-                </a>
-            </div>*@
+                    <a class="txt1" href="#">
+                        Forgot Password?
+                    </a>
+                </div>*@
 
         </form>
     </div>
@@ -67,10 +66,12 @@
 
     DahFIMSDbContext db = new DahFIMSDbContext();
     private List<SYSTEM_USER> users;
-    private List<SYSTEM_SUPERVISOR> provost;
-    private List<CAADU_USER> caadu;
-    private List<HR_USER> hr;
-    private List<IT_USER> coordinators;
+    private List<EMPLOYEE> employeesList;
+
+    //private List<SYSTEM_ADMIN> provost;
+    //private List<CAADU_USER> caadu;
+    //private List<HR_USER> hr;
+    //private List<IT_USER> coordinators;
 
 
     int userid;
@@ -80,47 +81,52 @@
     string message;
     bool found = false;
     string provName;
-    string caaduName;
-    string hrName;
-    string coorName;
+    //string caaduName;
+    //string hrName;
+    //string coorName;
 
     protected void signinButtonClicked()
     {
         users = db.SYSTEM_USERs.Where(c => c.Username == username && c.Password == password).ToList();
 
+
+
         if (users.Count != 0)
         {
-            message = users[0].Username + "  " + username + "  " + users[0].Password + "  " + password;
+            //message = users[0].Username + "  " + username + "  " + users[0].Password + "  " + password;
             type = users[0].UserType;
             userid = users[0].UserId;
 
-            if (type == "prov")
+            if (type == "Provost")
             {
-                provost = db.SYSTEM_SUPERVISORs.Where(c => c.UserId == userid).ToList();
-                provName = provost[0].Employee.FirstName + "  " + provost[0].Employee.LastName;
-                navigationManager.NavigateTo($"/ /{provName}");
+                employeesList = db.EMPLOYEEs.Where(c => c.UserId == userid).ToList();
+                provName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+
+                navigationManager.NavigateTo($"/ProvostHomepage/{provName}");
             }
 
-            else if (type == "caadu")
-            {
-                caadu = db.CAADU_USERs.Where(c => c.UserId == userid).ToList();
-                caaduName = caadu[0].Employee.FirstName + "  " + caadu[0].Employee.LastName;
-                navigationManager.NavigateTo($"/CAADUHomepage/{caaduName}");
-            }
+            //else if (type == "CAADU")
+            //{
+            //    caadu = db.CAADU_USERs.Where(c => c.UserId == userid).ToList();
+            //    caaduName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
 
-            else if (type == "hr")
-            {
-                hr = db.HR_USERs.Where(c => c.UserId == userid).ToList();
-                hrName = hr[0].Employee.FirstName + "  " + hr[0].Employee.LastName;
-                navigationManager.NavigateTo($"/HRHomepage/{hrName}");
-            }
+            //    navigationManager.NavigateTo($"/CAADUHomepage/{caaduName}");
+            //}
 
-            else if (type == "coor")
-            {
-                coordinators = db.IT_USERs.Where(c => c.UserId == userid).ToList();
-                coorName = coordinators[0].Employee.FirstName + "  " + coordinators[0].Employee.LastName;
-                navigationManager.NavigateTo($"/CoordinatorsHomepage/{coorName}");
-            }
+            //else if (type == "HR")
+            //{
+            //    hr = db.HR_USERs.Where(c => c.UserId == userid).ToList();
+            //    hrName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+
+            //    navigationManager.NavigateTo($"/HRHomepage/{hrName}");
+            //}
+
+            //else if (type == "Coordinators")
+            //{
+            //    coordinators = db.IT_USERs.Where(c => c.UserId == userid).ToList();
+            //    coorName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+            //    navigationManager.NavigateTo($"/CoordinatorsHomepage/{coorName}");
+            //}
         }
 
         else

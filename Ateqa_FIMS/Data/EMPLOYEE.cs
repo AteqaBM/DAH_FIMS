@@ -36,15 +36,26 @@ namespace DAH_FIMS.Data
         public int DepartmentId { get; set; }
         public int? OfficeId { get; set; }
 
+        public int? UserId { get; set; }
+
         [ForeignKey(nameof(DepartmentId))]
         [InverseProperty(nameof(DEPARTMENT.EMPLOYEEs))]
         public virtual DEPARTMENT Department { get; set; }
+
         [ForeignKey(nameof(OfficeId))]
         [InverseProperty(nameof(OFFICE.EMPLOYEEs))]
         public virtual OFFICE Office { get; set; }
+
         [ForeignKey(nameof(PositionId))]
         [InverseProperty(nameof(POSITION.EMPLOYEEs))]
         public virtual POSITION Position { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        [InverseProperty(nameof(SYSTEM_USER.EMPLOYEEs))]
+        public virtual SYSTEM_USER SystemUser { get; set; }
+
+
+
         [InverseProperty("Employee")]
         public virtual CAADU_USER CAADU_USER { get; set; }
         [InverseProperty("Employee")]

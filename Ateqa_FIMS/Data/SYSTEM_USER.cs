@@ -35,6 +35,10 @@ namespace DAH_FIMS.Data
 
         [InverseProperty(nameof(CAADU_USER.User))]
         public virtual ICollection<CAADU_USER> CAADU_USERs { get; set; }
+
+        [InverseProperty(nameof(EMPLOYEE.SystemUser))]
+        public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
+
         [InverseProperty(nameof(HR_USER.User))]
         public virtual ICollection<HR_USER> HR_USERs { get; set; }
         [InverseProperty(nameof(INFO_DESK_USER.User))]
