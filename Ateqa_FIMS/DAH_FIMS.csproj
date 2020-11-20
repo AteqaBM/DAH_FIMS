@@ -8,9 +8,10 @@
     <Folder Include="Pages\CAADU Users\" />
     <Folder Include="Pages\HR Users\" />
     <Folder Include="Pages\Coordinators Users\" />
-    <Folder Include="Pages\Provost Users\Teacher Assistants\" />
-    <Folder Include="Pages\Provost Users\Requests Resources\" />
-    <Folder Include="Pages\Provost Users\Workloads\" />
+    <Folder Include="Pages\ProvostUsers\Teacher Assistants\" />
+    <Folder Include="Pages\ProvostUsers\Requests Resources\" />
+    <Folder Include="Pages\ProvostUsers\Workloads\" />
+    <Folder Include="wwwroot\JSS\" />
   </ItemGroup>
 
   <ItemGroup>

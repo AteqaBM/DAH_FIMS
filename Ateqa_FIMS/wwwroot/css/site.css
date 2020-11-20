@@ -136,6 +136,24 @@ th {
     background-color: #4d0000;
 }
 
+/*login-reg-panel {
+    position: relative;
+    top: 1000%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 70%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 400px;
+    background-color: #4d0000;
+}*/
+
+/*login-reg-panel {
+    color: darkred;
+    text-align: left;
+}*/
+
 .white-panel {
     background-color: #ffe6b3;
     height: 500px;
@@ -148,10 +166,24 @@ th {
     box-shadow: 0 0 15px 9px #00000096;
 }
 
+/*white-panel {
+    background-color: #ffe6b3;
+    height: 500px;
+    position: absolute;
+    top: -50px;
+    width: 50%;
+    right: calc(50% - 50px);
+    transition: .3s ease-in-out;
+    z-index: 0;
+    box-shadow: 0 0 15px 9px #00000096;
+}*/
+
 .login-reg-panel {
     color: darkred;
     text-align: left;
 }
+
+
 
 .register-info-box {
     width: 30%;
@@ -163,6 +195,16 @@ th {
     color: white;
 }
 
+/*register-info-box {
+    width: 30%;
+    padding: 0 50px;
+    top: 20%;
+    right: 0;
+    position: absolute;
+    text-align: center;
+    color: white;
+}*/
+
 /*------------------------------------------------------------------
 [ Input ]*/
 
@@ -172,6 +214,15 @@ th {
     border-bottom: 2px solid rgba(255,255,255,0.24);
     margin-bottom: 30px;
 }
+
+
+/*wrap-input100 {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid rgba(255,255,255,0.24);
+    margin-bottom: 30px;
+}*/
+
 
 .input100 {
     font-family: Poppins-Regular;
@@ -185,6 +236,19 @@ th {
     padding: 0 5px 0 38px;
 }
 
+
+/*input100 {
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px 0 38px;
+}*/
+
 /*---------------------------------------------*/
 .focus-input100 {
     position: absolute;
@@ -195,6 +259,17 @@ th {
     left: 0;
     pointer-events: none;
 }
+
+
+/*focus-input100 {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}*/
 
     .focus-input100::before {
         content: "";
@@ -210,6 +285,21 @@ th {
         transition: all 0.4s;
         background: #fff;
     }
+
+/*focus-input100::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    background: #fff;
+}*/
 
     .focus-input100::after {
         font-family: Material-Design-Iconic-Font;
@@ -227,34 +317,74 @@ th {
         -moz-transition: all 0.4s;
         transition: all 0.4s;
     }
+/*focus-input100::after {
+    font-family: Material-Design-Iconic-Font;
+    font-size: 22px;
+    color: #fff;
+    content: attr(data-placeholder);
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 6px;
+    left: 0px;
+    padding-left: 5px;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}*/
+
 
 .input100:focus {
     padding-left: 5px;
 }
+
+/*input100:focus {
+    padding-left: 5px;
+}*/
 
     .input100:focus + .focus-input100::after {
         top: -22px;
         font-size: 18px;
     }
 
+/*input100:focus + .focus-input100::after {
+    top: -22px;
+    font-size: 18px;
+}*/
     .input100:focus + .focus-input100::before {
         width: 100%;
     }
+/*input100:focus + .focus-input100::before {
+    width: 100%;
+}*/
+
 
 .has-val.input100 + .focus-input100::after {
     top: -22px;
     font-size: 18px;
 }
 
+/*has-val.input100 + .focus-input100::after {
+    top: -22px;
+    font-size: 18px;
+}*/
+
 .has-val.input100 + .focus-input100::before {
     width: 100%;
 }
+
+/*has-val.input100 + .focus-input100::before {
+    width: 100%;
+}*/
 
 .has-val.input100 {
     padding-left: 5px;
 }
 
-
+/*has-val.input100 {
+    padding-left: 5px;
+}*/
 
 /*==================================================================
 [ Restyle Checkbox ]*/
@@ -265,9 +395,19 @@ th {
     padding-bottom: 35px;
 }
 
+/*contact100-form-checkbox {
+    padding-left: 20px;
+    padding-top: 1px;
+    padding-bottom: 35px;
+}*/
+
 .input-checkbox100 {
     display: none;
 }
+
+/*input-checkbox100 {
+    display: none;
+}*/
 
 .label-checkbox100 {
     font-family: arial, sans-serif;
@@ -280,6 +420,17 @@ th {
     cursor: pointer;
 }
 
+
+/*label-checkbox100 {
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    color: #4d0000;
+    line-height: 1.2;
+    display: block;
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+}*/
     .label-checkbox100::before {
         content: "\f2";
         font-family: arial, sans-serif;
@@ -306,13 +457,43 @@ th {
         transform: translateY(-50%);
     }
 
+/*label-checkbox100::before {
+    content: "\f2";
+    font-family: arial, sans-serif;
+    font-size: 13px;
+    color: transparent;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background: #fff;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}*/
+
 .input-checkbox100:checked + .label-checkbox100::before {
     color: #4d0000;
 }
 
+/*input-checkbox100:checked + .label-checkbox100::before {
+    color: #4d0000;
+}*/
+
 /*==================================================================
 [ Button ]*/
-.container-login100-form-btn {
+/*.container-login100-form-btn {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
@@ -321,9 +502,24 @@ th {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}*/
+
+
+container-login100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
 }
 
-.login100-form-btn {
+
+
+/*.login100-form-btn {
     font-family: arial, sans-serif;
     font-size: 16px;
     color: #ffe6b3;
@@ -350,9 +546,39 @@ th {
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
+}*/
+
+login100-form-btn {
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    color: #ffe6b3;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    background: #ffe6b3;
+    background: -webkit-linear-gradient(bottom, #ffe6b3, #4d0000);
+    background: -o-linear-gradient(bottom, #4d0000, #ffe6b3);
+    background: -moz-linear-gradient(bottom, #4d0000, #ffe6b3);
+    background: linear-gradient(bottom, #4d0000, #ffe6b3);
+    position: relative;
+    z-index: 1;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    cursor: pointer;
 }
 
-    .login100-form-btn::before {
+/*    .login100-form-btn::before {
         content: "";
         display: block;
         position: absolute;
@@ -368,16 +594,43 @@ th {
         -o-transition: all 0.4s;
         -moz-transition: all 0.4s;
         transition: all 0.4s;
+    }*/
+
+    login100-form-btn::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        background-color: #4d0000;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+        cursor: pointer;
     }
 
-    .login100-form-btn:hover {
+/*    .login100-form-btn:hover {
         color: #4d0000;
+    }*/
+
+    login100-form-btn:hover {
+        color: #4d0000;
+        cursor: pointer;
     }
 
-     .login100-form-btn:hover:before {
+  /*   .login100-form-btn:hover:before {
             opacity: 0;
-     }
-
+     }*/
+        login100-form-btn:hover:before {
+            opacity: 0;
+            cursor: pointer;
+        }
 
 .txt1 {
     font-family: arial, sans-serif;
@@ -386,6 +639,13 @@ th {
     line-height: 5;
 }
 
+
+/*txt1 {
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    color: #4d0000;
+    line-height: 5;
+}*/
 
 
 

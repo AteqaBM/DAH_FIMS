@@ -1,136 +1,146 @@
 ﻿@page "/signin"
 @using DAH_FIMS.Data
+
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 
-<div class="login-reg-panel">
-    <div class="register-info-box">
-        <h5>Welcome, User</h5>
-        <hr>
-        <center><h6> Fill up the boxes with your DAH Id as a Username and Password </h6></center>
 
+
+    <div class="login-reg-panel">
+        <div class="register-info-box">
+            <h5>Welcome, User</h5>
+            <hr>
+            <center><h6> Fill up the boxes with your DAH Id as a Username and Password </h6></center>
+
+        </div>
+
+        <div class="white-panel">
+            <center>
+                <h5>
+                    <br /> <br />
+                    Sign in to Account
+                </h5>
+            </center>
+            <hr style="width: 50%; background-color: #4d0000">
+
+            <form>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" @bind="username">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" @bind="password">
+                </div>
+                <div>
+                    <label class="form-control-label" style="color: darkred; font-size: 16px;">
+                        @message
+                    </label>
+                </div>
+                <br />
+                <br />
+
+                <div class="contact100-form-checkbox form-inline">
+                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                    <label class="label-checkbox100" for="ckb1">
+                        Remember me     <a href="#" style="right:-50px"> Forgot Password? </a>
+                    </label>
+                </div>
+                <container-login100-form-btn>
+                    <login100-form-btn @onclick="signinButtonClicked">
+                        Sign In
+                    </login100-form-btn>
+                </container-login100-form-btn>
+
+                @*<label style="color: darkred; font-size: 16px;"> @message </label>*@
+
+            </form>
+        </div>
     </div>
-
-    <div class="white-panel">
-        <center>
-            <h5>
-                <br /> <br />
-                <label style="color: darkred; font-size: 16px;"> @message </label> Sign in to Account
-            </h5>
-        </center>
-        <hr style="width: 50%; background-color: #4d0000">
-
-        <form>
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" @bind="username">
-            </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" @bind="password">
-            </div>
-            <br />
-            <br />
-
-            <div class="contact100-form-checkbox form-inline">
-                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                <label class="label-checkbox100" for="ckb1">
-                    Remember me
-                </label>
-
-                <a class="txt1" href="#">
-                    Forgot Password?
-                </a>
-            </div>
-
-            <div class="container-login100-form-btn">
-                <button class="login100-form-btn" @onclick="signinButtonClicked">
-                    Sign In
-                </button>
-            </div>
+ 
 
 
-            @*<div class="text-center p-t-90">
-                    <a class="txt1" href="#">
-                        Forgot Password?
-                    </a>
-                </div>*@
-
-        </form>
-    </div>
-</div>
-<br />
-<br />
-
-
-@code{
-
-    DahFIMSDbContext db = new DahFIMSDbContext();
-    private List<SYSTEM_USER> users;
-    private List<EMPLOYEE> employeesList;
-
-    //private List<SYSTEM_ADMIN> provost;
-    //private List<CAADU_USER> caadu;
-    //private List<HR_USER> hr;
-    //private List<IT_USER> coordinators;
-
-
-    int userid;
-    string username;
-    string password;
-    string type;
-    string message;
-    bool found = false;
-    string provName;
-    //string caaduName;
-    //string hrName;
-    //string coorName;
-
-    protected void signinButtonClicked()
-    {
-        users = db.SYSTEM_USERs.Where(c => c.Username == username && c.Password == password).ToList();
+    @code{
 
 
 
-        if (users.Count != 0)
+        DahFIMSDbContext db = new DahFIMSDbContext();
+        private List<SYSTEM_USER> users;
+        private List<EMPLOYEE> employeesList;
+
+        //private List<SYSTEM_ADMIN> provost;
+        //private List<CAADU_USER> caadu;
+        //private List<HR_USER> hr;
+        //private List<IT_USER> coordinators;
+
+
+        int userid;
+        string username;
+        string password;
+        string type;
+        string message;
+        bool found = false;
+        string provName;
+        //string caaduName;
+        //string hrName;
+        //string coorName;
+
+        protected void signinButtonClicked()
         {
-            //message = users[0].Username + "  " + username + "  " + users[0].Password + "  " + password;
-            type = users[0].UserType;
-            userid = users[0].UserId;
+            //navigationManager.NavigateTo($"/");
+            users = db.SYSTEM_USERs.Where(c => c.Username == username && c.Password == password).ToList();
 
-            if (type == "Provost")
+
+
+            if (users.Count != 0)
             {
-                employeesList = db.EMPLOYEEs.Where(c => c.UserId == userid).ToList();
-                provName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+                //message = users[0].Username + "  " + username + "  " + users[0].Password + "  " + password;
+                type = users[0].UserType;
+                userid = users[0].UserId;
 
-                navigationManager.NavigateTo($"/ProvostHomepage/{provName}");
+                if (type == "Provost")
+                {
+                    employeesList = db.EMPLOYEEs.Where(c => c.UserId == userid).ToList();
+                    provName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+
+                    navigationManager.NavigateTo($"/Provost/Homepage/{provName}");
+                }
+
+                //else if (type == "CAADU")
+                //{
+                //    caadu = db.CAADU_USERs.Where(c => c.UserId == userid).ToList();
+                //    caaduName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+
+                //    navigationManager.NavigateTo($"/CAADUHomepage/{caaduName}");
+                //}
+
+                //else if (type == "HR")
+                //{
+                //    hr = db.HR_USERs.Where(c => c.UserId == userid).ToList();
+                //    hrName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+
+                //    navigationManager.NavigateTo($"/HRHomepage/{hrName}");
+                //}
+
+                //else if (type == "Coordinators")
+                //{
+                //    coordinators = db.IT_USERs.Where(c => c.UserId == userid).ToList();
+                //    coorName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+                //    navigationManager.NavigateTo($"/CoordinatorsHomepage/{coorName}");
+                //}
+                //}
+
+                else
+                {
+                    message = "Invalid usernname or password";
+                }
             }
 
-            //else if (type == "CAADU")
-            //{
-            //    caadu = db.CAADU_USERs.Where(c => c.UserId == userid).ToList();
-            //    caaduName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
 
-            //    navigationManager.NavigateTo($"/CAADUHomepage/{caaduName}");
-            //}
 
-            //else if (type == "HR")
-            //{
-            //    hr = db.HR_USERs.Where(c => c.UserId == userid).ToList();
-            //    hrName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
 
-            //    navigationManager.NavigateTo($"/HRHomepage/{hrName}");
-            //}
 
-            //else if (type == "Coordinators")
-            //{
-            //    coordinators = db.IT_USERs.Where(c => c.UserId == userid).ToList();
-            //    coorName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
-            //    navigationManager.NavigateTo($"/CoordinatorsHomepage/{coorName}");
-            //}
+
+
+
         }
-
-        else
-            message = "Invalid usernname or password";
     }
-
-}

@@ -36,9 +36,9 @@ namespace DAH_FIMS
             services.AddSyncfusionBlazor();
 
 
-            //services.AddDbContext<DahFIMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<OfficesService>();
-            //services.AddScoped<FacultyService>();
+            services.AddDbContext<DahFIMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<OfficesService>();
+            services.AddScoped<FacultyService>();
 
         }
 

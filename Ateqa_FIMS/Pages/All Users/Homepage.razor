@@ -1,4 +1,8 @@
 ﻿@page "/"
+
+
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
 <br />
 <br />
 <h1 style="text-align:center;">Faculty Information Managment System</h1>
@@ -7,19 +11,25 @@
 <br />
 <br />
 <p style="text-align:center;">
-    <div class="container-login100-form-btn" >
-        <a class="login100-form-btn" href="signin" role="button">
+    <container-login100-form-btn>
+        <login100-form-btn @onclick="signinButtonClicked">
             Sign In
-        </a>
-    </div>
+        </login100-form-btn>
+    </container-login100-form-btn>
     @*<a class="btn btn-primary" href="signin" role="button">Sign In</a>*@
 </p>
 
 
+@code{
 
 
+    protected void signinButtonClicked()
+    {
+        navigationManager.NavigateTo($"/signin");
+    }
 
 
+}
 
 
 

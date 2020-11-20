@@ -30,7 +30,8 @@ namespace DAH_FIMS.Services
         /// <returns>List of all faculties</returns>
         public List<EMPLOYEE> GetFaculties()
         {
-            return db.EMPLOYEEs.Include("FACULTY").ToList();
+            //return db.EMPLOYEEs.Include("FACULTY").ToList();
+            return db.EMPLOYEEs.ToList();
         }
 
         public EMPLOYEE GetFaculty (int id)
