@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\CAADU Users\" />
-    <Folder Include="Pages\HR Users\" />
-    <Folder Include="Pages\Coordinators Users\" />
     <Folder Include="Pages\ProvostUsers\Teacher Assistants\" />
     <Folder Include="Pages\ProvostUsers\Requests Resources\" />
     <Folder Include="Pages\ProvostUsers\Workloads\" />

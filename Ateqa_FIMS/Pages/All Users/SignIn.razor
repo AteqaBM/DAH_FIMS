@@ -42,7 +42,7 @@
                 <div class="contact100-form-checkbox form-inline">
                     <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                     <label class="label-checkbox100" for="ckb1">
-                        Remember me     <a href="#" style="right:-50px"> Forgot Password? </a>
+                        Remember me     @*<a href="#" style="right:-50px"> Forgot Password? </a>*@
                     </label>
                 </div>
                 <container-login100-form-btn>
@@ -50,8 +50,6 @@
                         Sign In
                     </login100-form-btn>
                 </container-login100-form-btn>
-
-                @*<label style="color: darkred; font-size: 16px;"> @message </label>*@
 
             </form>
         </div>
@@ -67,12 +65,7 @@
         private List<SYSTEM_USER> users;
         private List<EMPLOYEE> employeesList;
 
-        //private List<SYSTEM_ADMIN> provost;
-        //private List<CAADU_USER> caadu;
-        //private List<HR_USER> hr;
-        //private List<IT_USER> coordinators;
-
-
+        
         int userid;
         string username;
         string password;
@@ -80,9 +73,9 @@
         string message;
         bool found = false;
         string provName;
-        //string caaduName;
-        //string hrName;
-        //string coorName;
+        string caaduName;
+        string hrName;
+        string coorName;
 
         protected void signinButtonClicked()
         {
@@ -93,7 +86,6 @@
 
             if (users.Count != 0)
             {
-                //message = users[0].Username + "  " + username + "  " + users[0].Password + "  " + password;
                 type = users[0].UserType;
                 userid = users[0].UserId;
 
@@ -105,42 +97,42 @@
                     navigationManager.NavigateTo($"/Provost/Homepage/{provName}");
                 }
 
-                //else if (type == "CAADU")
-                //{
-                //    caadu = db.CAADU_USERs.Where(c => c.UserId == userid).ToList();
-                //    caaduName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+                else if (type == "CAADU")
+                {
+                    employeesList = db.EMPLOYEEs.Where(c => c.UserId == userid).ToList();
+                    caaduName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
 
-                //    navigationManager.NavigateTo($"/CAADUHomepage/{caaduName}");
-                //}
+                    navigationManager.NavigateTo($"/CAADU/Homepage/{caaduName}");
+                }
 
-                //else if (type == "HR")
-                //{
-                //    hr = db.HR_USERs.Where(c => c.UserId == userid).ToList();
-                //    hrName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+                else if (type == "HR")
+                {
+                    employeesList = db.EMPLOYEEs.Where(c => c.UserId == userid).ToList();
+                    hrName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
 
-                //    navigationManager.NavigateTo($"/HRHomepage/{hrName}");
-                //}
+                    navigationManager.NavigateTo($"/HR/Homepage/{hrName}");
+                }
 
-                //else if (type == "Coordinators")
-                //{
-                //    coordinators = db.IT_USERs.Where(c => c.UserId == userid).ToList();
-                //    coorName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
-                //    navigationManager.NavigateTo($"/CoordinatorsHomepage/{coorName}");
-                //}
-                //}
-
-
-
+                else if (type == "Coordinators")
+                {
+                    employeesList = db.EMPLOYEEs.Where(c => c.UserId == userid).ToList();
+                    coorName = employeesList[0].FirstName + "  " + employeesList[0].LastName;
+                    navigationManager.NavigateTo($"/Coordinators/Homepage/{coorName}");
+                }
             }
 
             else
 
                 message = "Invalid usernname or password";
 
-
-
-
-
-
         }
-    }
+
+
+}
+
+
+
+
+
+
+
