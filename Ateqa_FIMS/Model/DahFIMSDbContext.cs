@@ -288,7 +288,9 @@ namespace DAH_FIMS.Model
                     .HasConstraintName("FK_NOTIFICATION_WORKLOAD");
             });
 
-            modelBuilder.Entity<Office_Information>(entity =>
+          
+
+           modelBuilder.Entity<Office_Information>(entity =>
             {
                 entity.ToView("Office_Information");
             });

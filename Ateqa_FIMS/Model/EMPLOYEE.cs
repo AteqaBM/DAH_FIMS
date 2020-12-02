@@ -16,6 +16,7 @@ namespace DAH_FIMS.Model
         public EMPLOYEE()
         {
             RECEIVE_NOTIFICATIONs = new HashSet<RECEIVE_NOTIFICATION>();
+           
         }
 
         [Key]
@@ -44,8 +45,8 @@ namespace DAH_FIMS.Model
         [InverseProperty(nameof(OFFICE.EMPLOYEEs))]
         public virtual OFFICE Office { get; set; }
         [ForeignKey(nameof(PositionId))]
-        //[InverseProperty(nameof(POSITION.EMPLOYEEs))]
-        [InverseProperty("EMPLOYEE")]
+        [InverseProperty(nameof(POSITION.EMPLOYEEs))]
+       
         public virtual POSITION Position { get; set; }
         [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(SYSTEM_USER.EMPLOYEEs))]
@@ -72,6 +73,8 @@ namespace DAH_FIMS.Model
         public virtual TEACHER_ASSISTANT TEACHER_ASSISTANT { get; set; }
         [InverseProperty(nameof(RECEIVE_NOTIFICATION.Employee))]
         public virtual ICollection<RECEIVE_NOTIFICATION> RECEIVE_NOTIFICATIONs { get; set; }
+
+       
     }
 
     public enum school

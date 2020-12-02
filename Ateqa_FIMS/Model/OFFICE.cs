@@ -30,6 +30,7 @@ namespace DAH_FIMS.Model
 
         [InverseProperty(nameof(EMPLOYEE.Office))]
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
+
         [InverseProperty(nameof(REQUEST.Office))]
         public virtual ICollection<REQUEST> REQUESTs { get; set; }
         [InverseProperty(nameof(RESOURCE.Office))]

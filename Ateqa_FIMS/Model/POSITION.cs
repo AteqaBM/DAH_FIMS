@@ -21,8 +21,8 @@ namespace DAH_FIMS.Model
         [Required]
         public string PositionTitle { get; set; }
 
-        //[InverseProperty(nameof(EMPLOYEE.Position))]
-        [InverseProperty("Position")]
+        [InverseProperty(nameof(EMPLOYEE.Position))]
+     
         public virtual ICollection<EMPLOYEE> EMPLOYEEs { get; set; }
     }
 }
