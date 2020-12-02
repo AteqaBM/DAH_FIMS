@@ -11,18 +11,25 @@ a, .btn-link {
 }
 
 
-.btn-primary {
-    color: #fff;
+.button {
     background-color: #4d0000;
-    border-color: #4d0000;
+    
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #4d0000;
 }
-
-
-    .btn-primary:hover {
-        color: #fff;
+    .button:hover {
         background-color: #ffe6b3;
-        border-color: #4d0000;
+        color: #4d0000;
     }
+
 
 app {
     position: relative;
@@ -647,8 +654,28 @@ login100-form-btn {
     line-height: 5;
 }*/
 
+/*Continer Design*/
+fieldset {
+    background-color: #ffe6b3;
+    display: block;
+    margin-left: 250px;
+    margin-right: 250px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border: 2px solid;
+}
 
+legend {
+    background-color: #4d0000;
+    color: white;
+    padding: 1px 0px;
+}
 
+input {
+    margin: 5px;
+}
 
 
 

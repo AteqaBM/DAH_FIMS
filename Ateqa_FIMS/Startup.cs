@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using DAH_FIMS.Data;
+using DAH_FIMS.Data1;
+using DAH_FIMS.Model;
 using Microsoft.EntityFrameworkCore;
 using DAH_FIMS.Services;
 using Syncfusion.Blazor;
@@ -37,25 +38,19 @@ namespace DAH_FIMS
 
 
             services.AddDbContext<DahFIMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<OfficesService>();
+            services.AddScoped<EmployeeService>();
             services.AddScoped<FacultyService>();
+            services.AddScoped<DepartmentService>();
+            services.AddScoped<SchoolService>();
+            services.AddScoped<PositionService>();
+            services.AddScoped<OfficesService>();
+
+            
+            
+
+            
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

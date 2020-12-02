@@ -1,22 +1,16 @@
-﻿using DAH_FIMS.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+using DAH_FIMS.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAH_FIMS.Services
 {
     public class FacultyService
     {
+        // Instance of the db context
         private readonly DahFIMSDbContext db;
-
-        //private List<EMPLOYEE> employeesList;
-        //private List<FACULTY> facultyList;
-        //string departmentName;
-        //string schoolName;
 
         // Constructor using dependency injection
         public FacultyService(DahFIMSDbContext context)
@@ -25,43 +19,66 @@ namespace DAH_FIMS.Services
         }
 
         /// <summary>
-        /// Get all faculties
+        /// Get all Faculties
         /// </summary>
-        /// <returns>List of all faculties</returns>
-        public List<EMPLOYEE> GetFaculties()
+        /// <returns>List of all Faculties</returns>
+        public List<FACULTY> GetFaculties()
         {
-            //return db.EMPLOYEEs.Include("FACULTY").ToList();
-            return db.EMPLOYEEs.ToList();
+            return db.FACULTies.ToList();
         }
 
-        public EMPLOYEE GetFaculty (int id)
+        /// <summary>
+        /// Get a Faculty
+        /// </summary>
+        /// <param name="id">Id of the Faculty to return</param>
+        /// <returns>A Faculty with the provided id or null</returns>
+        public FACULTY GetFaculty(int id)
         {
-            return db.EMPLOYEEs.SingleOrDefault(c => c.EmployeeId == id);
+            return db.FACULTies.SingleOrDefault(c => c.EmployeeId == id);
         }
 
-        public bool Addprofile(EMPLOYEE faculty)
+        /// <summary>
+        /// Add a new Faculty
+        /// </summary>
+        /// <param name="Faculty">The Faculty to add</param>
+        /// <returns>True if Faculty is added successfuly otherwise false</returns>
+        public bool AddFaculty(FACULTY faculty)
         {
             if (faculty != null)
             {
-                db.EMPLOYEEs.Add(faculty);
+                db.FACULTies.Add(faculty);
                 db.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public void EditProfile(EMPLOYEE faculty)
+        /// <summary>
+        /// Delete a faculty
+        /// </summary>
+        /// <param name="id">Id of the faculty to delete</param>
+        /// <returns>True if faculty is deleted successfuly otherwise false</returns>
+        public bool DeleteFaculty(int id)
         {
+            var faculty = db.FACULTies.Find(id);
+            if (faculty != null)
+            {
+                db.FACULTies.Remove(faculty);
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Update a faculty
+        /// </summary>
+        /// <param name="faculty">faculty object</param>
+        public void EditFaculty(FACULTY faculty)
+        {
+            // Change the state of the faculty object to modified, so it will be update in database
             db.Entry(faculty).State = EntityState.Modified;
             db.SaveChanges();
         }
-
-        //public void showProfile(int id)
-        //{
-        //    employeesList = db.EMPLOYEEs.Where(c => c.EmployeeId == id).ToList();
-        //    facultyList = db.FACULTies.Where(c => c.EmployeeId == id).ToList();
-        //    departmentName = db.DEPARTMENTs.Where(c => c.DepartmentId == employeesList[0].DepartmentId).Select(c => c.DepartmentName).ToString();
-        //    schoolName = db.SCHOOLs.Where(c => c.SchoolId == employeesList[0].Department.SchoolId).Select(c => c.SchoolName).ToString();
-        //}
     }
 }

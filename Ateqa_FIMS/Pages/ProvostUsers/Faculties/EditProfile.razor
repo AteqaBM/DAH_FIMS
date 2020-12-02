@@ -1,5 +1,297 @@
-﻿<h3>EditProfile</h3>
+﻿@page "/Profile/Edit/{Id:int}"
+
+@layout ProvostLayout2
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject EmployeeService EmpService
+@inject DepartmentService DepService
+@inject FacultyService FacService
+@inject SchoolService SchService
+@inject PositionService PosService
+
+@inject DahFIMSDbContext db
+
+<br />
+<h4>Edit Profile</h4>
+<br />
+<form action="/" method="get" id="ProfileAdd">
+    <fieldset>
+        <EditForm Model="employee" OnValidSubmit="UpdateProfile">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-raw">
+                <div class=" form-group col-4">
+                    <label for="firstName">First Name:*</label>
+                    <InputText type="text" id="firstName" @bind-Value="employee.FirstName" class="form-control" placeholder="Enter Fisrt Name" />
+                    <ValidationMessage For="@(() => employee.FirstName)" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="lastName">Last Name:*</label>
+                    <InputText type="text" id="lastName" @bind-Value="employee.LastName" class="form-control" placeholder="Enter Last Name" />
+                    <ValidationMessage For="@(() => employee.LastName)" />
+                </div>
+
+                <div class="form-group col-4">
+                    <label for="mobile">Mobile Number:*</label>
+                    <InputText id="mobile" @bind-Value="employee.FACULTY.MobileNumber" class="form-control" placeholder="00966000000000" />
+                    <ValidationMessage For="@(() => employee.FACULTY.MobileNumber)" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label for="emailAddress" class="control-label">Email Address:*</label>
+                    <InputText type="email" id="emailAddress" @bind-Value="employee.EmailAdress" class="form-control" placeholder="sam@example.com" />
+                    <ValidationMessage For="@(() => employee.EmailAdress)" />
+                </div>
+
+                <div class="form-group col-3">
+                    <label for="dateOfBirth">Date Of Birth:*</label>
+                    <InputDate id="dateOfBirth" @bind-Value="employee.FACULTY.DateOfBirth" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.DateOfBirth)" />
+                </div>
+
+                <label class="mr-2">Marital status:* </label>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="single" name="maritalStatus" value="Single" @onchange="SelectStatus" checked=@(employee.FACULTY.Status== FacultyStatus.Single) />
+                    <label class="form-check-label" for="single">
+                        Single
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="married" name="maritalStatus" value="Married" @onchange="SelectStatus" checked=@(employee.FACULTY.Status== FacultyStatus.Married) />
+                    <label class="form-check-label" for="married">
+                        Married
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="nationality">Nationality:*</label>
+                    <InputText type="text" id="nationality" @bind-Value="employee.FACULTY.Nationality" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.Nationality)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="highestEducation">Highest Education:*</label>
+                    <InputText type="text" id="highestEducation" @bind-Value="employee.FACULTY.HighestEducation" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.HighestEducation)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="institution">Institution:*</label>
+                    <InputText type="text" id="institution" @bind-Value="employee.FACULTY.Institution" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.Institution)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="division">Division:*</label>
+                    <InputText type="text" id="division" @bind-Value="employee.FACULTY.Division" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.Division)" />
+                </div>
+
+                @*<div class="form-row">
+                    <div class="form-group col-3">
+                        <label style="display: flex; align-items: center">
+                            <span style="margin-right: 32px">School Name:*</span>
+                        </label>
+                        <RadzenDropDown Data="@school" @bind-Value="employee.Department.School.SchoolName" />
+                    </div>*@
+
+                <div class="form-group">
+                    <label for="schoolName">School Name:*</label>
+                    <select id="schoolName" class="form-control">
+                        <option selected>---Select a School---</option>
+                        <option>School of Business & Law</option>
+                        <option>School of Design & Architecture</option>
+                        <option>School of Health, Behavioral Sciences & Education</option>
+                        <option>School of Engineering, Computing & Informatics</option>
+                    </select>
+                </div>
+                @*<div class="form-group col-3">
+                            <label style="display: flex; align-items: center">
+                                <span style="margin-right: 32px">Department Name:*</span>
+                            </label>
+                            <RadzenDropDown Data="@department" @bind-Value="employee.Department.DepartmentName" />
+                        </div>
+                    </div>*@
+                <br />
+                <br />
+
+
+                <div class="form-group">
+                    <label for="department">Department Name:*</label>
+                    <InputSelect @bind-Value="departmentId" id="department" class="form-control">
+                        <option value="">---Select a Department---</option>
+                        @foreach (var department in departments)
+                        {
+                            <option value="@department.DepartmentId">@department.DepartmentName</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="form-group">
+                    <label for="positionTitle">Position Title:*</label>
+                    <InputText type="text" id="positionTitle" @bind-Value="employee.Position.PositionTitle" class="form-control" />
+                    <ValidationMessage For="@(() => employee.Position.PositionTitle)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="typeOfContract">Type of Contract:*</label>
+                    <InputText type="text" id="typeOfContract" @bind-Value="employee.FACULTY.TypeOfContract" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.TypeOfContract)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneExtension">Phone Extension:*</label>
+                    <InputNumber id="phoneExtension" @bind-Value="employee.PhoneExtension" class="form-control" />
+                    <ValidationMessage For="@(() => employee.PhoneExtension)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="officeNumber">Office Number</label>
+                    <InputText id="officeNumber" @bind-Value="employee.Office.OfficeNumber" class="form-control" />
+                    <ValidationMessage For="@(() => employee.Office.OfficeNumber)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="dateNeeded">Date Needed:*</label>
+                    <InputDate id="dateNeeded" @bind-Value="employee.FACULTY.DateNeeded" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.DateNeeded)" />
+                </div>
+
+                @*<div class="form-row">
+                        <div class="form-group col-3">
+                            <label style="display: flex; align-items: center">
+                                <span style="margin-right: 32px">Reqruitment Status:*</span>
+                            </label>
+                            <RadzenDropDown Data="@reqStatus" @bind-Value="employee.FACULTY.RecruitmentStatus" />
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <label for="reqruitmentStatus">Reqruitment Status:*</label>
+                    <select id="reqruitmentStatus" class="form-control">
+                        <option selected>---Choose---</option>
+                        <option>Pending</option>
+                        <option>Cancelled</option>
+                        <option>Approved</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <label for="applicationDate">Application Date:*</label>
+                    <InputDate id="applicationDate" @bind-Value="employee.FACULTY.ApplicationDate" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.ApplicationDate)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="hiringDate">Hiring Date: </label>
+                    <InputDate id="hiringDate" @bind-Value="employee.FACULTY.HiringDate" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.ApplicationDate)" />
+                </div>
+
+                @*<div class="form-row">
+                        <div class="form-group col-3">
+                            <label style="display: flex; align-items: center">
+                                <span style="margin-right: 32px">Rank:*</span>
+                            </label>
+                            <RadzenDropDown Data="@rank" @bind-Value="employee.FACULTY.Rank" />
+                        </div>
+                    </div>*@
+                <br />
+
+                <div class="form-group">
+                    <label for="rank">Rank:*</label>
+                    <select id="rank" class="form-control">
+                        <option selected>---Choose---</option>
+                        <option>Professor</option>
+                        <option>Associate Professor</option>
+                        <option>Assistant Professor</option>
+                        <option>Lecturer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="requiredLoad">Required Load:</label>
+                    <InputNumber id="requiredLoad" @bind-Value="employee.FACULTY.RequiredLoad" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.RequiredLoad)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="conversionRate">Conversion Rate:</label>
+                    <InputNumber id="requiredLoad" @bind-Value="employee.FACULTY.ConversionRate" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.ConversionRate)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="releaseDate">Relesse Date: </label>
+                    <InputDate id="releaseDate" @bind-Value="employee.FACULTY.ReleaseDate" @bind-Value:format="yyyy-MM-dd" class="form-control" />
+                    <ValidationMessage For="@(() => employee.FACULTY.ReleaseDate)" />
+                </div>
+
+                <div class="file-field">
+                    <label for="hiringDocuments">Hiring Documents Copy:*</label>
+                    <br />
+                    <div class="btn btn-primary btn-sm float-left">
+                        <span>Choose file</span>
+                        <input type="file">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <button type="submit" class="button">Save</button>
+                <a href="/Faculty/List" class="button" role="button">Cancel</a>
+            </center>
+        </EditForm>
+    </fieldset>
+</form>
+
+<br />
+
+<p>@message</p>
 
 @code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    EMPLOYEE employee = new EMPLOYEE();
+
+    string message;
+
+    private string departmentId = String.Empty;
+    private List<DEPARTMENT> departments = new List<DEPARTMENT>();
+
+    // Used to handle faculty martial status using radio buttons
+    FacultyStatus status;
+
+    void SelectStatus(ChangeEventArgs args)
+    {
+        Enum.TryParse(args.Value.ToString(), out status);
+    }
+
+    protected override void OnInitialized()
+    {
+        employee = EmpService.GetEmployee(Id);
+    }
+
+    public void UpdateProfile()
+    {
+        // Edit the profile
+        employee.FACULTY.Status = status;
+
+        EmpService.EditProfile(employee);
+
+        message = "Faculty information updated successfully";
+
+    }
 
 }

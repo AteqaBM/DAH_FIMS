@@ -1,0 +1,51 @@
+﻿@page "/Office/Delete/{Id:int}"
+
+@layout ProvostLayout2
+
+
+@inject NavigationManager NavigationManager
+@inject OfficesService OffService
+
+<h3>Delete Office</h3>
+
+<div class="alert alert-danger">
+    Do you want to delete this office assignment?
+</div>
+
+<table class="table table-hover">
+    <tr>
+        <td>Office Number: </td>
+        <td>@office.OfficeNumber</td>
+    </tr>
+
+</table>
+<br />
+
+<center>
+    <button type="submit" class="button" @onclick="RemoveOffice">Delete Office</button> &nbsp;
+    <a href="/Office/List" class="button" role="button">Cancel</a>
+</center>
+
+<br />
+
+
+@code {
+
+    OFFICE office = new OFFICE();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private void RemoveOffice()
+    {
+        OffService.DeleteOffice(Id);
+
+        NavigationManager.NavigateTo("Office/List");
+    }
+
+    protected override void OnInitialized()
+    {
+        office = OffService.GetOffice(Id);
+    }
+
+}

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DAH_FIMS.Data;
+using DAH_FIMS.Model;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,8 +22,12 @@ namespace DAH_FIMS.Services
         /// Get all offices
         /// </summary>
         /// <returns>List of all offices</returns>
-        public List<OFFICE> GetProducts()
+        public List<OFFICE> GetOffices()
         {
+            // Load the Employees
+            Include(nameof(db.EMPLOYEEs));
+
+
             return db.OFFICEs.ToList();
         }
 
@@ -32,13 +36,13 @@ namespace DAH_FIMS.Services
         /// </summary>
         /// <param name="id">Id of the office to return</param>
         /// <returns>A office with the provided id or null</returns>
-        public OFFICE GetProduct(int id)
+        public OFFICE GetOffice(int id)
         {
             return db.OFFICEs.SingleOrDefault(c => c.OfficeId == id);
         }
 
         /// <summary>
-        /// Assign an office
+        /// Assign a new office
         /// </summary>
         /// <param name="office">The office to assign</param>
         /// <returns>True if office is added successfuly otherwise false</returns>
@@ -74,11 +78,20 @@ namespace DAH_FIMS.Services
         /// Edit an office assignment
         /// </summary>
         /// <param name="office">office object</param>
-        public void EditOffice(OFFICE office)
+        public void Editoffice(OFFICE office)
         {
-            // Change the state of the office object to modified, so it will be update in database
+            //Change the state of the office object to modified, so it will be update in database
             db.Entry(office).State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Load related navigational properties (eager loading)
+        /// </summary>
+        /// <param name="property">The navigational property to load</param>
+        public void Include(string property)
+        {
+            var offices = db.OFFICEs.Include(property);
         }
     }
 }

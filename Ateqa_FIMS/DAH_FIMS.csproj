@@ -17,6 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Radzen.Blazor" Version="2.17.9" />
     <PackageReference Include="Syncfusion.Blazor" Version="18.3.0.50" />
   </ItemGroup>
 

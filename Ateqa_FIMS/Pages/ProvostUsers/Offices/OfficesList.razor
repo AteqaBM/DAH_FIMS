@@ -1,5 +1,73 @@
-﻿<h3>OfficesList</h3>
+﻿@page "/Office/List"
+
+@layout ProvostLayout2
+
+
+@inject OfficesService OffService
+
+<h1>Offices</h1>
+
+<a href="Office/Assign">
+    <span class="oi oi-plus"></span> &nbsp;
+    Assign Office
+</a>
+
+<div class="mt-2"></div>
+
+@if (offices == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Office Number</th>
+                <th>Name</th>
+                <th>Position Title</th>
+                <th>Job Type</th>
+                <th>Available Resources</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in offices)
+            {
+                <tr>
+                    <td class="text-center">@item.OfficeNumber</td>
+                    <td>@*@item.EMPLOYEEs.FirstName.LastName*@</td>
+                        <td class="text-center">@*@item.EMPLOYEEs.Position.PositionTitle*@</td>
+                        <td class="text-center">@*@item.EMPLOYEEs.IsItPartTime*@</td>
+                    <td class="text-center">@item.AvailableResources</td>
+
+
+                    <td>
+                        <a href="Office/Details/@item.OfficeId"><span class="oi oi-list"></span></a> &nbsp;
+                        <a href="Office/Edit/@item.OfficeId"><span class="oi oi-pencil"></span></a> &nbsp;
+                        <a href="Office/Delete/@item.OfficeId"><span class="oi oi-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
 
 @code {
 
+    // Create a list of offices to be displayed in the component
+    private List<OFFICE> offices;
+
+    protected override void OnInitialized()
+    {
+        // Get the offices from the service
+        offices = OffService.GetOffices();
+    }
 }

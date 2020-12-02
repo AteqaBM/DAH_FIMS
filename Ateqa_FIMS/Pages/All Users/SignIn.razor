@@ -1,5 +1,5 @@
 ﻿@page "/signin"
-@using DAH_FIMS.Data
+@using DAH_FIMS.Model
 
 @inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
 
@@ -79,10 +79,7 @@
 
         protected void signinButtonClicked()
         {
-            //navigationManager.NavigateTo($"/");
             users = db.SYSTEM_USERs.Where(c => c.Username == username && c.Password == password).ToList();
-
-
 
             if (users.Count != 0)
             {

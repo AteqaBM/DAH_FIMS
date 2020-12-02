@@ -1,5 +1,66 @@
-﻿<h3>OfficeDetails</h3>
+﻿@page "/Office/Details/{Id:int}"
 
-@code {
+@layout ProvostLayout2
 
-}
+
+@inject OfficesService OffService
+
+<h3>Office Details</h3>
+
+<table class="table table-hover">
+    <tr>
+        <td>Office Id: </td>
+        <td>@office.OfficeId</td>
+    </tr>
+    @*<tr>
+            <td>First Name: </td>
+            <td>@office.Name</td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td>@office.Name</td>
+        </tr>
+        <tr>
+            <td>Position Title: </td>
+            <td>@office.Name</td>
+        </tr>
+        <tr>
+            <td>Job Type: </td>
+            <td>@office.EMPLOYEE.IsItPartTime?.ToString(" ")</td>
+        </tr>*@
+    <tr>
+        <td>Office Number: </td>
+        <td>@office.OfficeNumber</td>
+    </tr>
+    <tr>
+        <td>Office Area: </td>
+        <td>@office.OfficeArea</td>
+    </tr>
+    @*<tr>
+            <td>Phone Extension: </td>
+            <td>@office.EMPLOYEEs.PhoneExtension</td>
+        </tr>*@
+    <tr>
+        <td>Available Resources: </td>
+        <td>@office.AvailableResources</td>
+    </tr>
+</table>
+<br />
+<center>
+    <a href="/Office/List" class="button" role="button">Cancel</a>
+</center>
+
+
+
+        @code {
+
+            OFFICE office = new OFFICE();
+
+            [Parameter]
+            public int Id { get; set; }
+
+            protected override void OnInitialized()
+            {
+                office = OffService.GetOffice(Id);
+            }
+        }

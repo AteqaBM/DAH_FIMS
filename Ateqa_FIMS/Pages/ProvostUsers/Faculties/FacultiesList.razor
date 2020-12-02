@@ -1,35 +1,46 @@
-﻿@page "/Faculties"
+﻿@page "/Faculty/List"
 
-@inject FacultyService Service
+@layout ProvostLayout2
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject EmployeeService EmpService
+@inject DepartmentService DepService
+@inject FacultyService FacService
+@inject SchoolService SchService
+@inject PositionService PosService
+
+@inject DahFIMSDbContext db
 
 
-
-<h3>Faculties</h3>
+<h4>Faculties</h4>
 
 
 <a href="Profile/Add">
     <span class="oi oi-plus"></span> &nbsp;
-    Add New Customer
+    Add New Profile
 </a>
 
 
 <div class="mt-2"></div>
 
-@if (faculties == null)
+@if (employees == null)
 {
     <div class="d-flex align-items-center">
         <strong>Loading data ...</strong>
         <div class="spinner-border ml-auto"></div>
     </div>
-  }
+
+}
 
 else
 {
-    <table class=" table table-hover">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
                 <th>Position Title</th>
                 <th>Type of Contract</th>
                 <th>School Name</th>
@@ -39,11 +50,10 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in faculties)
+            @foreach (var item in employees)
             {
                 <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
+                    <td>@item.FirstName @item.LastName</td>
                     <td class="text-center">@item.Position.PositionTitle</td>
                     <td class="text-center">@item.FACULTY.TypeOfContract</td>
                     <td class="text-center">@item.Department.School.SchoolName</td>
@@ -55,18 +65,21 @@ else
                         <a href="Profile/Edit/@item.EmployeeId"><span class="oi oi-pencil"></span></a>
                     </td>
                 </tr>
-              }
+            }
         </tbody>
 
     </table>
 }
 
 @code {
-    List<EMPLOYEE> faculties;
+
+    List<EMPLOYEE> employees;
 
     protected override void OnInitialized()
+
     {
-        faculties = Service.GetFaculties();
+        employees = EmpService.GetEmployees();
     }
+
 }
 
