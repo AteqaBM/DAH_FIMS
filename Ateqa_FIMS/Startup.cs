@@ -44,11 +44,16 @@ namespace DAH_FIMS
             services.AddScoped<SchoolService>();
             services.AddScoped<PositionService>();
             services.AddScoped<OfficesService>();
+            services.AddScoped<RequestsService>();
+            services.AddScoped<ResourcesService>();
 
-            
-            
 
-            
+
+
+
+
+
+
 
         }
 

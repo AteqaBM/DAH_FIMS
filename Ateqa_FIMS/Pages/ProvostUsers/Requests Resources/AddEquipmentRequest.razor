@@ -1,0 +1,193 @@
+﻿@page "/EquipmentRequest/Add"
+
+@layout ProvostLayout2
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+
+@inject OfficesService OffService
+@inject ResourcesService ResService
+@inject RequestsService ReqService
+@inject EmployeeService EmpService
+@inject NavigationManager NavigationManager
+@inject DahFIMSDbContext db
+
+<br />
+<h4>Door Sign Request</h4>
+<br />
+<form action="/" method="get" id="EquipmentRequest">
+    <fieldset>
+        <EditForm Model="eRequest" OnValidSubmit="AddRequest">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            @*<div class="form-group row">
+        <label for="officeNumber" class="col-sm-2 col-form-label">Office Number:*</label>
+        <div class="col-sm-5">
+        <InputText id="officeNumber" @bind-Value="dRequest.Office.OfficeNumber" class="form-control" placeholder="Enter Office Number" />
+        <ValidationMessage For="@(() => dRequest.Office.OfficeNumber)" />
+        </div>
+        </div>*@
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-5 col-form-label">Equipment Name & Quntity:*</label>
+                <div class="col-sm-5">
+                    <select id="department" @bind="eRequest.ResourceType" class="form-control">
+                        <option selected>---Select an Equipment---</option>
+                        <option>Desk</option>
+                        <option>Chair</option>
+                        <option>Cabinet</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-5 col-form-label"></label>
+                <div class="col-sm-5">
+                    <select id="department" class="form-control">
+                        <option selected>---Select an Equipment---</option>
+                        <option>Desk</option>
+                        <option>Chair</option>
+                        <option>Cabinet</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-5 col-form-label"></label>
+                <div class="col-sm-5">
+                    <select id="department" class="form-control">
+                        <option selected>---Select an Equipment---</option>
+                        <option>Desk</option>
+                        <option>Chair</option>
+                        <option>Cabinet</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="statment" class="col-sm-5 col-form-label">Problem Statement (If Available):</label>
+                <div class="col-sm-5">
+                    <InputText id="statment" @bind-Value="eRequest.Note" class="form-control" />
+                    <ValidationMessage For="@(() => eRequest.Note)" />
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-form-label col-sm-5 pt-0">Electrecity Extension:*</label>
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                        <label class="form-check-label" for="gridRadios1">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-5 col-form-label">Electricity Voltage:</label>
+                <div class="col-sm-5">
+                    <select id="department" class="form-control">
+                        <option selected>---Select Electricity Voltage---</option>
+                        <option>110V</option>
+                        <option>220V</option>
+                        <option>None</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-form-label col-sm-5 pt-0">Phone Extension:*</label>
+                <div class="col-sm-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios3" id="gridRadios3" value="option3">
+                        <label class="form-check-label" for="gridRadios3">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios3" id="gridRadios4" value="option4">
+                        <label class="form-check-label" for="gridRadios4">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-5 col-form-label">Responsible Department:*</label>
+                <div class="col-sm-5">
+                    <select id="department" class="form-control">
+                        <option selected>---Select a Department---</option>
+                        <option>IT</option>
+                        <option>Maintanance</option>
+                        <option>Information Desk</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="department" class="col-sm-5 col-form-label">Request Status:*</label>
+                <div class="col-sm-5">
+                    <select id="department" class="form-control">
+                        <option selected>---Select a Status---</option>
+                        <option>Pending</option>
+                        <option>Cancel</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="requestDateTime" class="col-sm-5 col-form-label">Request Date & Time:*</label>
+                <div class="col-sm-5">
+                    <input type="datetime-local" name="requestDateTime" @bind="eRequest.RequestDateTime">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="deliveryDateTime" class="col-sm-5 col-form-label">Delivery Date & Time:*</label>
+                <div class="col-sm-5">
+                    <input type="datetime-local" name="deliveryDateTime" @bind="eRequest.DeliveryDateTime">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="note" class="col-sm-5 col-form-label">Note:</label>
+                <div class="col-sm-5">
+                    <InputText id="note" @bind-Value="eRequest.Note" class="form-control" />
+                    <ValidationMessage For="@(() => eRequest.Note)" />
+                </div>
+            </div>
+            <br />
+            <br />
+
+            <center>
+                <button type="submit" class="button">Save</button>
+                <a href="/Office/List" class="button" role="button">Cancel</a>
+            </center>
+        </EditForm>
+    </fieldset>
+</form>
+
+
+@code {
+    REQUEST eRequest = new REQUEST();
+
+    private void AddRequest()
+    {
+
+        ReqService.AddRequest(eRequest);
+
+        eRequest = new REQUEST();
+    }
+}

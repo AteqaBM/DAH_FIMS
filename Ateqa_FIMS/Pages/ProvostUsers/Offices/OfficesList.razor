@@ -5,12 +5,12 @@
 
 @inject OfficesService OffService
 
-<h1>Offices</h1>
-
-<a href="Office/Assign">
-    <span class="oi oi-plus"></span> &nbsp;
+<h4>Offices</h4>
+<p style="text-align:right">
+    <a href="Office/Assign"><span class="oi oi-plus"></span></a>&nbsp;
     Assign Office
-</a>
+</p>
+       
 
 <div class="mt-2"></div>
 
@@ -23,9 +23,9 @@
 }
 else
 {
-    <table class="table table-hover">
+    <table class="table table-hover" style="border-color:darkred">
         <thead>
-            <tr>
+            <tr class="table-warning">
                 <th>Office Number</th>
                 <th>Name</th>
                 <th>Position Title</th>
@@ -38,11 +38,11 @@ else
             @foreach (var item in offices)
             {
                 <tr>
-                    <td class="text-center">@item.OfficeNumber</td>
+                    <td>@item.OfficeNumber</td>
                     <td>@*@item.EMPLOYEEs.FirstName.LastName*@</td>
-                        <td class="text-center">@*@item.EMPLOYEEs.Position.PositionTitle*@</td>
-                        <td class="text-center">@*@item.EMPLOYEEs.IsItPartTime*@</td>
-                    <td class="text-center">@item.AvailableResources</td>
+                    <td class="text-center">@*@item.EMPLOYEEs.Position.PositionTitle*@</td>
+                    <td class="text-center">@*@item.EMPLOYEEs.IsItPartTime*@</td>
+                    <td>@item.AvailableResources</td>
 
 
                     <td>
