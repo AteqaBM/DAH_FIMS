@@ -3,125 +3,134 @@
 @layout ProvostLayout2
 
 @inject EmployeeService EmpService
+@inject FacultyService FacService
+@inject DepartmentService DepService 
 
 <h4>Profile Details</h4>
-<table class="table table-hover">
-    <tr>
-        <td>First Name: </td>
-        <td>@employee.FirstName</td>
-    </tr>
-    <tr>
-        <td>Last Name:</td>
-        <td>@employee.LastName</td>
-    </tr>
-    <tr>
-        <td>Mobile Number:</td>
-        <td>@employee.FACULTY.MobileNumber</td>
-    </tr>
-    <tr>
-        <td>Email Address:</td>
-        <td>@employee.EmailAdress</td>
-    </tr>
-    <tr>
-        <td>Date of Birth:</td>
-        <td>@employee.FACULTY.DateOfBirth?.ToString("dd-mm-yyyy")</td>
-    </tr>
-    <tr>
-        <td>Martial Status:</td>
-        <td>@employee.FACULTY.Status</td>
-    </tr>
-    <tr>
-        <td>Nationality:</td>
-        <td>@employee.FACULTY.Nationality</td>
-    </tr>
-    <tr>
-        <td>Highest Education:</td>
-        <td>@employee.FACULTY.HighestEducation</td>
-    </tr>
-    <tr>
-        <td>Institution:</td>
-        <td>@employee.FACULTY.Institution</td>
-    </tr>
-    <tr>
-        <td>Division:</td>
-        <td>@employee.FACULTY.Division</td>
-    </tr>
-    <tr>
-        <td>School Name:</td>
-        <td>@employee.Department.School.SchoolName</td>
-    </tr>
-    <tr>
-        <td>Department Name:</td>
-        <td>@employee.Department.DepartmentName</td>
-    </tr>
-    <tr>
-        <td>Position Title:</td>
-        <td>@employee.Position.PositionTitle</td>
-    </tr>
-    <tr>
-        <td>Type of Contract:</td>
-        <td>@employee.FACULTY.TypeOfContract</td>
-    </tr>
-    <tr>
-        <td>Phone Extension:</td>
-        <td>@employee.PhoneExtension</td>
-    </tr>
-    <tr>
-        <td>Office Number:</td>
-        <td>@employee.Office.OfficeNumber</td>
-    </tr>
-    <tr>
-        <td>Date Needed:</td>
-        <td>@employee.FACULTY.DateNeeded?.ToString("dd-mm-yyyy")</td>
-    </tr>
-    <tr>
-        <td>Reqruitment Status:</td>
-        <td>@employee.FACULTY.RecruitmentStatus</td>
-    </tr>
-    <tr>
-        <td>Application Date:</td>
-        <td>@employee.FACULTY.ApplicationDate?.ToString("dd-mm-yyyy")</td>
-    </tr>
-    <tr>
-        <td>Hiring Date:</td>
-        <td>@employee.FACULTY.HiringDate?.ToString("dd-mm-yyyy")</td>
-    </tr>
-    <tr>
-        <td>Rank:</td>
-        <td>@employee.FACULTY.Rank</td>
-    </tr>
-    <tr>
-        <td>Required Load:</td>
-        <td>@employee.FACULTY.RequiredLoad</td>
-    </tr>
-    <tr>
-        <td>Conversion Rate:</td>
-        <td>@employee.FACULTY.ConversionRate</td>
-    </tr>
-    <tr>
-        <td>Relesse Date:</td>
-        <td>@employee.FACULTY.ReleaseDate?.ToString("dd-mm-yyyy")</td>
-    </tr>
-    <tr>
-        <td>Hiring Documents:</td>
-        <td>@employee.FACULTY.HIRING_DOCUMENTs</td>
-    </tr>
-</table>
-<br />
-<center>
-    <a href="/Faculty/List" class="button" role="button">Cancel</a>
-</center>
+
+<fieldset>
+    <table class="table table-borderless">
+        <tr>
+            <th scope="row">First Name: </th>
+            <td>@employee.FirstName</td>
+        </tr>
+        <tr>
+            <th scope="row">Last Name:</th>
+            <td>@employee.LastName</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobile Number:</th>
+            <td>@faculty.MobileNumber</td>
+        </tr>
+        <tr>
+            <th scope="row">Email Address:</th>
+            <td>@employee.EmailAdress</td>
+        </tr>
+        <tr>
+            <th scope="row">Date of Birth:</th>
+            <td>@faculty.DateOfBirth?.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <th scope="row">Martial Status:</th>
+            <td>@faculty.Status</td>
+        </tr>
+        <tr>
+            <th scope="row">Nationality:</th>
+            <td>@faculty.Nationality</td>
+        </tr>
+        <tr>
+            <th scope="row">Highest Education:</th>
+            <td>@faculty.HighestEducation</td>
+        </tr>
+        <tr>
+            <th scope="row">Institution:</th>
+            <td>@faculty.Institution</td>
+        </tr>
+        <tr>
+            <th scope="row">Division:</th>
+            <td>@faculty.Division</td>
+        </tr>
+        <tr>
+            <th scope="row">School Name:</th>
+            <td>@department.School.SchoolName</td>
+        </tr>
+        <tr>
+            <th scope="row">Department Name:</th>
+            <td>@employee.Department.DepartmentName</td>
+        </tr>
+        <tr>
+            <th scope="row">Position Title:</th>
+            <td>@employee.Position.PositionTitle</td>
+        </tr>
+        <tr>
+            <th scope="row">Type of Contract:</th>
+            <td>@faculty.TypeOfContract</td>
+        </tr>
+        <tr>
+            <th scope="row">Phone Extension:</th>
+            <td>@employee.PhoneExtension</td>
+        </tr>
+        <tr>
+            <th scope="row">Office Number:</th>
+            <td>@employee.Office.OfficeNumber</td>
+        </tr>
+        <tr>
+            <th scope="row">Date Needed:</th>
+            <td>@faculty.DateNeeded?.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <th scope="row">Reqruitment Status:</th>
+            <td>@faculty.RecruitmentStatus</td>
+        </tr>
+        <tr>
+            <th scope="row">Application Date:</th>
+            <td>@faculty.ApplicationDate?.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <th scope="row">Hiring Date:</th>
+            <td>@faculty.HiringDate?.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <th scope="row">Rank:</th>
+            <td>@faculty.Rank</td>
+        </tr>
+        <tr>
+            <th scope="row">Required Load:</th>
+            <td>@faculty.RequiredLoad</td>
+        </tr>
+        <tr>
+            <th scope="row">Conversion Rate:</th>
+            <td>@faculty.ConversionRate</td>
+        </tr>
+        <tr>
+            <th scope="row">Relesse Date:</th>
+            <td>@faculty.ReleaseDate?.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <th scope="row">Hiring Documents:</th>
+            <td>@faculty.HIRING_DOCUMENTs</td>
+        </tr>
+    </table>
+</fieldset>
+    <br />
+    <center>
+        <a href="/Faculty/List" class="button" role="button">Cancel</a>
+    </center>
 
 
-@code {
+    @code {
 
-    EMPLOYEE employee = new EMPLOYEE();
+        EMPLOYEE employee = new EMPLOYEE();
+        FACULTY faculty = new FACULTY();
+        DEPARTMENT department = new DEPARTMENT();
 
-    [Parameter]
-    public int Id { get; set; }
+        [Parameter]
+        public int Id { get; set; }
 
-    protected override void OnInitialized()
-    {
-        employee = EmpService.GetEmployee(Id);
+        protected override void OnInitialized()
+        {
+            employee = EmpService.GetEmployee(Id);
+            faculty = FacService.GetFaculty(Id);
+            department = DepService.GetDepartment(Id);
+        }
     }
-}

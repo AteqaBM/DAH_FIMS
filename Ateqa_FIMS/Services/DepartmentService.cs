@@ -34,7 +34,9 @@ namespace DAH_FIMS.Services
         /// <returns>A Department with the provided id or null</returns>
         public DEPARTMENT GetDepartment(int id)
         {
-            return db.DEPARTMENTs.SingleOrDefault(c => c.DepartmentId == id);
+            return db.DEPARTMENTs
+                .Include(s => s.School)
+                .SingleOrDefault(c => c.DepartmentId == id);
         }
 
         /// <summary>

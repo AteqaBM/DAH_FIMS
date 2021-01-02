@@ -27,9 +27,7 @@ else
         <thead>
             <tr class="table-warning">
                 <th>Office Number</th>
-                <th>Name</th>
-                <th>Position Title</th>
-                <th>Job Type</th>
+                <th>Office Area</th>
                 <th>Available Resources</th>
                 <th>Tasks</th>
             </tr>
@@ -39,12 +37,8 @@ else
             {
                 <tr>
                     <td>@item.OfficeNumber</td>
-                    <td>@*@item.EMPLOYEEs.FirstName.LastName*@</td>
-                    <td class="text-center">@*@item.EMPLOYEEs.Position.PositionTitle*@</td>
-                    <td class="text-center">@*@item.EMPLOYEEs.IsItPartTime*@</td>
+                    <td>@item.OfficeArea</td>
                     <td>@item.AvailableResources</td>
-
-
                     <td>
                         <a href="Office/Details/@item.OfficeId"><span class="oi oi-list"></span></a> &nbsp;
                         <a href="Office/Edit/@item.OfficeId"><span class="oi oi-pencil"></span></a> &nbsp;
@@ -55,10 +49,6 @@ else
         </tbody>
     </table>
 }
-
-
-
-
 
 @code {
 

@@ -1,63 +1,70 @@
 ﻿@page "/Office/Edit/{Id:int}"
 
 @layout ProvostLayout2
-
-@*@inject NavigationManager NavigationManager*@
+@inject NavigationManager NavigationManager
 
 @inject OfficesService OffService
-
+@inject EmployeeService EmpService
+@inject PositionService PosService
+@inject NavigationManager NavigationManager
 @inject DahFIMSDbContext db
 
 @using DAH_FIMS.Model;
 @using DAH_FIMS.Services;
 
 <br />
-<h4 style="padding-right:50px">Edit Office</h4>
+<h4>Edit Office</h4>
+<p>@message</p>
 <br />
-<form>
+<form action="/" method="get" id="EditOffice">
     <fieldset>
         <EditForm Model="office" OnValidSubmit="Editoffice">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            @*<div class="form-group">
-            <label for="first-name">First Name:*</label>
-            <InputText id="name" @bind-Value="office.EMPLOYEE.FirstName" class="form-control" placeholder="Enter Fisrt Name" />
-            <ValidationMessage For="@(() => office.EMPLOYEE.FirstName)" />
-        </div>*@
+            <div class="form-group row">
+                <label for="first-name" class="col-sm-3 col-form-label">First Name:*</label>
+                <div class="col-sm-5">
+                    <InputText id="name" @bind-Value="employee.FirstName" class="form-control" placeholder="Enter Fisrt Name" />
+                    <ValidationMessage For="@(() => employee.FirstName)" />
+                </div>
+            </div>
 
-            @*<div class="form-group">
-            <label for="last-name">Last Name:*</label>
-             <InputText id="last-name" @bind-Value="office.EMPLOYEE.LastName" class="form-control" placeholder="Enter Last Name" />
-            <ValidationMessage For="@(() => office.EMPLOYEE.LastName)" />
-        </div>*@
+            <div class="form-group row">
+                <label for="last-name" class="col-sm-3 col-form-label">Last Name:*</label>
+                <div class="col-sm-5">
+                    <InputText id="last-name" @bind-Value="employee.LastName" class="form-control" placeholder="Enter Last Name" />
+                    <ValidationMessage For="@(() => employee.LastName)" />
+                </div>
+            </div>
 
-            @*<div class="form-group">
-            <label for="positionTitle">Position Title:*</label>
-            <InputText id="positionTitle" @bind-Value="office.EMPLOYEE.POSITION.PositionTitle" class="form-control" placeholder="Enter Position Title" />
-            <ValidationMessage For="@(() => office.EMPLOYEE.POSITION.PositionTitle)" />
-        </div>*@
+            <div class="form-group row">
+                <label for="positionTitle" class="col-sm-3 col-form-label">Position Title:*</label>
+                <div class="col-sm-5">
+                    <InputText id="positionTitle" @bind-Value="position.PositionTitle" class="form-control" placeholder="Enter Position Title" />
+                    <ValidationMessage For="@(() => position.PositionTitle)" />
+                </div>
+            </div>
 
-
-            <div class="row">
-                <label class="col-form-label col-sm-2 pt-0">Job Type:*</label>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label" for="gridRadios1">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-3 pt-0">Job Type:*</label>
+                <div class="col-sm-7">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">
                             Full-Time
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">
                             Part-Time
                         </label>
                     </div>
                 </div>
             </div>
-            <br />
+
             <div class="form-group row">
-                <label for="officeNumber" class="col-sm-2 col-form-label">Office Number:*</label>
+                <label for="officeNumber" class="col-sm-3 col-form-label">Office Number:*</label>
                 <div class="col-sm-5">
                     <InputText id="officeNumber" @bind-Value="office.OfficeNumber" class="form-control" />
                     <ValidationMessage For="@(() => office.OfficeNumber)" />
@@ -65,89 +72,49 @@
             </div>
 
             <div class="form-group row">
-                <label for="officeArea" class="col-sm-2 col-form-label">Office Area:*</label>
+                <label for="officeArea" class="col-sm-3 col-form-label">Office Area:*</label>
                 <div class="col-sm-5">
                     <InputText id="officeArea" @bind-Value="office.OfficeArea" class="form-control" />
                     <ValidationMessage For="@(() => office.OfficeArea)" />
                 </div>
             </div>
 
-            @*<div class="form-group">
-            <label for="phoneExtension">Phone Extension:*</label>
-            <InputText id="phoneExtension" @bind-Value="office.EMPLOYEE.PhoneExtension" class="form-control" placeholder="Ext 230" />
-            <ValidationMessage For="@(() => office.EMPLOYEE.PhoneExtention)" />
-        </div>*@
-
+            <div class="form-group row">
+                <label for="phoneExtension" class="col-sm-3 col-form-label">Phone Extension:*</label>
+                <div class="col-sm-5">
+                    <InputNumber id="phoneExtension" @bind-Value="employee.PhoneExtension" class="form-control" placeholder="Ext 230" />
+                    <ValidationMessage For="@(() => employee.PhoneExtension)" />
+                </div>
+            </div>
 
             <div class="form-group row">
-                <div class="col-sm-2">Available Resources:*</div>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                        <label class="form-check-label" for="gridCheck1">
-                            Desk
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck2">
-                        <label class="form-check-label" for="gridCheck2">
-                            Chairs
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck3">
-                        <label class="form-check-label" for="gridCheck3">
-                            Cabinets
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck4">
-                        <label class="form-check-label" for="gridCheck4">
-                            Door Sign
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck5">
-                        <label class="form-check-label" for="gridCheck5">
-                            Phone
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck6">
-                        <label class="form-check-label" for="gridCheck6">
-                            Computer
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck7">
-                        <label class="form-check-label" for="gridCheck7">
-                            Printer
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck8">
-                        <label class="form-check-label" for="gridCheck8">
-                            Nothing Is Available
-                        </label>
+                <label for="availableResources" class="col-sm-3 col-form-label">Available Resources:*</label>
+                <div class="col-sm-5">
+                    <InputTextArea id="availableResources" raws="3" @bind-Value="office.AvailableResources" class="form-control" placeholder="List the Available Resources. If there is nothing type 'Nothing Available'" />
+                    <ValidationMessage For="@(() => office.AvailableResources)" />
+                    <br />
+                    <br />
+                    <div class="card" style="width: 315px">
+                        <div class="card-header" style="text-align:center; background-color:#4d0000; color:white">
+                            Available Resources Examples
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="text-align:center">Desk - Chairs - Cabinets - Door Sign  Phone - Computer - Printer</li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <br />
             <br />
-            <div class="mt-2"></div>
-
             <center>
                 <button type="submit" class="button">Save</button>
                 <a href="/Office/List" class="button" role="button">Cancel</a>
             </center>
 
+
         </EditForm>
     </fieldset>
 </form>
-
-<br />
-
-<p>@message</p>
 
 
 @code {
@@ -156,12 +123,18 @@
     public int Id { get; set; }
 
     OFFICE office = new OFFICE();
+    EMPLOYEE employee = new EMPLOYEE();
+    POSITION position = new POSITION();
+
 
     string message;
 
     protected override void OnInitialized()
     {
         office = OffService.GetOffice(Id);
+        employee = EmpService.GetEmployee(Id);
+
+
     }
 
     public void Editoffice()

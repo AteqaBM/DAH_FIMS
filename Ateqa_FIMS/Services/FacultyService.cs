@@ -34,7 +34,9 @@ namespace DAH_FIMS.Services
         /// <returns>A Faculty with the provided id or null</returns>
         public FACULTY GetFaculty(int id)
         {
-            return db.FACULTies.SingleOrDefault(c => c.EmployeeId == id);
+            return db.FACULTies
+                .Include(e => e.Employee)
+                .SingleOrDefault(c => c.EmployeeId == id);
         }
 
         /// <summary>

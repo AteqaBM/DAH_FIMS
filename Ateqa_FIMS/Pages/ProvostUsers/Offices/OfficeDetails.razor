@@ -2,47 +2,43 @@
 
 @layout ProvostLayout2
 
-
 @inject OfficesService OffService
+@inject EmployeeService EmpService
 
-<h3>Office Details</h3>
+<h4>Office Details</h4>
 
 <fieldset>
-    <table class="table table-hover">
+    <table class="table table-borderless">
         <tr>
-            <td>Office Id: </td>
-            <td>@office.OfficeId</td>
+            <th scope="row">First Name: </th>
+            <td>@employee.FirstName</td>
         </tr>
-        @*<tr>
-                <td>First Name: </td>
-                <td>@office.Name</td>
-            </tr>
-            <tr>
-                <td>Last Name: </td>
-                <td>@office.Name</td>
-            </tr>
-            <tr>
-                <td>Position Title: </td>
-                <td>@office.Name</td>
-            </tr>
-            <tr>
-                <td>Job Type: </td>
-                <td>@office.EMPLOYEE.IsItPartTime?.ToString(" ")</td>
-            </tr>*@
         <tr>
-            <td>Office Number: </td>
+            <th scope="row">Last Name: </th>
+            <td>@employee.LastName</td>
+        </tr>
+        <tr>
+            <th scope="row">Position Title: </th>
+            <td>@employee.Position.PositionTitle</td>
+        </tr>
+        <tr>
+            <th scope="row">Job Type: </th>
+            <td>@employee.IsItPartTime</td>
+        </tr>
+        <tr>
+            <th scope="row">Office Number: </th>
             <td>@office.OfficeNumber</td>
         </tr>
         <tr>
-            <td>Office Area: </td>
+            <th scope="row">Office Area: </th>
             <td>@office.OfficeArea</td>
         </tr>
-        @*<tr>
-                <td>Phone Extension: </td>
-                <td>@office.EMPLOYEEs.PhoneExtension</td>
-            </tr>*@
         <tr>
-            <td>Available Resources: </td>
+            <th scope="row">Phone Extension: </th>
+            <td>@employee.PhoneExtension</td>
+        </tr>
+        <tr>
+            <th scope="row">Available Resources: </th>
             <td>@office.AvailableResources</td>
         </tr>
     </table>
@@ -54,15 +50,18 @@
 
 
 
-        @code {
+@code {
 
-            OFFICE office = new OFFICE();
+    OFFICE office = new OFFICE();
+    EMPLOYEE employee = new EMPLOYEE();
 
-            [Parameter]
-            public int Id { get; set; }
 
-            protected override void OnInitialized()
-            {
-                office = OffService.GetOffice(Id);
-            }
-        }
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        office = OffService.GetOffice(Id);
+        employee = EmpService.GetEmployee(Id);
+    }
+}

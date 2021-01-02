@@ -21,14 +21,14 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int EmployeeId { get; set; }
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
         public DateTime? DateOfBirth { get; set; }
         [Required]
         [StringLength(30)]
         public string Nationality { get; set; }
         [Required]
         [StringLength(10)]
-        public FacultyStatus Status { get; set; }
+        public string Status { get; set; }
         [Required]
         [StringLength(20)]
         public string MobileNumber { get; set; }
@@ -44,21 +44,21 @@ namespace DAH_FIMS.Model
         [Required]
         [StringLength(20)]
         public string TypeOfContract { get; set; }
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
         public DateTime? DateNeeded { get; set; }
         [Required]
         [StringLength(20)]
         public string RecruitmentStatus { get; set; }
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
         public DateTime? ApplicationDate { get; set; }
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
         public DateTime? HiringDate { get; set; }
         [Required]
         [StringLength(20)]
         public string Rank { get; set; }
         public int? RequiredLoad { get; set; }
         public int? ConversionRate { get; set; }
-        [Column(TypeName = "date")]
+        //[Column(TypeName = "date")]
         public DateTime? ReleaseDate { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
@@ -74,8 +74,14 @@ namespace DAH_FIMS.Model
         public virtual ICollection<WORKLOAD> WORKLOADs { get; set; }
     }
 
-    public enum FacultyStatus
+    public enum ReqrutimentStatus
     {
-        Single = 1, Married
+        Pending = 1, Cancelled, Approved, Rejected
     }
+
+    public enum Rank
+    {
+        Professor = 1, AssociateProfessor, AssistantProfessor, Lecturer
+    }
+        
 }

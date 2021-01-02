@@ -14,6 +14,7 @@ using DAH_FIMS.Model;
 using Microsoft.EntityFrameworkCore;
 using DAH_FIMS.Services;
 using Syncfusion.Blazor;
+using Radzen;
 
 
 namespace DAH_FIMS
@@ -36,6 +37,10 @@ namespace DAH_FIMS
             services.AddSingleton<WeatherForecastService>();
             services.AddSyncfusionBlazor();
 
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
+            services.AddScoped<TooltipService>();
+            services.AddScoped<ContextMenuService>();
 
             services.AddDbContext<DahFIMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<EmployeeService>();
@@ -47,7 +52,8 @@ namespace DAH_FIMS
             services.AddScoped<RequestsService>();
             services.AddScoped<ResourcesService>();
 
-
+            services.AddSingleton<AppDataService>();
+            services.AddScoped<AppDataService>();
 
 
 
@@ -65,7 +71,7 @@ namespace DAH_FIMS
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU1MTg1QDMxMzgyZTMzMmUzMGRpUWxvc29hSGQ0RmRRa01pUnVrMHhxQXVFS1BtQ0x0LzVpYzdFa3lndEU9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mzc1OTQ2QDMxMzgyZTM0MmUzME0wa1JWb0JGb3QwZ1lUaDFvQWdJQjRnVy91Q0g3TWJUdm9WOWU0TkFDeWs9");
 
 
             if (env.IsDevelopment())

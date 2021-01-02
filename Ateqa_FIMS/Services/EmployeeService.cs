@@ -26,21 +26,21 @@ namespace DAH_FIMS.Services
         /// <returns>List of all employees</returns>
         public List<EMPLOYEE> GetEmployees()
         {
-            //return db.EMPLOYEEs.Include("FACULTY").Include("DEPARTMENTs").Include("SCHOOLs").Include("POSITIONs").ToList();
-           
-            // Load the categories
-            Include(nameof(db.FACULTies));
-            Include(nameof(db.DEPARTMENTs));
-            Include(nameof(db.SCHOOLs));
-            Include(nameof(db.POSITIONs));
-
-            return db.EMPLOYEEs.ToList();
-
+          
+            return db.EMPLOYEEs
+                .Include(e => e.Department)
+                .Include(e => e.Position)
+                .Include(e => e.Office)
+                .ToList();
         }
 
         public EMPLOYEE GetEmployee(int id)
         {
-            return db.EMPLOYEEs.SingleOrDefault(c => c.EmployeeId == id);
+            return db.EMPLOYEEs
+                .Include(e => e.Department)
+                .Include(e => e.Position)
+                .Include(e => e.Office)
+                .SingleOrDefault(c => c.EmployeeId == id);
         }
 
         public bool Addprofile(EMPLOYEE employee)
@@ -59,7 +59,7 @@ namespace DAH_FIMS.Services
         /// </summary>
 
 
-        public void EditProfile(EMPLOYEE employee)
+        public void Editprofile(EMPLOYEE employee)
         {
             db.Entry(employee).State = EntityState.Modified;
             db.SaveChanges();
@@ -69,9 +69,9 @@ namespace DAH_FIMS.Services
         /// Load related navigational properties (eager loading)
         /// </summary>
         /// <param name="property">The navigational property to load</param>
-        public void Include(string property)
-        {
-            var employees = db.EMPLOYEEs.Include(property);
-        }
+        //public void Include(string property)
+        //{
+        //    var employees = db.EMPLOYEEs.Include(property);
+        //}
     }
 }

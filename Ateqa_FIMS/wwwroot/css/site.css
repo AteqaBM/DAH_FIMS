@@ -1,4 +1,4 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: arial, sans-serif;
@@ -647,13 +647,6 @@ login100-form-btn {
 }
 
 
-/*txt1 {
-    font-family: arial, sans-serif;
-    font-size: 15px;
-    color: #4d0000;
-    line-height: 5;
-}*/
-
 /*Continer Design*/
 fieldset {
     background-color: #ffe6b3;
@@ -678,14 +671,28 @@ input {
 }
 
 
-.table{
-
+.container {
+    display:grid;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
 }
 
+.table-wrapper {
+    overflow-y: scroll;
+    height: 150px;
+}
 
+.table-wrapper th{
+    position: sticky;
+    top: 0;
+    color: #4d0000;
+}
 
-
-
+.table-bordered {
+    color: #4d0000;
+    border-color: #4d0000;
+}
 
 
 
@@ -870,7 +877,7 @@ app {
 
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
-}
+}*/
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -882,7 +889,7 @@ app {
 
 .validation-message {
     color: red;
-}*/
+}
 
 #blazor-error-ui {
     background: lightyellow;

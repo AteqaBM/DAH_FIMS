@@ -1,39 +1,254 @@
-﻿@page "/Provost/Homepage/{provName}"
+﻿@page "/Provost/Homepage/"
+
 @layout ProvostLayout
 
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+@using Syncfusion.Blazor.Charts
+@using Syncfusion.Blazor.Buttons
 
-<div class=" raw ">
-    <div class=" col-10 ">
-        <table style=" width: 100%">
-            <tr>
-                <th>
-                    <h4>
-                        Dashboard
-                    </h4>
-                </th>
-                <th>
-                    <h4><a href="#home"><span class="oi oi-pencil" style="color: #4d0000; right:-610px"></span></a></h4>
-                </th>
-                <th>
-                    <h4><a href="#home"><span class="oi oi-file" style="color: #4d0000; right:-480px"></span></a></h4>
-                </th>
-                <th>
-                    <h4><a href="#home"><span class="oi oi-print" style="color: #4d0000; right:-350px"></span></a></h4>
-                </th>
-                </tr>
-        </table>
+@inject EmployeeService EmpService
+@inject NavigationManager NavigationManager
+
+<title>FIMS | Provost Homepage</title>
+<body>
+    <div class=" container-fluid">
+        <div class=" raw ">
+            <div class=" col-10 ">
+                <table style=" width: 100%">
+                    <tr>
+                        <th>
+                            <h4>
+                                Dashboard
+                            </h4>
+                        </th>
+                        <th>
+                            <h4><SfButton ID="button" @onclick="PrintChart" Content= class="oi oi-share-boxed" style="color: #4d0000; right:-560px" CssClass="e-flat" IsPrimary="true"></SfButton></h4>
+                        </th>
+                        <th>
+                            <h4><SfButton ID="button" @onclick="PrintChart" Content= class="oi oi-print" style="color: #4d0000; right:-380px" CssClass="e-flat" IsPrimary="true"></SfButton></h4>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <!--* Card init *-->
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header" style="background-color: #ffe6b3">
+                                <!-- Title -->
+                                <center><h5 style="color:#4d0000">Number of Faculties in Each School</h5></center>
+                            </div>
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <SfAccumulationChart EnableAnimation="true">
+                                    <AccumulationChartTooltipSettings Enable="true"></AccumulationChartTooltipSettings>
+                                    <AccumulationChartLegendSettings Visible="true"></AccumulationChartLegendSettings>
+                                    <AccumulationChartSeriesCollection>
+                                        <AccumulationChartSeries DataSource="@dataSource" XName="xValue" YName="yValue" Name="Faculties" Radius=50% StartAngle="@StartAngle" EndAngle="@EndAngle"
+                                                                 InnerRadius="0%" ExplodeIndex="@ExplodeIndex" Explode="true" ExplodeOffset="@ExplodeRadius">
+                                            <AccumulationDataLabelSettings Visible="true" Name="xValue" Position="AccumulationLabelPosition.Outside"></AccumulationDataLabelSettings>
+                                        </AccumulationChartSeries>
+                                    </AccumulationChartSeriesCollection>
+                                    @*<ChartEvents OnPointRender="PointRender"></ChartEvents>*@
+                                </SfAccumulationChart>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <!--* Card init *-->
+                        <div class="card">
+                            <!-- Card header -->
+                            <div class="card-header" style="background-color: #ffe6b3">
+                                <!-- Title -->
+                                <center><h5 style="color:#4d0000">Full-Time & Part-Time Faculties in Each School</h5></center>
+                            </div>
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <SfChart>
+                                    <ChartArea><ChartAreaBorder Width="0"></ChartAreaBorder></ChartArea>
+                                    <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category" Interval="1">
+                                        <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
+                                    </ChartPrimaryXAxis>
+                                    <ChartPrimaryYAxis>
+                                        <ChartAxisLineStyle Width="0"></ChartAxisLineStyle>
+                                        <ChartAxisLabelStyle Color="transparent"></ChartAxisLabelStyle>
+                                        <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
+                                        <ChartAxisMajorTickLines Width="0"></ChartAxisMajorTickLines>
+                                    </ChartPrimaryYAxis>
+                                    <ChartSeriesCollection>
+                                        <ChartSeries DataSource="@DataSource" XName="x" YName="y" Name="Full-time" Type="ChartSeriesType.Column">
+                                            <ChartMarker>
+                                                <ChartDataLabel Visible="true" Position="Syncfusion.Blazor.Charts.LabelPosition.Top">
+                                                    <ChartDataLabelFont FontWeight="600" Color="#ffffff"></ChartDataLabelFont>
+                                                </ChartDataLabel>
+                                            </ChartMarker>
+                                        </ChartSeries>
+                                        <ChartSeries DataSource="@DataSource" XName="x" YName="y1" Name="Part-Time" Type="ChartSeriesType.Column">
+                                            <ChartMarker>
+                                                <ChartDataLabel Visible="true" Position="Syncfusion.Blazor.Charts.LabelPosition.Top">
+                                                    <ChartDataLabelFont FontWeight="600" Color="#ffffff"></ChartDataLabelFont>
+                                                </ChartDataLabel>
+                                            </ChartMarker>
+                                        </ChartSeries>
+                                    </ChartSeriesCollection>
+                                    <ChartTooltipSettings Enable="true"></ChartTooltipSettings>
+                                    @*<ChartEvents OnPointRender="PointRender"></ChartEvents>*@
+                                </SfChart>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col">
+                        <main role="main">
+                            <h5>Current Faculty List</h5>
+                            <hr />
+                            <div class="table-wrapper" style="overflow:auto; height:200px; width:1100px">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr class="table-warning">
+                                            <th>Name</th>
+                                            <th>Position Title</th>
+                                            <th>Department Name</th>
+                                            <th>Email Address</th>
+                                            <th>Phone Extension</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in employees)
+                                        {
+                                            <tr>
+                                                <td>@item.FirstName @item.LastName</td>
+                                                <td>@item.Position.PositionTitle</td>
+                                                <td>@item.Department.DepartmentName</td>
+                                                <td>@item.EmailAdress</td>
+                                                <td>@item.PhoneExtension</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+
+</body>
+
+
 
 
 
 
 
 @code {
+    // Table Code
 
-    [Parameter]
-    public string provName { get; set; }
+    // Create a list of employees to be displayed in the component
+    List<EMPLOYEE> employees;
+
+    protected override void OnInitialized()
+
+    {
+        // Get the employees from the service
+        employees = EmpService.GetEmployees();
 
 
+    }
 
+    public int StartAngle = 0, value = 0, EndAngle = 360, radiusValue = 70, exploderadius = 10;
+    public double ExplodeIndex = 1;
+    public string OuterRadius = "70%", ExplodeRadius = "10%";
+    private void changeAngle(Microsoft.AspNetCore.Components.ChangeEventArgs args)
+    {
+        value = Convert.ToInt32(args.Value);
+        StartAngle = +Convert.ToInt32(args.Value);
+        EndAngle = +Convert.ToInt32(args.Value);
+    }
+    private void ChangeOuterRadius(Microsoft.AspNetCore.Components.ChangeEventArgs args)
+    {
+        radiusValue = Convert.ToInt32(args.Value);
+        OuterRadius = args.Value + "%";
+    }
+    private void ChangeExplodeRadius(Microsoft.AspNetCore.Components.ChangeEventArgs args)
+    {
+        exploderadius = Convert.ToInt32(args.Value);
+        ExplodeRadius = args.Value + "%";
+    }
+    private void ChangeExplodeIndex(Microsoft.AspNetCore.Components.ChangeEventArgs args)
+    {
+        ExplodeIndex = Convert.ToInt32(args.Value);
+    }
+
+    // Pie Chart Code
+
+    public class PieData1
+    {
+        public string xValue { get; set; }
+        public double yValue { get; set; }
+        public string r { get; set; }
+    }
+    private List<PieData1> dataSource = new List<PieData1>
+{
+        new PieData1 { xValue = "Buisness & Law", yValue = 26},
+        new PieData1 { xValue = "Design & Architecture", yValue = 30},
+        new PieData1 { xValue = "Health, Behavioral Sciences & Education", yValue = 23 },
+        new PieData1 { xValue = "Engineering, Computing & Informatics", yValue = 21}
+    };
+    string CurrentUri;
+    private Syncfusion.Blazor.Theme Theme { get; set; }
+
+    // Column Chart Code
+
+    public class ColumnChartData
+    {
+        public string x { get; set; }
+        public double y { get; set; }
+        public double y1 { get; set; }
+        public double y2 { get; set; }
+    }
+    public List<ColumnChartData> DataSource = new List<ColumnChartData>
+{
+        new ColumnChartData { x= "Buisness & Law", y= 18, y1= 8},
+        new ColumnChartData { x= "Design & Architecture", y= 20, y1= 10},
+        new ColumnChartData { x= "Health, Behavioral Sciences & Education", y= 6, y1= 17},
+        new ColumnChartData { x= "Engineering, Computing & Informatics", y= 7, y1= 14}
+    };
+
+    SfChart chartObj;
+
+    public void PrintChart(MouseEventArgs args)
+    {
+        chartObj.Print();
+    }
+
+    //public void PointRender(PointRenderEventArgs args)
+    //{
+    //    if (CurrentUri.IndexOf("material") > -1)
+    //    {
+    //        args.Fill = PointColor.MaterialColors[args.Point.Index % 10];
+    //    }
+    //    else if (CurrentUri.IndexOf("fabric") > -1)
+    //    {
+    //        args.Fill = PointColor.FabricColors[args.Point.Index % 10];
+    //    }
+    //    else if (CurrentUri.IndexOf("bootstrap") > -1)
+    //    {
+    //        args.Fill = PointColor.BootstrapColors[args.Point.Index % 10];
+    //    }
+    //    else if (CurrentUri.IndexOf("highcontrast") > -1)
+    //    {
+    //        args.Fill = PointColor.HighContrastColors[args.Point.Index % 10];
+    //    }
+    //}
 }
