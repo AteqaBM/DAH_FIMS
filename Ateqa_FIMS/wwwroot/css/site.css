@@ -694,6 +694,10 @@ input {
     border-color: #4d0000;
 }
 
+.control_wrapper {
+    width: 350px;
+    margin: 0 auto;
+}
 
 
 

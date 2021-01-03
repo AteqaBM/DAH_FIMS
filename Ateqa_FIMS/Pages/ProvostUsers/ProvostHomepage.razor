@@ -39,9 +39,9 @@
                         <!--* Card init *-->
                         <div class="card">
                             <!-- Card header -->
-                            <div class="card-header" style="background-color: #ffe6b3">
+                            <div class="card-header" style="background-color: #ffe6b3; height: 90px">
                                 <!-- Title -->
-                                <center><h5 style="color:#4d0000">Number of Faculties in Each School</h5></center>
+                                <center><h5 style="color:#4d0000">Number of Faculties By School In Fall 2019-2020 </h5></center>
                             </div>
                             <!-- Card body -->
                             <div class="card-body">
@@ -63,9 +63,9 @@
                         <!--* Card init *-->
                         <div class="card">
                             <!-- Card header -->
-                            <div class="card-header" style="background-color: #ffe6b3">
+                            <div class="card-header" style="background-color: #ffe6b3; height: 90px">
                                 <!-- Title -->
-                                <center><h5 style="color:#4d0000">Full-Time & Part-Time Faculties in Each School</h5></center>
+                                <center><h5 style="color:#4d0000">Full-Time & Part-Time Faculties By School In Fall 2019-2020 </h5></center>
                             </div>
                             <!-- Card body -->
                             <div class="card-body">
@@ -132,7 +132,6 @@
                                             </tr>
                                         }
                                     </tbody>
-
                                 </table>
                             </div>
                         </main>
@@ -142,11 +141,9 @@
 
         </div>
     </div>
-
+    <br />
+    <br />
 </body>
-
-
-
 
 
 
@@ -162,9 +159,9 @@
     {
         // Get the employees from the service
         employees = EmpService.GetEmployees();
-
-
     }
+
+    // Pie Chart Code
 
     public int StartAngle = 0, value = 0, EndAngle = 360, radiusValue = 70, exploderadius = 10;
     public double ExplodeIndex = 1;
@@ -189,8 +186,6 @@
     {
         ExplodeIndex = Convert.ToInt32(args.Value);
     }
-
-    // Pie Chart Code
 
     public class PieData1
     {
@@ -225,30 +220,12 @@
         new ColumnChartData { x= "Engineering, Computing & Informatics", y= 7, y1= 14}
     };
 
+    // Export & Print buttons Codes (Still in Progress)
+
     SfChart chartObj;
 
     public void PrintChart(MouseEventArgs args)
     {
         chartObj.Print();
     }
-
-    //public void PointRender(PointRenderEventArgs args)
-    //{
-    //    if (CurrentUri.IndexOf("material") > -1)
-    //    {
-    //        args.Fill = PointColor.MaterialColors[args.Point.Index % 10];
-    //    }
-    //    else if (CurrentUri.IndexOf("fabric") > -1)
-    //    {
-    //        args.Fill = PointColor.FabricColors[args.Point.Index % 10];
-    //    }
-    //    else if (CurrentUri.IndexOf("bootstrap") > -1)
-    //    {
-    //        args.Fill = PointColor.BootstrapColors[args.Point.Index % 10];
-    //    }
-    //    else if (CurrentUri.IndexOf("highcontrast") > -1)
-    //    {
-    //        args.Fill = PointColor.HighContrastColors[args.Point.Index % 10];
-    //    }
-    //}
 }

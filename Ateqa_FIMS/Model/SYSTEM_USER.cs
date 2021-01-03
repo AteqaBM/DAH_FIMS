@@ -26,10 +26,10 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int UserId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Username field is required.")]
         [StringLength(50)]
         public string Username { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Password field is required.")]
         public string Password { get; set; }
         [Required]
         public string UserType { get; set; }

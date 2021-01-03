@@ -21,44 +21,46 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int EmployeeId { get; set; }
-        //[Column(TypeName = "date")]
+        [Column(TypeName = "date")]
+        [Required(ErrorMessage = "The Date Of Birth field is required ")]
         public DateTime? DateOfBirth { get; set; }
-        [Required]
+        [Required(ErrorMessage ="The Nationality field is required ")]
         [StringLength(30)]
         public string Nationality { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Status field is required ")]
         [StringLength(10)]
         public string Status { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Mobile Number field is required ")]
         [StringLength(20)]
+        [RegularExpression("(00966)(5|0|3|6|4|9|1|8|7)([0-9]{7})", ErrorMessage = "Wrong mobile number format. Ex. 009665XXXXXXXX ")]
         public string MobileNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Highest Education field is required ")]
         [StringLength(50)]
         public string HighestEducation { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Institution field is required ")]
         [StringLength(50)]
         public string Institution { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Division field is required ")]
         [StringLength(50)]
         public string Division { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Type of Contract field is required ")]
         [StringLength(20)]
         public string TypeOfContract { get; set; }
-        //[Column(TypeName = "date")]
+        [Column(TypeName = "date")]
+        [Required(ErrorMessage = "The Date Needed field is required ")]
         public DateTime? DateNeeded { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Recruitment Status field is required ")]
         [StringLength(20)]
         public string RecruitmentStatus { get; set; }
-        //[Column(TypeName = "date")]
+        [Column(TypeName = "date")]
+        [Required(ErrorMessage = "The Application Date field is required ")]
         public DateTime? ApplicationDate { get; set; }
-        //[Column(TypeName = "date")]
         public DateTime? HiringDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Rank field is required ")]
         [StringLength(20)]
         public string Rank { get; set; }
         public int? RequiredLoad { get; set; }
         public int? ConversionRate { get; set; }
-        //[Column(TypeName = "date")]
         public DateTime? ReleaseDate { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]

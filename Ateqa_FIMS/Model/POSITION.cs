@@ -18,7 +18,7 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int PositionId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Position Title field is required.")]
         public string PositionTitle { get; set; }
 
         [InverseProperty(nameof(EMPLOYEE.Position))]

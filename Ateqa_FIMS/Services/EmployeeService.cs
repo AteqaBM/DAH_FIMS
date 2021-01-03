@@ -42,6 +42,10 @@ namespace DAH_FIMS.Services
                 .Include(e => e.Office)
                 .SingleOrDefault(c => c.EmployeeId == id);
         }
+        public List<EMPLOYEE> GetOfficeEmployees(int id)
+        {
+            return db.EMPLOYEEs.Where(c => c.OfficeId == id).ToList();
+        }
 
         public bool Addprofile(EMPLOYEE employee)
         {

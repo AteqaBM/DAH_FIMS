@@ -5,6 +5,7 @@
 @using DAH_FIMS.Model
 @using DAH_FIMS.Services
 @using Microsoft.AspNetCore.Components.Forms
+@using Syncfusion.Blazor.Inputs
 
 @inject EmployeeService EmpService
 @inject DepartmentService DepService
@@ -128,7 +129,6 @@
                     </select>
                 </div>
             </div>
-            <br />
 
             <div class="form-group row">
                 <label for="department" class="col-sm-3 col-form-label">Department Name:*</label>
@@ -143,13 +143,18 @@
                 </div>
             </div>
 
-            @*<div class="form-group row">
-                    <label for="positionTitle" class="col-sm-3 col-form-label">Position Title:*</label>
-                    <div class="col-sm-5">
-                        <InputText type="text" id="positionTitle" @bind-Value="employee.Position.PositionTitle" class="form-control" />
-                        <ValidationMessage For="@(() => employee.Position.PositionTitle)" />
-                    </div>
-                </div>*@
+            <div class="form-group row">
+                <label for="position" class="col-sm-3 col-form-label">Position Title:*</label>
+                <div class="col-sm-5">
+                    <InputSelect @bind-Value="positionId" id="position" class="form-control">
+                        <option value="">---Select a Position---</option>
+                        @foreach (var position in positions)
+                        {
+                            <option value="@position.PositionId">@position.PositionTitle</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="typeOfContract" class="col-sm-3 col-form-label">Type of Contract:*</label>
@@ -167,13 +172,26 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label for="officeNumber" class="col-sm-3 col-form-label">Office Number:*</label>
+                <div class="col-sm-5">
+                    <InputSelect @bind-Value="officeId" id="officeNumber" class="form-control">
+                        <option value="">---Select an Office---</option>
+                        @foreach (var office in offices)
+                        {
+                            <option value="@office.OfficeId">@office.OfficeNumber</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+
             @*<div class="form-group row">
-                    <label for="officeNumber" class="col-sm-3 col-form-label">Office Number</label>
-                    <div class="col-sm-5">
-                        <InputText id="officeNumber" @bind-Value="office.OfficeNumber" class="form-control" />
-                        <ValidationMessage For="@(() => office.OfficeNumber)" />
-                    </div>
-                </div>*@
+            <label for="officeNumber" class="col-sm-3 col-form-label">Office Number</label>
+            <div class="col-sm-5">
+                <InputText id="officeNumber" @bind-Value="office.OfficeNumber" class="form-control" />
+                <ValidationMessage For="@(() => office.OfficeNumber)" />
+            </div>
+        </div>*@
 
             <div class="form-group row">
                 <label for="dateNeeded" class="col-sm-3 col-form-label">Date Needed:*</label>
@@ -252,12 +270,24 @@
             <div class="form-group row">
                 <label for="hiringDocuments" class="col-sm-3 col-form-label">Hiring Documents Copy:*</label>
                 <div class="col-sm-5">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    <div class="control_wrapper">
+                        <SfUploader ID="UploadFiles" DropArea=".control-fluid">
+                            <UploaderEvents OnRemove="OnFileRemove"></UploaderEvents>
+                            <UploaderAsyncSettings SaveUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save" RemoveUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove"></UploaderAsyncSettings>
+                        </SfUploader>
                     </div>
                 </div>
             </div>
+
+            @*<div class="form-group row">
+            <label for="hiringDocuments" class="col-sm-3 col-form-label">Hiring Documents Copy:*</label>
+            <div class="col-sm-5">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+            </div>
+        </div>*@
             <br />
             <br />
 
@@ -305,12 +335,28 @@
     // Check why employee.departmentId does not bind
     private string departmentId = String.Empty;
 
+    private string positionId = String.Empty;
+
+    private string officeId = String.Empty;
+
     private void Addprofile()
     {
         // Convert departmentId from string to int
         if (!String.IsNullOrEmpty(departmentId))
         {
             employee.DepartmentId = Int32.Parse(departmentId);
+        }
+
+        // Convert positionId from string to int
+        if (!String.IsNullOrEmpty(positionId))
+        {
+            employee.PositionId = Int32.Parse(positionId);
+        }
+
+        // Convert officeId from string to int
+        if (!String.IsNullOrEmpty(officeId))
+        {
+            employee.OfficeId = Int32.Parse(officeId);
         }
 
         EmpService.Addprofile(employee);
@@ -320,5 +366,10 @@
 
         // May navigate to the Faculty/List component
         NavigationManager.NavigateTo("Faculty/List");
+    }
+
+    public void OnFileRemove(RemovingEventArgs args)
+    {
+        args.PostRawFile = false;
     }
 }

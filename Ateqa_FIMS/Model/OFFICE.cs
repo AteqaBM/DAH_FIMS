@@ -20,12 +20,12 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int OfficeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Office Number field is required.")]
         [StringLength(10)]
         public string OfficeNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Office Area field is required.")]
         public string OfficeArea { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Available Resources field is required.")]
         public string AvailableResources { get; set; }
 
         [InverseProperty(nameof(EMPLOYEE.Office))]

@@ -20,7 +20,7 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int DepartmentId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Department Name field is required.")]
         [StringLength(100)]
         public string DepartmentName { get; set; }
         public int? SchoolId { get; set; }

@@ -21,15 +21,18 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int EmployeeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The First Name field is required ")]
         [StringLength(20)]
         public string FirstName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Last Name field is required ")]
         [StringLength(20)]
         public string LastName { get; set; }
-        [Required]
-        [StringLength(30)]
+        [Required(ErrorMessage = "The Email field is required ")]
+        [StringLength(100)]
+        [EmailAddress]
         public string EmailAdress { get; set; }
+        [StringLength(3)]
+        [Range(1, 10, ErrorMessage = "The range for Phone Extension is 3 numbers")]
         public int PhoneExtension { get; set; }
         public bool IsItPartTime { get; set; }
         public bool AcceptEmailNotification { get; set; }
