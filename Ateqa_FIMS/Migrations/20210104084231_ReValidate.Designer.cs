@@ -4,20 +4,22 @@ using DAH_FIMS.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAH_FIMS.Migrations
 {
     [DbContext(typeof(DahFIMSDbContext))]
-    partial class DahFIMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210104084231_ReValidate")]
+    partial class ReValidate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("DAH_FIMS.Model.CAADU_USER", b =>
                 {
@@ -664,8 +666,8 @@ namespace DAH_FIMS.Migrations
 
                     b.Property<string>("OfficeNumber")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("OfficeId");
 

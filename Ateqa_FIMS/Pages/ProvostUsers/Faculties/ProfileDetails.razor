@@ -1,14 +1,21 @@
-﻿@page "/Profile/Details/{Id:int}"
+﻿@*//This page is viewing the details of the faculty*@
+
+@page "/Profile/Details/{Id:int}"
 
 @layout ProvostLayout2
 
 @inject EmployeeService EmpService
 @inject FacultyService FacService
-@inject DepartmentService DepService 
+@inject DepartmentService DepService
 
+<title>FIMS | Profile Details</title>
+
+<br />
 <h4>Profile Details</h4>
-
+<br />
 <fieldset>
+    @*@foreach (var faculty in facultyEmployees)
+        {*@
     <table class="table table-borderless">
         <tr>
             <th scope="row">First Name: </th>
@@ -111,26 +118,30 @@
             <td>@faculty.HIRING_DOCUMENTs</td>
         </tr>
     </table>
-</fieldset>
+    @*}*@
     <br />
     <center>
         <a href="/Faculty/List" class="button" role="button">Cancel</a>
     </center>
+</fieldset>
+<br />
+    
 
+@code {
 
-    @code {
+    EMPLOYEE employee = new EMPLOYEE();
+    FACULTY faculty = new FACULTY();
+    private List<FACULTY> facultyEmployees;
+    DEPARTMENT department = new DEPARTMENT();
 
-        EMPLOYEE employee = new EMPLOYEE();
-        FACULTY faculty = new FACULTY();
-        DEPARTMENT department = new DEPARTMENT();
+    [Parameter]
+    public int Id { get; set; }
 
-        [Parameter]
-        public int Id { get; set; }
-
-        protected override void OnInitialized()
-        {
-            employee = EmpService.GetEmployee(Id);
-            faculty = FacService.GetFaculty(Id);
-            department = DepService.GetDepartment(Id);
-        }
+    protected override void OnInitialized()
+    {
+        employee = EmpService.GetEmployee(Id);
+        faculty = FacService.GetFaculty(Id);
+        //facultyEmployees = FacService.GetFacultEmployees(Id);
+        department = DepService.GetDepartment(Id);
+    }
     }

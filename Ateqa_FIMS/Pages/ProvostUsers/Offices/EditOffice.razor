@@ -1,0 +1,98 @@
+﻿@*//This page to edit the office details*@ 
+
+@page "/Office/Edit/{Id:int}"
+
+@layout ProvostLayout2
+@inject NavigationManager NavigationManager
+
+@inject OfficesService OffService
+@inject EmployeeService EmpService
+@inject PositionService PosService
+@inject NavigationManager NavigationManager
+@inject DahFIMSDbContext db
+
+@using DAH_FIMS.Model;
+@using DAH_FIMS.Services;
+
+<title>FIMS | Edit Office</title>
+
+<br />
+<h4>Edit Office</h4>
+<br />
+<form action="/" method="get" id="EditOffice">
+    <fieldset>
+        <EditForm Model="office" OnValidSubmit="Editoffice">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row">
+                <label for="officeNumber" class="col-sm-3 col-form-label"><b>Office Number:*</b></label>
+                <div class="col-sm-5">
+                    <InputText id="officeNumber" @bind-Value="office.OfficeNumber" class="form-control" />
+                    <ValidationMessage For="@(() => office.OfficeNumber)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="officeArea" class="col-sm-3 col-form-label"><b>Office Area:*</b></label>
+                <div class="col-sm-5">
+                    <InputText id="officeArea" @bind-Value="office.OfficeArea" class="form-control" />
+                    <ValidationMessage For="@(() => office.OfficeArea)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="availableResources" class="col-sm-3 col-form-label"><b>Available Resources:*</b></label>
+                <div class="col-sm-5">
+                    <InputTextArea id="availableResources" raws="3" @bind-Value="office.AvailableResources" class="form-control" />
+                    <ValidationMessage For="@(() => office.AvailableResources)" />
+                    <br />
+                    <br />
+                    <div class="card" style="width: 315px">
+                        <div class="card-header" style="text-align:center; background-color:#4d0000; color:white">
+                            Available Resources Examples
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="text-align:center">Desk - Chairs - Cabinets - Door Sign  Phone - Computer - Printer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <button type="submit" class="button">Save</button>
+                <a href="/Office/List" class="button" role="button">Cancel</a>
+            </center>
+        </EditForm>
+        <br />
+        <center><p>@message</p></center>
+    </fieldset>
+</form>
+<br />
+<br />
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    OFFICE office = new OFFICE();
+
+    string message;
+
+    // To Get A specifice Office Information
+    protected override void OnInitialized()
+    {
+        office = OffService.GetOffice(Id);
+    }
+
+    // To Update Office Information
+    public void Editoffice()
+    {
+        OffService.Editoffice(office);
+
+        message = "Office Information is Updated Successfully";
+    }
+
+}

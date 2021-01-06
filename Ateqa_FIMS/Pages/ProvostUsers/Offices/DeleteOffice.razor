@@ -1,0 +1,90 @@
+﻿@*//This page is to delete the office from offices list page and the database*@
+
+@page "/Office/Delete/{Id:int}"
+
+@layout ProvostLayout2
+
+@inject NavigationManager NavigationManager
+@inject OfficesService OffService
+@inject EmployeeService EmpService
+
+<title>FIMS | Delete Office</title>
+
+<br />
+<h4>Delete Office</h4>
+<br />
+<center>
+    <div class="alert alert-danger" style="width:320px; height:80px">
+        DO YOU WANT TO DELETE THIS OFFICE?
+    </div>
+</center>
+
+<fieldset>
+    @if (count == 0)
+    {
+        <center><p> This Office Has Not Been Assigned</p></center>
+        <hr style="width: 50%; background-color: #4d0000">
+        <table class="table table-borderless" style="color:#4d0000">
+            <tr>
+                <th scope="row">Office Number: </th>
+                <td>@office.OfficeNumber</td>
+            </tr>
+        </table>
+    }
+    else
+    { 
+        <center><p> This Office Has Been Assigned To:</p></center>
+        <hr style="width: 50%; background-color: #4d0000">
+        @foreach (var employee in officeEmployees)
+        {
+            <table class="table table-borderless" style="color:#4d0000">
+                <tr>
+                    <th scope="row">Name: </th>
+                    <td>@employee.FirstName @employee.LastName</td>
+                </tr>
+                <tr>
+                    <th scope="row">Office Number: </th>
+                    <td>@office.OfficeNumber</td>
+                </tr>
+                <hr style="width: 150%; background-color: #4d0000">
+            </table>
+        }
+    }
+    <br />
+    <br />
+    <center>
+        <button type="submit" class="button" @onclick="RemoveOffice">Delete Office</button> &nbsp;
+        <a href="/Office/List" class="button" role="button">Cancel</a>
+    </center>
+</fieldset>
+<br />
+<br />
+
+
+    @code {
+
+        OFFICE office = new OFFICE();
+
+        [Parameter]
+        public int Id { get; set; }
+
+        //Code to have all assigned employees for each office
+        private List<EMPLOYEE> officeEmployees;
+        int count;
+
+        //Code to Delete the office 
+        private void RemoveOffice()
+        {
+            OffService.DeleteOffice(Id);
+
+            NavigationManager.NavigateTo("Office/List");
+        }
+
+        protected override void OnInitialized()
+        {
+            office = OffService.GetOffice(Id);
+            officeEmployees = EmpService.GetOfficeEmployees(Id);
+            count = officeEmployees.Count;
+        }
+
+    }

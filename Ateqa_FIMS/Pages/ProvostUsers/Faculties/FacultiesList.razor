@@ -1,4 +1,7 @@
-﻿@page "/Faculty/List"
+﻿@*//This page is viewing the list of all the faculties that has been added to the
+//databse and provide mutible actions that can be performed to the faculties.*@
+
+@page "/Faculty/List"
 
 @layout ProvostLayout2
 
@@ -8,70 +11,71 @@
 
 @inject EmployeeService EmpService
 
-    <title>FIMS | Faculties</title>
+<title>FIMS | Faculties</title>
 
+<br />
+<div style="float: left">
+    <h4>Faculties</h4>
+</div>
 
-    <div style="float: left">
-        <h4>Faculties</h4>
-    </div>
-
-    <div style="float: right">
+<div style="float: right">
     <a href="Profile/Add"><span class="oi oi-plus"></span></a>&nbsp;
-    <b>Add Profile</b></div><div style="clear: both;"></div>
+    <b>Add Profile</b>
+</div><div style="clear: both;"></div>
 
-    <br />
-    @if (employees == null)
-    {
-        <div class="d-flex align-items-center">
-            <strong>Loading data ...</strong>
-            <div class="spinner-border ml-auto"></div>
-        </div>
-    }
-    else
-    {
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr class="table-warning">
-                    <th>Name</th>
-                    <th>Position Title</th>
-                    <th>Department Name</th>
-                    <th>Email Address</th>
-                    <th>Phone Extension</th>
-                    <th>Tasks</th>
+<br />
+@if (employees == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-warning">
+                <th>Name</th>
+                <th>Position Title</th>
+                <th>Department Name</th>
+                <th>Email Address</th>
+                <th>Phone Extension</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in employees)
+            {
+                <tr>
+                    <td>@item.FirstName @item.LastName</td>
+                    <td>@item.Position.PositionTitle</td>
+                    <td>@item.Department.DepartmentName</td>
+                    <td>@item.EmailAdress</td>
+                    <td>@item.PhoneExtension</td>
+                    <td>
+                        <a href="Profile/Details/@item.EmployeeId"><span class="oi oi-list"></span></a> &nbsp;
+                        <a href="Databank/@item.EmployeeId"><span class="oi oi-folder"></span></a> &nbsp;
+                        <a href="Profile/Edit/@item.EmployeeId"><span class="oi oi-pencil"></span></a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in employees)
-                {
-                    <tr>
-                        <td>@item.FirstName @item.LastName</td>
-                        <td>@item.Position.PositionTitle</td>
-                        <td>@item.Department.DepartmentName</td>
-                        <td>@item.EmailAdress</td>
-                        <td>@item.PhoneExtension</td>
-                        <td>
-                            <a href="Profile/Details/@item.EmployeeId"><span class="oi oi-list"></span></a> &nbsp;
-                            <a href="Databank/@item.EmployeeId"><span class="oi oi-folder"></span></a> &nbsp;
-                            <a href="Profile/Edit/@item.EmployeeId"><span class="oi oi-pencil"></span></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            }
+        </tbody>
 
-        </table>
+    </table>
+}
+
+@code {
+
+    // Create a list of employees to be displayed in the component
+    List<EMPLOYEE> employees;
+
+    protected override void OnInitialized()
+
+    {
+        // Get the employees from the service
+        employees = EmpService.GetEmployees();
     }
 
-    @code {
-
-        // Create a list of employees to be displayed in the component
-        List<EMPLOYEE> employees;
-
-        protected override void OnInitialized()
-
-        {
-            // Get the employees from the service
-            employees = EmpService.GetEmployees();
-        }
-
-    }
+}
 

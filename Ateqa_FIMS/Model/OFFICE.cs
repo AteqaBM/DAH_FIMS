@@ -21,7 +21,8 @@ namespace DAH_FIMS.Model
         [Key]
         public int OfficeId { get; set; }
         [Required(ErrorMessage = "The Office Number field is required.")]
-        [StringLength(10)]
+        [StringLength(6, ErrorMessage = "Office Number Should be 5 char")]
+        [RegularExpression ("[0-3][0-9][0-9]", ErrorMessage ="Wrong Office Number Format. Ex. 009")]
         public string OfficeNumber { get; set; }
         [Required(ErrorMessage = "The Office Area field is required.")]
         public string OfficeArea { get; set; }

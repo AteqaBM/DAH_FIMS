@@ -68,14 +68,5 @@ namespace DAH_FIMS.Services
             db.Entry(employee).State = EntityState.Modified;
             db.SaveChanges();
         }
-
-        /// <summary>
-        /// Load related navigational properties (eager loading)
-        /// </summary>
-        /// <param name="property">The navigational property to load</param>
-        //public void Include(string property)
-        //{
-        //    var employees = db.EMPLOYEEs.Include(property);
-        //}
     }
 }

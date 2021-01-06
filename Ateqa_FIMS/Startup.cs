@@ -36,6 +36,8 @@ namespace DAH_FIMS
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSyncfusionBlazor();
+            services.AddScoped<IFileUpload, FileUpload>();
+            
 
             services.AddScoped<DialogService>();
             services.AddScoped<NotificationService>();
@@ -71,7 +73,7 @@ namespace DAH_FIMS
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mzc1OTQ2QDMxMzgyZTM0MmUzME0wa1JWb0JGb3QwZ1lUaDFvQWdJQjRnVy91Q0g3TWJUdm9WOWU0TkFDeWs9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mzc3NDAwQDMxMzgyZTM0MmUzME0wa1JWb0JGb3QwZ1lUaDFvQWdJQjRnVy91Q0g3TWJUdm9WOWU0TkFDeWs9");
 
 
             if (env.IsDevelopment())

@@ -1,44 +1,23 @@
-﻿@page "/Office/Details/{Id:int}"
+﻿@*//This page is viewing the details of the assigned and not assigned offices*@
+
+@page "/Office/Details/{Id:int}"
 
 @layout ProvostLayout2
 
 @inject OfficesService OffService
 @inject EmployeeService EmpService
 
-<h4>Office Details</h4>
+<title>FIMS | Office Details</title>
 
+<br />
+<h4>Office Details</h4>
+<br />
 <fieldset>
     @if (count == 0)
     {
-
-        <p>No Employee has been assigned for this office </p>
-
-
-
-    }
-    else
-    {
-    @foreach (var employee in officeEmployees)
-    {
-
-
-        <table class="table table-borderless">
-            <tr>
-                <th scope="row">First Name: </th>
-                <td>@employee.FirstName</td>
-            </tr>
-            <tr>
-                <th scope="row">Last Name: </th>
-                <td>@employee.LastName</td>
-            </tr>
-            <tr>
-                <th scope="row">Position Title: </th>
-                <td>@employee.Position.PositionTitle</td>
-            </tr>
-            <tr>
-                <th scope="row">Job Type: </th>
-                <td>@employee.IsItPartTime</td>
-            </tr>
+        <center><p> This Office Has Not Been Assigned For Any Employee</p></center>
+        <hr style="width: 50%; background-color: #4d0000">
+        <table class="table table-borderless" style="color:#4d0000">
             <tr>
                 <th scope="row">Office Number: </th>
                 <td>@office.OfficeNumber</td>
@@ -47,34 +26,70 @@
                 <th scope="row">Office Area: </th>
                 <td>@office.OfficeArea</td>
             </tr>
-            <tr>
-                <th scope="row">Phone Extension: </th>
-                <td>@employee.PhoneExtension</td>
-            </tr>
+
             <tr>
                 <th scope="row">Available Resources: </th>
                 <td>@office.AvailableResources</td>
             </tr>
-
-            <tr>
-
-                ----------------------------------------------------------------------------------
-            </tr>
         </table>
-      }
     }
+    else
+    {
+        <center><p> This Office Has Been Assigned To:</p></center>
+        <hr style="width: 50%; background-color: #4d0000">
+        @foreach (var employee in officeEmployees)
+        {
+            <table class="table table-borderless" style="color:#4d0000">
+                <tr>
+                    <th scope="row">First Name: </th>
+                    <td>@employee.FirstName</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Name: </th>
+                    <td>@employee.LastName</td>
+                </tr>
+                <tr>
+                    <th scope="row">Position Title: </th>
+                    <td>@employee.Position.PositionTitle</td>
+                </tr>
+                <tr>
+                    <th scope="row">Job Type: </th>
+                    <td>@employee.IsItPartTime</td>
+                </tr>
+                <tr>
+                    <th scope="row">Office Number: </th>
+                    <td>@office.OfficeNumber</td>
+                </tr>
+                <tr>
+                    <th scope="row">Office Area: </th>
+                    <td>@office.OfficeArea</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone Extension: </th>
+                    <td>@employee.PhoneExtension</td>
+                </tr>
+                <tr>
+                    <th scope="row">Available Resources: </th>
+                    <td>@office.AvailableResources</td>
+                </tr>
+                <hr style="width: 225%; background-color: #4d0000">
+            </table>
+        }
+    }
+    <br />
+    <br />
+    <center>
+        <a href="/Office/List" class="button" role="button">Cancel</a>
+    </center>
 </fieldset>
 <br />
-<center>
-    <a href="/Office/List" class="button" role="button">Cancel</a>
-</center>
-
-
+<br />
 
 @code {
 
     OFFICE office = new OFFICE();
 
+    //Code to have all assigned employees for each office
     private List<EMPLOYEE> officeEmployees;
     int count;
 

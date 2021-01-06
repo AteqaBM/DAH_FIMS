@@ -39,6 +39,11 @@ namespace DAH_FIMS.Services
                 .SingleOrDefault(c => c.EmployeeId == id);
         }
 
+        //public List<FACULTY> GetFacultEmployees(int id)
+        //{
+        //    return db.FACULTies.Where(c => c.EmployeeId == id).ToList();
+        //}
+
         /// <summary>
         /// Add a new Faculty
         /// </summary>

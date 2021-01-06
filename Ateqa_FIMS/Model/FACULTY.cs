@@ -31,8 +31,8 @@ namespace DAH_FIMS.Model
         [StringLength(10)]
         public string Status { get; set; }
         [Required(ErrorMessage = "The Mobile Number field is required ")]
-        [StringLength(20)]
-        [RegularExpression("(00966)(5|0|3|6|4|9|1|8|7)([0-9]{7})", ErrorMessage = "Wrong mobile number format. Ex. 009665XXXXXXXX ")]
+        [StringLength(14)]
+        [Phone(ErrorMessage = "Invalid Mobile Number Ex.(00966xxxxxxxxx)")]
         public string MobileNumber { get; set; }
         [Required(ErrorMessage = "The Highest Education field is required ")]
         [StringLength(50)]

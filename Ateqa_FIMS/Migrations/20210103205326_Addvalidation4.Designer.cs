@@ -4,20 +4,22 @@ using DAH_FIMS.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAH_FIMS.Migrations
 {
     [DbContext(typeof(DahFIMSDbContext))]
-    partial class DahFIMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210103205326_Addvalidation4")]
+    partial class Addvalidation4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("DAH_FIMS.Model.CAADU_USER", b =>
                 {
@@ -168,8 +170,8 @@ namespace DAH_FIMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneExtension")
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<int?>("PositionId")
                         .HasColumnType("int");
@@ -234,8 +236,8 @@ namespace DAH_FIMS.Migrations
 
                     b.Property<string>("MobileNumber")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Nationality")
                         .IsRequired()
@@ -664,8 +666,8 @@ namespace DAH_FIMS.Migrations
 
                     b.Property<string>("OfficeNumber")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("OfficeId");
 

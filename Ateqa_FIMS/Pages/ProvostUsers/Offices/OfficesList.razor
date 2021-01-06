@@ -1,19 +1,26 @@
-﻿@page "/Office/List"
+﻿@*//This page is viewing the list of all the offices that has been added to the 
+//databse and provide mutible actions that can be performed to the Offices.*@
+
+@page "/Office/List"
 
 @layout ProvostLayout2
 
-
 @inject OfficesService OffService
+@inject EmployeeService EmpService
 
-<h4>Offices</h4>
-<p style="text-align:right">
-    <a href="Office/Assign"><span class="oi oi-plus"></span></a>&nbsp;
-    Assign Office
-</p>
-       
+<title>FIMS | Offices</title>
 
-<div class="mt-2"></div>
+<br />
+<div style="float: left">
+    <h4>Offices</h4>
+</div>
 
+<div style="float: right">
+    <a href="/Office/Assign"><span class="oi oi-plus"></span></a>&nbsp;
+    <b>Add Office</b>
+</div><div style="clear: both;"></div>
+
+<br />
 @if (offices == null)
 {
     <div class="d-flex align-items-center">
@@ -23,12 +30,13 @@
 }
 else
 {
-    <table class="table table-hover" style="border-color:darkred">
+    <table class="table table-hover table-bordered">
         <thead>
             <tr class="table-warning">
                 <th>Office Number</th>
                 <th>Office Area</th>
                 <th>Available Resources</th>
+                <th>Office Assignment</th>
                 <th>Tasks</th>
             </tr>
         </thead>
@@ -40,6 +48,20 @@ else
                     <td>@item.OfficeArea</td>
                     <td>@item.AvailableResources</td>
                     <td>
+                        @if (count == 0)
+                        {
+                            <p> This Office Has Not Been Assigned </p>
+                        }
+                        else
+                        {
+                            @foreach (var employee in officeEmployees)
+                            {
+                                @employee.FirstName @employee.LastName
+                            }
+                        }
+                        </td>
+
+                    <td>
                         <a href="Office/Details/@item.OfficeId"><span class="oi oi-list"></span></a> &nbsp;
                         <a href="Office/Edit/@item.OfficeId"><span class="oi oi-pencil"></span></a> &nbsp;
                         <a href="Office/Delete/@item.OfficeId"><span class="oi oi-trash"></span></a>
@@ -49,15 +71,34 @@ else
         </tbody>
     </table>
 }
+<br />
+<br />
 
 @code {
 
+    private List<EMPLOYEE> officeEmployees;
+
+    int count;
+
+    [Parameter]
+    public int Id { get; set; }
+
     // Create a list of offices to be displayed in the component
     private List<OFFICE> offices;
+    OFFICE office = new OFFICE();
 
     protected override void OnInitialized()
     {
         // Get the offices from the service
         offices = OffService.GetOffices();
+        
+        //Get a specific office from the service
+        office = OffService.GetOffice(Id);
+        
+        //Get all employees that assigned for a specific offic
+        officeEmployees = EmpService.GetOfficeEmployees(Id);
+
+        //Count the employees in each office and save it in count variable
+        count = officeEmployees.Count;
     }
 }

@@ -1,0 +1,97 @@
+﻿@*//This page to add a new office in the databse with its information*@ 
+
+@page "/Office/Assign"
+
+@layout ProvostLayout2
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject OfficesService OffService
+@inject EmployeeService EmpService
+@inject FacultyService FacService
+@inject PositionService PosService
+@inject NavigationManager NavigationManager
+@inject DahFIMSDbContext db
+
+<title>FIMS | Add Office</title>
+
+<br />
+<h4>Add Office</h4>
+<br />
+<form action="/" method="get" id="officeAdd">
+    <fieldset>
+        <EditForm Model="office" OnValidSubmit="Addoffice">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row">
+                <label for="officeNumber" class="col-sm-3 col-form-label"><b>Office Number:*</b></label>
+                <div class="col-sm-5">
+                    <InputText id="officeNumber" @bind-Value="office.OfficeNumber" class="form-control" placeholder="Ex: [0-3][0-9][0-9]" />
+                    <ValidationMessage For="@(() => office.OfficeNumber)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="officeArea" class="col-sm-3 col-form-label"><b>Office Area:*</b></label>
+                <div class="col-sm-5">
+                    <InputText id="officeArea" @bind-Value="office.OfficeArea" class="form-control" placeholder="Ex: First Floor Right Wing" />
+                    <ValidationMessage For="@(() => office.OfficeArea)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="availableResources" class="col-sm-3 col-form-label"><b>Available Resources:*</b></label>
+                <div class="col-sm-5">
+                    <InputTextArea id="availableResources" raws="3" @bind-Value="office.AvailableResources" class="form-control" placeholder="List the Available Resources. If there is nothing type 'Nothing Available'" />
+                    <ValidationMessage For="@(() => office.AvailableResources)" />
+                    <br />
+                    <br />
+                    <div class="card" style="width: 315px">
+                        <div class="card-header" style="text-align:center; background-color:#4d0000; color:white">
+                            Available Resources Examples
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="text-align:center">Desk - Chairs - Cabinets - Door Sign  Phone - Computer - Printer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <button type="submit" class="button">Save</button>
+                <a href="/Office/List" class="button" role="button">Cancel</a>
+            </center>
+        </EditForm>
+        <br />
+        <center><p>@message</p></center>
+    </fieldset>
+</form>
+<br />
+<br />
+
+
+@code {
+
+    OFFICE office = new OFFICE();
+
+    string message;
+
+    //TO Add New Office Code
+    private void Addoffice()
+    {
+
+        OffService.Addoffice(office);
+
+        Console.WriteLine("OnValidSubmit");
+
+        message = "Office has been added successfully";
+
+        // To empty the form, find more elegant way
+        office = new OFFICE();
+    }
+}
+
+    

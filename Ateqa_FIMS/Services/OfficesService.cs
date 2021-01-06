@@ -46,7 +46,7 @@ namespace DAH_FIMS.Services
         /// </summary>
         /// <param name="office">The office to assign</param>
         /// <returns>True if office is added successfuly otherwise false</returns>
-        public bool Assignoffice(OFFICE office)
+        public bool Addoffice(OFFICE office)
         {
             if (office != null)
             {
@@ -83,15 +83,6 @@ namespace DAH_FIMS.Services
             //Change the state of the office object to modified, so it will be update in database
             db.Entry(office).State = EntityState.Modified;
             db.SaveChanges();
-        }
-
-        /// <summary>
-        /// Load related navigational properties (eager loading)
-        /// </summary>
-        /// <param name="property">The navigational property to load</param>
-        public void Include(string property)
-        {
-            var offices = db.OFFICEs.Include(property);
         }
     }
 }
