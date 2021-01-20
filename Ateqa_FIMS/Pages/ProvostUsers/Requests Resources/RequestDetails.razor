@@ -1,0 +1,75 @@
+﻿@*//This page is viewing the details of the request*@ 
+
+@page "/Request/Details/{Id:int}"
+
+@layout ProvostLayout2
+
+@inject OfficesService OffService
+@inject EmployeeService EmpService
+@inject RequestsService ReqService
+
+<title>FIMS | Request Details</title>
+
+<br />
+<h4>Request Details</h4>
+<br />
+<fieldset>
+    <table class="table table-borderless" style="color:#4d0000">
+        <tr>
+            <th scope="row">Office Number: </th>
+            <td>@request.Office.OfficeNumber</td>
+        </tr>
+        <tr>
+            <th scope="row">Faculty Name:</th>
+            <td>@request.Employee.FirstName @request.Employee.LastName</td>
+        </tr>
+        <tr>
+            <th scope="row">Resource Typer:</th>
+            <td>@request.ResourceType</td>
+        </tr>
+        <tr>
+            <th scope="row">Resource Quantity:</th>
+            <td>@request.ResourceQuantity</td>
+        </tr>
+        <tr>
+            <th scope="row">Request Date & Time:</th>
+            <td>@request.RequestDateTime</td>
+        </tr>
+        <tr>
+            <th scope="row">Delivery Date & Time:</th>
+            <td>@request.DeliveryDateTime</td>
+        </tr>
+        <tr>
+            <th scope="row">Note:</th>
+            <td>@request.Note</td>
+        </tr>   
+    </table>
+    <br />
+    <br />
+    <center>
+        <a href="/Office/List" class="button" role="button">Cancel</a>
+    </center>
+</fieldset>
+<br />
+<br />
+
+@code {
+
+    REQUEST request = new REQUEST();
+
+    ////Code to have all assigned employees for each office
+    //private List<EMPLOYEE> officeEmployees;
+    //int count;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        request = ReqService.GetRequest(Id);
+        //officeEmployees = EmpService.GetOfficeEmployees(Id);
+        //count = officeEmployees.Count;
+    }
+
+
+}

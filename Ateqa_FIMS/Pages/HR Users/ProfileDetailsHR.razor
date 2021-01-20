@@ -1,0 +1,133 @@
+﻿@*//This page is viewing the details of the faculty so the HR user can approve*@
+
+@page "/Profile/DetailsHR"
+
+@layout HRLayout
+
+<title>FIMS | Profile Details</title>
+
+<br />
+<h4>Profile Details</h4>
+<br />
+<fieldset>
+    <table class="table table-borderless">
+        <tr>
+            <th scope="row">First Name: </th>
+            <td>Shaimaa</td>
+        </tr>
+        <tr>
+            <th scope="row">Last Name:</th>
+            <td>Masry</td>
+        </tr>
+        <tr>
+            <th scope="row">Mobile Number:</th>
+            <td>00966509388338</td>
+        </tr>
+        <tr>
+            <th scope="row">Email Address:</th>
+            <td>Smasry@gmail.com</td>
+        </tr>
+        <tr>
+            <th scope="row">Date of Birth:</th>
+            <td>02/02/1980</td>
+        </tr>
+        <tr>
+            <th scope="row">Martial Status:</th>
+            <td>Married</td>
+        </tr>
+        <tr>
+            <th scope="row">Nationality:</th>
+            <td>Egyption</td>
+        </tr>
+        <tr>
+            <th scope="row">Highest Education:</th>
+            <td>PhD</td>
+        </tr>
+        <tr>
+            <th scope="row">Institution:</th>
+            <td>Oxford Institution</td>
+        </tr>
+        <tr>
+            <th scope="row">Division:</th>
+            <td>Information System</td>
+        </tr>
+        <tr>
+            <th scope="row">School Name:</th>
+            <td>School of Computing Engineering & Informatic</td>
+        </tr>
+        <tr>
+            <th scope="row">Department Name:</th>
+            <td>Cybersecurity</td>
+        </tr>
+        <tr>
+            <th scope="row">Position Title:</th>
+            <td>Assistant Professor</td>
+        </tr>
+        <tr>
+            <th scope="row">Type of Contract:</th>
+            <td>Permenat</td>
+        </tr>
+        <tr>
+            <th scope="row">Phone Extension:</th>
+            <td>293</td>
+        </tr>
+        <tr>
+            <th scope="row">Office Number:</th>
+            <td>115</td>
+        </tr>
+        <tr>
+            <th scope="row">Date Needed:</th>
+            <td>19/01/2020</td>
+        </tr>
+        <tr>
+            <th scope="row">Reqruitment Status:</th>
+            <td>Pending</td>
+        </tr>
+        <tr>
+            <th scope="row">Application Date:</th>
+            <td>27/12/2019</td>
+        </tr>
+        <tr>
+            <th scope="row">Hiring Date:</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">Rank:</th>
+            <td>Assistant Professor</td>
+        </tr>
+        <tr>
+            <th scope="row">Required Load:</th>
+            <td>12</td>
+        </tr>
+        <tr>
+            <th scope="row">Conversion Rate:</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">Relesse Date:</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">Hiring Documents:</th>
+            <td><a href="~/Upload/Ateqa Bin Mahfodh_CV.zip"></a></td>
+        </tr>
+    </table>
+    <br />
+    <center>
+        <a @onclick="messageAButtonClicked" class="button" role="button">Approved</a>
+        <a href="/HR/Homepage" class="button" role="button">Cancel</a>
+    </center>
+    <center><p>@approveMessage</p></center>
+</fieldset>
+<br />
+
+
+@code {
+
+    string approveMessage;
+
+    protected void messageAButtonClicked()
+    {
+        approveMessage = "The Profile Has Been Approved";
+    }
+}

@@ -14,8 +14,6 @@
 <h4>Profile Details</h4>
 <br />
 <fieldset>
-    @*@foreach (var faculty in facultyEmployees)
-        {*@
     <table class="table table-borderless">
         <tr>
             <th scope="row">First Name: </th>
@@ -57,10 +55,10 @@
             <th scope="row">Division:</th>
             <td>@faculty.Division</td>
         </tr>
-        <tr>
+        @*<tr>
             <th scope="row">School Name:</th>
             <td>@department.School.SchoolName</td>
-        </tr>
+        </tr>*@
         <tr>
             <th scope="row">Department Name:</th>
             <td>@employee.Department.DepartmentName</td>
@@ -113,12 +111,11 @@
             <th scope="row">Relesse Date:</th>
             <td>@faculty.ReleaseDate?.ToString("dd-MM-yyyy")</td>
         </tr>
-        <tr>
+        @*<tr>
             <th scope="row">Hiring Documents:</th>
             <td>@faculty.HIRING_DOCUMENTs</td>
-        </tr>
+        </tr>*@
     </table>
-    @*}*@
     <br />
     <center>
         <a href="/Faculty/List" class="button" role="button">Cancel</a>
@@ -131,7 +128,6 @@
 
     EMPLOYEE employee = new EMPLOYEE();
     FACULTY faculty = new FACULTY();
-    private List<FACULTY> facultyEmployees;
     DEPARTMENT department = new DEPARTMENT();
 
     [Parameter]
@@ -141,7 +137,6 @@
     {
         employee = EmpService.GetEmployee(Id);
         faculty = FacService.GetFaculty(Id);
-        //facultyEmployees = FacService.GetFacultEmployees(Id);
         department = DepService.GetDepartment(Id);
     }
     }

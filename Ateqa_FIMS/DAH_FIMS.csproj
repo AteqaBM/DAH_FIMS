@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Upload\" />
-    <Folder Include="Pages\ProvostUsers\Teacher Assistants\" />
-    <Folder Include="Pages\ProvostUsers\Workloads\" />
     <Folder Include="wwwroot\JSS\" />
   </ItemGroup>
 

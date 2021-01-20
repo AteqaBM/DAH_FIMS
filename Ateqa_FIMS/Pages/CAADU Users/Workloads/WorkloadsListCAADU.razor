@@ -1,0 +1,89 @@
+﻿@*//This page is viewing the list of all the facuties workloads that has been added to the
+    //databse and provide mutible actions that can be performed to the Workloads.*@
+
+@page "/WorkloadCaadu/List"
+
+@layout CAADULayout
+
+<title>FIMS | Workloads</title>
+
+<br />
+<div style="float: left">
+    <h4>Workloads</h4>
+</div>
+
+<div style="float: right">
+        <a href="/Workload/Assign"><span class="oi oi-plus"></span></a>&nbsp;
+        <b>Assign Workload</b>
+    </div><div style="clear: both;"></div>
+
+<br />
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-warning">
+                <th>Faculty Name</th>
+                <th>Position Title</th>
+                <th>Job Type</th>
+                <th>Department Name</th>
+                <th>Workload</th>
+                <th>Is It Approved</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mohammed Fares</td>
+                <td>Assistant Professor</td>
+                <td>Part-Time</td>
+                <td>Cybersecurity</td>
+                <td>8</td>
+                <td>Approved</td>
+                <td>
+                    <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                    <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                    <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Shaimaa Masry</td>
+                <td>Assisstant Professor</td>
+                <td>Full-Time</td>
+                <td>Computer Science</td>
+                <td>9</td>
+                <td>Pending</td>
+                <td>
+                    <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                    <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                    <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Mohammed Fares</td>
+                <td>Assistant Professor</td>
+                <td>Part-Time</td>
+                <td>Cybersecurity</td>
+                <td>8</td>
+                <td>Approved</td>
+                <td>
+                    <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                    <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                    <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Shaimaa Masry</td>
+                <td>Assisstant Professor</td>
+                <td>Full-Time</td>
+                <td>Computer Science</td>
+                <td>9</td>
+                <td>Pending</td>
+                <td>
+                    <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                    <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                    <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<br />
+<br />

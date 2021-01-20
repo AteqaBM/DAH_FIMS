@@ -20,18 +20,23 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int RequestId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Resource field is required")]
         public string ResourceType { get; set; }
+        [Required(ErrorMessage = "The Quantity field is required")]
         public int ResourceQuantity { get; set; }
         public string Note { get; set; }
-        public DateTime RequestDateTime { get; set; }
-        public DateTime DeliveryDateTime { get; set; }
+     
+        [Required(ErrorMessage = "The Request Date&Time field is required ")]
+        public DateTime? RequestDateTime { get; set; }
+        
+        [Required(ErrorMessage = "The Delivery Date&Time field is required ")]
+        public DateTime? DeliveryDateTime { get; set; }
         public int EmployeeId { get; set; }
         public int OfficeId { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
-        [InverseProperty(nameof(SYSTEM_ADMIN.REQUESTs))]
-        public virtual SYSTEM_ADMIN Employee { get; set; }
+        [InverseProperty(nameof(EMPLOYEE.REQUESTs))]
+        public virtual EMPLOYEE Employee { get; set; }
         [ForeignKey(nameof(OfficeId))]
         [InverseProperty(nameof(OFFICE.REQUESTs))]
         public virtual OFFICE Office { get; set; }
@@ -39,5 +44,12 @@ namespace DAH_FIMS.Model
         public virtual ICollection<NOTIFICATION> NOTIFICATIONs { get; set; }
         [InverseProperty(nameof(REQUEST_RESOURCE.Request))]
         public virtual ICollection<REQUEST_RESOURCE> REQUEST_RESOURCEs { get; set; }
+    }
+
+
+
+    public enum ResourceType
+    {
+        EquipmentResource = 1, ITResource , DoorSign
     }
 }

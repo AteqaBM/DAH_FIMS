@@ -42,16 +42,12 @@
                     </label>
                 </i>
             </div>
+            @*<br />
+            <div class="contact100-form-checkbox form-inline">
+            <a href="/ForgetPassword" style="right:-50px"> Forgot Password? </a>
+            </div>*@
             <br />
             <br />
-
-            <!--<div class="contact100-form-checkbox form-inline">
-                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                <label class="label-checkbox100" for="ckb1">
-                    Remember me-->
-            @*<a href="#" style="right:-50px"> Forgot Password? </a>*@
-            <!--</label>
-            </div>-->
             <container-login100-form-btn>
                 <login100-form-btn @onclick="signinButtonClicked">
                     Sign In
@@ -122,7 +118,7 @@
 
                 AppData.Username = hrName;
 
-                navigationManager.NavigateTo($"/HR/Homepage/");
+                navigationManager.NavigateTo($"/HR/Homepage");
             }
 
             else if (type == "Coordinators")
@@ -132,7 +128,7 @@
 
                 AppData.Username = coorName;
 
-                navigationManager.NavigateTo($"/Coordinators/Homepage/");
+                navigationManager.NavigateTo($"/Coordinator/Homepage");
             }
         }
 

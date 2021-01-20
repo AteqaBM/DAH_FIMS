@@ -1,13 +1,109 @@
-﻿@page "/Coordinators/Homepage/{coorName}"
+﻿@*//This page is the Homepage for the Coordinator Users
+    //This page contains one of the system's features and the user can access to it through this page*@
 
-<h3>Coordinators Homepage</h3>
+@page "/Coordinator/Homepage"
 
+@layout HRLayout
 
-@code {
+<title>FIMS | Coordinator Users Homepage</title>
+<body>
+    <div class=" container-fluid">
+        <div class=" raw ">
+            <div class="row">
+                <div class="col">
+                    <main role="main">
+                        <h5>Resources Requests List</h5>
+                        <hr />
+                        <center><p>@approveMessage</p></center><center><p>@rejectMessage</p></center>
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr class="table-warning">
+                                    <th>Office Number</th>
+                                    <th>Faculty Name</th>
+                                    <th>Resource Name & Quantity</th>
+                                    <th>Request Date & Time</th>
+                                    <th>Delivery Date & Time</th>
+                                    <th>Status</th>
+                                    <th>Tasks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>245</td>
+                                    <td>Haddel Ahmed</td>
+                                    <td>Desk 1 - Chairs 2</td>
+                                    <td>10-10-2020 10:00 AM</td>
+                                    <td>18-10-2020 08:00 AM</td>
+                                    <td>Pending</td>
+                                    <td>
+                                        <a href="/Coordinator/Homepage"><span class="oi oi-list"></span></a> &nbsp;
+                                        <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                        <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>245</td>
+                                    <td>Haddel Ahmed</td>
+                                    <td>Desk 1 - Chairs 2</td>
+                                    <td>10-10-2020 10:00 AM</td>
+                                    <td>18-10-2020 08:00 AM</td>
+                                    <td>Pending</td>
+                                    <td>
+                                        <a href="/Coordinator/Homepage"><span class="oi oi-list"></span></a> &nbsp;
+                                        <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                        <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>245</td>
+                                    <td>Haddel Ahmed</td>
+                                    <td>Desk 1 - Chairs 2</td>
+                                    <td>10-10-2020 10:00 AM</td>
+                                    <td>18-10-2020 08:00 AM</td>
+                                    <td>Pending</td>
+                                    <td>
+                                        <a href="/Coordinator/Homepage"><span class="oi oi-list"></span></a> &nbsp;
+                                        <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                        <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>245</td>
+                                    <td>Haddel Ahmed</td>
+                                    <td>Desk 1 - Chairs 2</td>
+                                    <td>10-10-2020 10:00 AM</td>
+                                    <td>18-10-2020 08:00 AM</td>
+                                    <td>Pending</td>
+                                    <td>
+                                        <a href="/Coordinator/Homepage"><span class="oi oi-list"></span></a> &nbsp;
+                                        <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                        <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </main>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+</body>
 
-    [Parameter]
-    public string coorName { get; set; }
+@code
+{
+    string approveMessage;
+    string rejectMessage;
 
+    protected void messageAButtonClicked()
+    {
+        approveMessage = "The Request Has Been Accepted";
+    }
 
-
+    protected void messageBButtonClicked()
+    {
+        rejectMessage = "The Request Has Been Rejected";
+    }
 }
+

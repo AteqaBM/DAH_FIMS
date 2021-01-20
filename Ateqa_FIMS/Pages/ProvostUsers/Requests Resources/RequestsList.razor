@@ -1,5 +1,91 @@
-﻿<h3>RequestsList</h3>
+﻿@*//This page is viewing the list of all the resources requests that has been added to the
+    //databse and provide mutible actions that can be performed to the Offices.*@
+
+@page "/Request/List"
+
+@layout ProvostLayout2
+
+@inject OfficesService OffService
+@inject EmployeeService EmpService
+@inject RequestsService ReqService
+
+<title>FIMS | Resources Requests</title>
+
+<br />
+<div style="float: left">
+    <h4>Resources Requests</h4>
+</div>
+
+<div style="float: right">
+    <a href="/Request/Add"><span class="oi oi-plus"></span></a>&nbsp;
+    <b>Add Request</b>
+</div><div style="clear: both;"></div>
+
+<br />
+@if (requests == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-warning">
+                <th>Office Number</th>
+                <th>Resource Type & Quantity</th>
+                <th>Request Date & Time</th>
+                <th>Delivery Data & Time</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in requests)
+            {
+                <tr>
+                    <td>@item.Office.OfficeNumber</td> 
+                    <td><b>The Resource Type:</b> @item.ResourceType <b>The Quantity:</b> @item.ResourceQuantity</td>
+                    <td>@item.RequestDateTime</td>
+                    <td>@item.DeliveryDateTime</td>
+                    <td>
+                        <a href="Request/Details/@item.RequestId"><span class="oi oi-list"></span></a> &nbsp;
+                        <a href="Request/Edit/@item.RequestId"><span class="oi oi-pencil"></span></a> &nbsp;
+                        <a href="Request/Delete/@item.RequestId"><span class="oi oi-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<br />
 
 @code {
 
+    int count;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    // Create a list of requests to be displayed in the component
+    private List<REQUEST> requests;
+    REQUEST request = new REQUEST();
+    OFFICE officeNumber = new OFFICE();
+
+    protected override void OnInitialized()
+    {
+        // Get the requests from the service
+        requests = ReqService.GetRequests();
+
+        //Get a specific office from the service
+        request = ReqService.GetRequest(Id);
+
+        //Get all offices that for the specifc request
+        officeNumber = OffService.GetOffice(Id);
+
+        ////Count the employees in each office and save it in count variable
+        //count = officeEmployees.Count;
+    }
 }

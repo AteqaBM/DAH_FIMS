@@ -24,16 +24,11 @@ namespace DAH_FIMS.Services
         /// <returns>List of all requests</returns>
         public List<REQUEST> GetRequests()
         {
-            // Load the Employees
-            Include(nameof(db.EMPLOYEEs));
-
-            Include(nameof(db.POSITIONs));
-
-            Include(nameof(db.OFFICEs));
-
-
-
-            return db.REQUESTs.ToList();
+           
+            return db.REQUESTs
+                .Include(e => e.Office)
+                .Include(e => e.Employee)
+                .ToList();
         }
 
         /// <summary>
@@ -43,7 +38,10 @@ namespace DAH_FIMS.Services
         /// <returns>A requests with the provided id or null</returns>
         public REQUEST GetRequest(int id)
         {
-            return db.REQUESTs.SingleOrDefault(c => c.RequestId == id);
+            return db.REQUESTs
+                 .Include(e => e.Office)
+                .Include(e => e.Employee)
+                .SingleOrDefault(c => c.RequestId == id);
         }
 
         /// <summary>
@@ -63,7 +61,7 @@ namespace DAH_FIMS.Services
         }
 
         /// <summary>
-        /// Delete an request
+        /// Delete a request
         /// </summary>
         /// <param name="id">Id of the request to delete</param>
         /// <returns>True if request is deleted successfuly otherwise false</returns>
@@ -82,21 +80,12 @@ namespace DAH_FIMS.Services
         /// <summary>
         /// Edit an request 
         /// </summary>
-        /// <param name="office">request object</param>
+        /// <param name="request">request object</param>
         public void EditRequest(REQUEST request)
         {
             //Change the state of the request object to modified, so it will be update in database
             db.Entry(request).State = EntityState.Modified;
             db.SaveChanges();
-        }
-
-        /// <summary>
-        /// Load related navigational properties (eager loading)
-        /// </summary>
-        /// <param name="property">The navigational property to load</param>
-        public void Include(string property)
-        {
-            var requests = db.REQUESTs.Include(property);
         }
     }
 }

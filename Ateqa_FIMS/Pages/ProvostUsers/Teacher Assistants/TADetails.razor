@@ -1,0 +1,82 @@
+﻿@*//This page is viewing the details of the assigned TA for a section*@
+
+@page "/TA/Details"
+
+@layout ProvostLayout2
+
+<title>FIMS | TA Assignment Details</title>
+
+<br />
+<h4>TA Assignment Details</h4>
+<br />
+<fieldset>
+    <table class="table table-borderless">
+        <tr>
+            <th scope="row">TA Id: </th>
+            <td>20211</td>
+        </tr>
+        <tr>
+            <th scope="row">TA Name: </th>
+            <td>Maha Alabed</td>
+        </tr>
+        <tr>
+            <th scope="row">Academic Year:</th>
+            <td>2020-2021AY</td>
+        </tr>
+        <tr>
+            <th scope="row">Semester:</th>
+            <td>Spring</td>
+        </tr>
+        <tr>
+            <th scope="row">Course Details:</th>
+            <td>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="table-warning" style="background-color:#4d0000">
+                            <th>Section Id</th>
+                            <th>Section Number</th>
+                            <th>Section Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>BSCS 2351 Fundamental Data Structure</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Total Workload:</th>
+            <td>12</td>
+        </tr>
+        <tr>
+            <th scope="row">Total Contact Hours:</th>
+            <td>25</td>
+        </tr>
+        <tr>
+            <th scope="row">Load Type:</th>
+            <td>Normal</td>
+        </tr>
+    </table>
+    <br />
+    <center>
+        <button type="submit" class="button" @onclick="messageAButtonClicked">Approve</button>
+        <a href="/TA/List" class="button" role="button">Cancel</a>
+    </center>
+    <center><p>@approveMessage</p></center>
+</fieldset>
+<br />
+
+@code
+{
+
+    string approveMessage;
+
+    protected void messageAButtonClicked()
+    {
+        approveMessage = "The TA Assignment Has Been Approved";
+    }
+}

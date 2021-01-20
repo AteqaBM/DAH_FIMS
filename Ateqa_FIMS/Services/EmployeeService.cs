@@ -40,6 +40,7 @@ namespace DAH_FIMS.Services
                 .Include(e => e.Department)
                 .Include(e => e.Position)
                 .Include(e => e.Office)
+                .Include(e=> e.FACULTY)
                 .SingleOrDefault(c => c.EmployeeId == id);
         }
         public List<EMPLOYEE> GetOfficeEmployees(int id)

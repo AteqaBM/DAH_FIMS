@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+
+@inject Model.AppDataService AppData
+
 @using DAH_FIMS.Pages
 <signin></signin>
 
@@ -10,8 +13,8 @@
     <a>   </a>
     <a>   </a>
     <a>   </a>
-    <a href="#about">Workloads</a>
-    <a href="#about">Teacher Assistants</a>
+    <a href="/WorkloadCaadu/List">Workloads</a>
+    <a href="/TACaadu/List">Teacher Assistants</a>
     <a>   </a>
     <a>   </a>
     <a>   </a>
@@ -39,21 +42,15 @@
     <a>   </a>
     <a>   </a>
     <a>   </a>
+    <a href="/AccountSetting"><span class="oi oi-person" style="color:white"></span></a>
+    <a style="color:white"><p>Hello,@AppData.Username</p></a>
     <a>   </a>
     <a>   </a>
     <a>   </a>
     <a>   </a>
     <a>   </a>
-    <a>   </a>
-    <a href="/"><span class="oi oi-person" style="color:white"></span></a>
-    <a style="color:white"><p>Hello, @caaduName</p></a>
-    <a>   </a>
-    <a>   </a>
-    <a>   </a>
-    <a>   </a>
-    <a>   </a>
-    <a>   </a>
-    <a href="#home"><span class="oi oi-bell" style="color:white"></span></a>
+    <a href="/CAADU/Homepage/"><span class="oi oi-home" style="color:white"></span></a>
+    <a href="/Notifications"><span class="oi oi-bell" style="color:white"></span></a>
     <a href="#home"><span class="oi oi-account-logout" style="color:white"></span></a>
 
 
@@ -117,7 +114,7 @@
                     <br />
                 </th>
                 <th>
-                    <a href="#home"><span class="oi oi-magnifying-glass" style="color: #4d0000; left:230px"></span></a>
+                    <a href="/Search"><span class="oi oi-magnifying-glass" style="color: #4d0000; left:230px"></span></a>
                 </th>
             </tr>
         </table>
@@ -128,21 +125,6 @@
     <a href=http://www.dah.edu.sa/en/Pages/default.aspx target="_blank">
         <img src="/Images/ProjectLogo/logo2.png" alt="DAH Logo" style="width:120px; height:120px; position:absolute; left:25px; top:9px;">
     </a>
-    @*<a>
-        <center>
-            <div id="wrapper"><SfDateRangePicker></SfDateRangePicker> </div>
-            <style>
-                #wrapper {
-                    max-width: 300px;
-                    margin: -17px auto;
-                    padding-top: 20px;
-                }
-            </style>
-
-
-
-        </center>
-    </a>*@
 </div>
 
 <div class="content">
@@ -150,12 +132,3 @@
 </div>
 
 
-
-@code {
-
-    [Parameter]
-    public string caaduName { get; set; }
-
-
-
-}

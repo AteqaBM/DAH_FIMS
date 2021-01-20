@@ -1,0 +1,162 @@
+﻿@page "/Request/Edit/{Id:int}"
+
+@layout ProvostLayout2
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject OfficesService OffService
+@inject RequestsService ReqService
+@inject PositionService PosService
+@inject EmployeeService EmpService
+@inject DahFIMSDbContext db
+
+<title>FIMS | Edit Request</title>
+
+<br />
+<h4> Edit Request</h4>
+<br />
+<form action="/" method="get" id="RequestAdd">
+    <fieldset>
+        <EditForm Model="request" OnValidSubmit="Editrequest">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group row">
+                <label for="officeNumber" class="col-sm-5 col-form-label"><b>Office Number:*</b></label>
+                <div class="col-sm-5">
+                    <InputSelect @bind-Value="request.OfficeId" id="officeNumber" class="form-control">
+                        <option value="">---Select an Office---</option>
+                        @foreach (var office in offices)
+                        {
+                            <option value="@office.OfficeId">@office.OfficeNumber</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => office.OfficeNumber)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="employee" class="col-sm-5 col-form-label"><b>Faculty Name:*</b></label>
+                <div class="col-sm-5">
+                    <InputSelect @bind-Value="request.EmployeeId" id="employee" class="form-control">
+                        <option value="">---Select a Faculty---</option>
+                        @foreach (var employee in employees)
+                        {
+                            <option value="@employee.EmployeeId">@employee.FirstName @employee.LastName</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => employee.EmployeeId)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="resource1" class="col-sm-5 col-form-label"><b>Resource Type:*</b></label>
+                <div class="col-sm-5">
+                    <InputText type="text" id="resource1" @bind-Value="request.ResourceType" class="form-control" />
+                    <ValidationMessage For="@(() => request.ResourceType)" />
+                    <br />
+                    <br />
+                    <div class="card" style="width: 320px">
+                        <div class="card-header" style="text-align:center; background-color:#4d0000; color:white">
+                            Resources Type Examples
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="text-align:center"><b>Equipment Resources - IT Resources - Door Sign</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="rQuantity" class="col-sm-5 col-form-label"><b>Resource Quntity:*</b></label>
+                <div class="col-sm-5">
+                    <InputNumber id="rQuantity" @bind-Value="request.ResourceQuantity" class="form-control" />
+                    <ValidationMessage For="@(() => request.ResourceQuantity)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="requestDateTime" class="col-sm-5 col-form-label"><b>Request Date & Time:*</b></label>
+                <div class="col-sm-5">
+                    <input type="datetime-local" name="requestDateTime" @bind="request.RequestDateTime">
+                    <ValidationMessage For="@(() => request.RequestDateTime)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="deliveryDateTime" class="col-sm-5 col-form-label"><b>Delivery Date & Time:*</b></label>
+                <div class="col-sm-5">
+                    <input type="datetime-local" name="deliveryDateTime" @bind="request.DeliveryDateTime">
+                    <ValidationMessage For="@(() => request.DeliveryDateTime)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="note" class="col-sm-5 col-form-label"><b>Note:</b></label>
+                <div class="col-sm-5">
+                    <InputTextArea id="note" raws="3" @bind-Value="request.Note" class="form-control" placeholder="List Resources Name Depends on The Resource Type" />
+                    <br />
+                    <br />
+                    <div class="card" style="width: 320px">
+                        <div class="card-header" style="text-align:center; background-color:#4d0000; color:white">
+                            Resources Names Examples
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="text-align:center"><b>Equipment Resources:</b>Desk - Chairs - Cabinets</li>
+                            <li class="list-group-item" style="text-align:center"><b>IT Resources:</b>Mac PC - Windows PC - Printer - Scanner - Paper Shredder - Webcam - Microphone - Speakers</li>
+                            <li class="list-group-item" style="text-align:center"><b>Door Sign:</b>Faculty Name in English & Arabic - Position Title in English & Arabic</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <button type="submit" class="button">Save</button>
+                <a href="/Request/List" class="button" role="button">Cancel</a>
+            </center>
+        </EditForm>
+        <br />
+        <center><p>@message</p></center>
+    </fieldset>
+</form>
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    string message;
+
+    REQUEST request = new REQUEST();
+    OFFICE office = new OFFICE();
+    EMPLOYEE employee = new EMPLOYEE();
+
+    // Needed to get attributes of each table
+    private List<OFFICE> offices = new List<OFFICE>();
+    private List<EMPLOYEE> employees = new List<EMPLOYEE>();
+
+    // Check why request.employeeId, officeId does not bind
+    private string officeId = String.Empty;
+    private string employeeId = String.Empty;
+
+    //Execute when component starts / initializes
+    protected override void OnInitialized()
+    {
+        offices = OffService.GetOffices();
+        employees = EmpService.GetEmployees();
+
+        employee = EmpService.GetEmployee(Id);
+        office = OffService.GetOffice(Id);
+    }
+
+    private void Editrequest()
+    {
+        ReqService.EditRequest(request);
+
+        message = "Resource Request Has Been Updated Successfully";
+    }
+}

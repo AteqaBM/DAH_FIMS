@@ -168,6 +168,7 @@ namespace DAH_FIMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneExtension")
+                        .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
@@ -762,7 +763,8 @@ namespace DAH_FIMS.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("DeliveryDateTime")
+                    b.Property<DateTime?>("DeliveryDateTime")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeeId")
@@ -774,7 +776,8 @@ namespace DAH_FIMS.Migrations
                     b.Property<int>("OfficeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RequestDateTime")
+                    b.Property<DateTime?>("RequestDateTime")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ResourceQuantity")
@@ -1390,7 +1393,7 @@ namespace DAH_FIMS.Migrations
 
             modelBuilder.Entity("DAH_FIMS.Model.REQUEST", b =>
                 {
-                    b.HasOne("DAH_FIMS.Model.SYSTEM_ADMIN", "Employee")
+                    b.HasOne("DAH_FIMS.Model.EMPLOYEE", "Employee")
                         .WithMany("REQUESTs")
                         .HasForeignKey("EmployeeId")
                         .HasConstraintName("FK_REQUEST_SYSTEM_ADMIN")
@@ -1523,10 +1526,16 @@ namespace DAH_FIMS.Migrations
 
             modelBuilder.Entity("DAH_FIMS.Model.WORKLOAD", b =>
                 {
-                    b.HasOne("DAH_FIMS.Model.FACULTY", "Employee")
+                    b.HasOne("DAH_FIMS.Model.EMPLOYEE", "Employee")
                         .WithMany("WORKLOADs")
                         .HasForeignKey("EmployeeId")
                         .HasConstraintName("FK_WORKLOAD_FACULTY")
+                        .IsRequired();
+
+                    b.HasOne("DAH_FIMS.Model.FACULTY", "Faculty")
+                        .WithMany("WORKLOADs")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAH_FIMS.Model.SYSTEM_SUPERVISOR", "EmployeeNavigation")
@@ -1546,6 +1555,8 @@ namespace DAH_FIMS.Migrations
                     b.Navigation("Employee1");
 
                     b.Navigation("EmployeeNavigation");
+
+                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("DAH_FIMS.Model.COURSE", b =>
@@ -1576,6 +1587,8 @@ namespace DAH_FIMS.Migrations
 
                     b.Navigation("RECEIVE_NOTIFICATIONs");
 
+                    b.Navigation("REQUESTs");
+
                     b.Navigation("SYSTEM_ADMIN");
 
                     b.Navigation("SYSTEM_ADMIN_ASSISTANT");
@@ -1583,6 +1596,8 @@ namespace DAH_FIMS.Migrations
                     b.Navigation("SYSTEM_SUPERVISOR");
 
                     b.Navigation("TEACHER_ASSISTANT");
+
+                    b.Navigation("WORKLOADs");
                 });
 
             modelBuilder.Entity("DAH_FIMS.Model.FACULTY", b =>
@@ -1642,11 +1657,6 @@ namespace DAH_FIMS.Migrations
             modelBuilder.Entity("DAH_FIMS.Model.SCHOOL", b =>
                 {
                     b.Navigation("DEPARTMENTs");
-                });
-
-            modelBuilder.Entity("DAH_FIMS.Model.SYSTEM_ADMIN", b =>
-                {
-                    b.Navigation("REQUESTs");
                 });
 
             modelBuilder.Entity("DAH_FIMS.Model.SYSTEM_SUPERVISOR", b =>

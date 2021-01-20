@@ -16,7 +16,9 @@ namespace DAH_FIMS.Model
         public EMPLOYEE()
         {
             RECEIVE_NOTIFICATIONs = new HashSet<RECEIVE_NOTIFICATION>();
-           
+            REQUESTs = new HashSet<REQUEST>();
+            WORKLOADs = new HashSet<WORKLOAD>();
+
         }
 
         [Key]
@@ -31,10 +33,11 @@ namespace DAH_FIMS.Model
         [StringLength(100)]
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string EmailAdress { get; set; }
+        [Required(ErrorMessage = "The Phone Extension field is required ")]
         [StringLength(3, ErrorMessage ="Phone Extention too long (3 char only).")]
         public string PhoneExtension { get; set; }
-        public bool IsItPartTime { get; set; }
-        public bool AcceptEmailNotification { get; set; }
+        public bool IsItPartTime { get; set; } = false;
+        public bool AcceptEmailNotification { get; set; } = false;
         public int? PositionId { get; set; }
         public int? DepartmentId { get; set; }
         public int? OfficeId { get; set; }
@@ -56,6 +59,8 @@ namespace DAH_FIMS.Model
         [InverseProperty("Employee")]
         public virtual CAADU_USER CAADU_USER { get; set; }
         [InverseProperty("Employee")]
+
+
         public virtual FACULTY FACULTY { get; set; }
         [InverseProperty("Employee")]
         public virtual HR_USER HR_USER { get; set; }
@@ -76,26 +81,16 @@ namespace DAH_FIMS.Model
         [InverseProperty(nameof(RECEIVE_NOTIFICATION.Employee))]
         public virtual ICollection<RECEIVE_NOTIFICATION> RECEIVE_NOTIFICATIONs { get; set; }
 
-       
+        [InverseProperty(nameof(REQUEST.Employee))]
+        public virtual ICollection<REQUEST> REQUESTs { get; set; }
+
+        [InverseProperty(nameof(WORKLOAD.Employee))]
+        public virtual ICollection<WORKLOAD> WORKLOADs { get; set; }
+
     }
 
     public enum school
     {
         Business  = 1, Design, Health, Engineering
-    }
-
-    public enum department
-    {
-        HR = 1, Marketing, MIS, Finance, Archetcture, Cybersequrity, Pshycology, GraphicDesign
-    }
-
-    public enum reqStatus
-    {
-        Pending = 1, Accepted, Cancelled, Rejected
-    }
-
-    public enum rank
-    {
-        Professor = 1, AssociateProfessor, AssistantProfessor, Lecturer
     }
 }

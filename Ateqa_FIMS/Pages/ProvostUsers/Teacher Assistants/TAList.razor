@@ -1,0 +1,102 @@
+﻿@*//This page is viewing the list of all the TA's  that has been added to the
+    //databse and provide mutible actions that can be performed to the their assignemnt.*@
+
+@page "/TA/List"
+
+@layout ProvostLayout2
+
+@inject WorkloadService WorkService
+@inject EmployeeService EmpService
+@inject TAService TAService
+
+
+<title>FIMS | Teacher Assistants</title>
+
+<br />
+<div style="float: left">
+    <h4>Teacher Assistants</h4>
+</div>
+<br />
+<br />
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr class="table-warning">
+            <th>TA Name</th>
+            <th>Department Name</th>
+            <th>Section Id</th>
+            <th>Workload</th>
+            <th>Approval Status</th>
+            <th>Tasks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sara Braik</td>
+            <td>Cybersecurity</td>
+            <td>23</td>
+            <td>12</td>
+            <td>Pending</td>
+            <td>
+                <a href="/TA/Details"><span class="oi oi-list"></span></a> &nbsp;
+                <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Sara Braik</td>
+            <td>Cybersecurity</td>
+            <td>23</td>
+            <td>12</td>
+            <td>Pending</td>
+            <td>
+                <a href="/TA/Details"><span class="oi oi-list"></span></a> &nbsp;
+                <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Sara Braik</td>
+            <td>Cybersecurity</td>
+            <td>23</td>
+            <td>12</td>
+            <td>Pending</td>
+            <td>
+                <a href="/TA/Details"><span class="oi oi-list"></span></a> &nbsp;
+                <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Sara Braik</td>
+            <td>Cybersecurity</td>
+            <td>23</td>
+            <td>12</td>
+            <td>Pending</td>
+            <td>
+                <a href="/TA/Details"><span class="oi oi-list"></span></a> &nbsp;
+                <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+}
+<br />
+<br />
+
+@code
+{
+    string approveMessage;
+    string rejectMessage;
+
+    protected void messageAButtonClicked()
+    {
+        approveMessage = "The Request Has Been Accepted";
+    }
+
+    protected void messageBButtonClicked()
+    {
+        rejectMessage = "The Request Has Been Rejected";
+    }
+}
+

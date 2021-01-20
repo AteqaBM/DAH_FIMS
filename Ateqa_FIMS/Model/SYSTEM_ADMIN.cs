@@ -13,7 +13,7 @@ namespace DAH_FIMS.Model
     {
         public SYSTEM_ADMIN()
         {
-            REQUESTs = new HashSet<REQUEST>();
+           
         }
 
         [Key]
@@ -26,7 +26,6 @@ namespace DAH_FIMS.Model
         [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(SYSTEM_USER.SYSTEM_ADMINs))]
         public virtual SYSTEM_USER User { get; set; }
-        [InverseProperty(nameof(REQUEST.Employee))]
-        public virtual ICollection<REQUEST> REQUESTs { get; set; }
+       
     }
 }

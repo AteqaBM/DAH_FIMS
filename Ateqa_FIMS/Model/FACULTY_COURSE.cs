@@ -40,4 +40,11 @@ namespace DAH_FIMS.Model
         [InverseProperty(nameof(SECTION.FacultyCourse))]
         public virtual ICollection<SECTION> SECTIONs { get; set; }
     }
+
+
+    public enum Semester
+    {
+        Fall = 1, Spring
+    }
+
 }

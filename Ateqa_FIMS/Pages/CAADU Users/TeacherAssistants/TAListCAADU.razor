@@ -1,0 +1,84 @@
+﻿@*//This page is viewing the list of all teacher assistants that has been added to the
+    //databse and provide mutible actions that can be performed to the TA'S profiles.*@
+
+@page "/TACaadu/List"
+
+@layout CAADULayout
+
+<title>FIMS | Teacher Assistants</title>
+
+<br />
+<div style="float: left">
+    <h4>Teacher Assistants</h4>
+</div>
+
+<div style="float: right">
+    <a href="/TA/Assign"><span class="oi oi-plus"></span></a>&nbsp;
+    <b>Assign TA</b>
+</div><div style="clear: both;"></div>
+
+<br />
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr class="table-warning">
+            <th>TA Name</th>
+            <th>Department Name</th>
+            <th>Section Id</th>
+            <th>Workload</th>
+            <th>Approval Status</th>
+            <th>Tasks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sara Braik</td>
+            <td>Cybersecurity</td>
+            <td>23</td>
+            <td>12</td>
+            <td>Pending</td>
+            <td>
+                <a href="/TA/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                <a href="/TA/Delete"><span class="oi oi-trash"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Maha Alabed</td>
+            <td>Computer Science</td>
+            <td>25</td>
+            <td>9</td>
+            <td>Pending</td>
+            <td>
+                <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Sara Braik</td>
+            <td>Cybersecurity</td>
+            <td>23</td>
+            <td>12</td>
+            <td>Pending</td>
+            <td>
+                <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Maha Alabed</td>
+            <td>Computer Science</td>
+            <td>25</td>
+            <td>9</td>
+            <td>Pending</td>
+            <td>
+                <a href="/Workload/DetailsCAADU"><span class="oi oi-list"></span></a> &nbsp;
+                <a href="/Workload/Edit"><span class="oi oi-pencil"></span></a> &nbsp;
+                <a href="/Workload/Delete"><span class="oi oi-trash"></span></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<br />

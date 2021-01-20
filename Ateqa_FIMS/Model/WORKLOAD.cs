@@ -34,8 +34,13 @@ namespace DAH_FIMS.Model
         public int EmployeeId { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
+        [InverseProperty(nameof(EMPLOYEE.WORKLOADs))]
+        public virtual EMPLOYEE Employee { get; set; }
+
+        [ForeignKey(nameof(EmployeeId))]
         [InverseProperty(nameof(FACULTY.WORKLOADs))]
-        public virtual FACULTY Employee { get; set; }
+        public virtual FACULTY Faculty { get; set; }
+
         [ForeignKey(nameof(EmployeeId))]
         [InverseProperty(nameof(TEACHER_ASSISTANT.WORKLOADs))]
         public virtual TEACHER_ASSISTANT Employee1 { get; set; }

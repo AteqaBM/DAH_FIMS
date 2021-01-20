@@ -1,0 +1,65 @@
+﻿@*//This page is viewing the list of all the faculties that has been relesed from the university and moved to archived*@
+
+@page "/Databank"
+
+@layout ProvostLayout2
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject EmployeeService EmpService
+
+<title>FIMS | Databank</title>
+
+<br />
+<div style="float: left">
+    <h4>Databank</h4>
+</div>
+
+@*<div style="float: right">
+        <a href="ProfileOne/Add"><span class="oi oi-plus"></span></a>&nbsp;
+        <b>Add Profile</b>
+    </div><div style="clear: both;"></div>*@
+
+<br />
+<center><p>@message</p></center>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr class="table-warning">
+            <th>Faculty Name</th>
+            <th>Position Title</th>
+            <th>Job Type</th>
+            <th>School Name</th>
+            <th>Department Name</th>
+            <th>Released Date</th>
+            <th>Tasks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Seema Bano</td>
+            <td>Lecturer</td>
+            <td>Full-Time</td>
+            <td>Business & Law</td>
+            <td>HR</td>
+            <td>12-12-2018</td>
+            <td>
+                <a href="Profile/Details"><span class="oi oi-list"></span></a> &nbsp;
+                <a @onclick="TransferMessage"><span class="oi oi-transfer"></span></a> &nbsp;
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+@code
+{
+
+    string message;
+
+    protected void TransferMessage()
+    {
+        message = "The Profile Has Been Re-Added to The Faculties List";
+    }
+}

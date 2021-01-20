@@ -1,0 +1,77 @@
+﻿@*//This page is to delete the request from requests list page and the database*@
+
+@page "/Request/Delete/{Id:int}"
+
+@layout ProvostLayout2
+
+@inject NavigationManager NavigationManager
+@inject OfficesService OffService
+@inject EmployeeService EmpService
+@inject RequestsService ReqService
+
+<title>FIMS | Delete Request</title>
+
+<br />
+<h4>Delete Request</h4>
+<br />
+<center>
+    <div class="alert alert-danger" style="width:320px; height:80px">
+        DO YOU WANT TO DELETE THIS REQUEST?
+    </div>
+</center>
+
+<fieldset>
+    <table class="table table-borderless" style="color:#4d0000">
+        <tr>
+            <th scope="row">Office Number: </th>
+            <td>@request.Office.OfficeNumber</td>
+        </tr>
+        <tr>
+            <th scope="row">Faculty Name: </th>
+            <td>@request.Employee.FirstName @request.Employee.LastName</td>
+        </tr>
+        <tr>
+            <th scope="row">Resource Type: </th>
+            <td>@request.ResourceType</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <center>
+        <button type="submit" class="button" @onclick="RemoveOffice">Delete Office</button> &nbsp;
+        <a href="/Office/List" class="button" role="button">Cancel</a>
+    </center>
+</fieldset>
+<br />
+<br />
+
+
+@code {
+
+    REQUEST request = new REQUEST();
+    EMPLOYEE employee = new EMPLOYEE();
+    OFFICE office = new OFFICE();
+
+
+    [Parameter]
+    public int Id { get; set; }
+
+    
+
+    //Code to Delete the request
+    private void RemoveOffice()
+    {
+        ReqService.DeleteRequest(Id);
+
+        NavigationManager.NavigateTo("Office/List");
+    }
+
+    protected override void OnInitialized()
+    {
+        office = OffService.GetOffice(Id);
+        employee = EmpService.GetEmployee(Id);
+        request = ReqService.GetRequest(Id);
+     
+    }
+
+}

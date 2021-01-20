@@ -1,0 +1,43 @@
+﻿@*//This page is to delete the assign TA for a specific section from TA list page and the database*@
+
+@page "/TA/Delete"
+
+@layout CAADULayout
+
+<title>FIMS | Delete TA</title>
+
+<br />
+<h4>Delete TA Assignment</h4>
+<br />
+<center>
+    <div class="alert alert-danger" style="width:320px; height:80px">
+        DO YOU WANT TO DELETE THIS TA Assignment?
+    </div>
+</center>
+
+<fieldset>
+    <table class="table table-borderless" style="color:#4d0000">
+        <tr>
+            <th scope="row">TA Id: </th>
+            <td>20212</td>
+        </tr>
+        <tr>
+            <th scope="row">TA Name: </th>
+            <td>Maha Alabid</td>
+        </tr>
+        <tr>
+            <th scope="row">Assigned Workload: </th>
+            <td>12</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <center>
+        <button type="submit" class="button">Delete TA</button> &nbsp;
+        <a href="/Office/List" class="button" role="button">Cancel</a>
+    </center>
+</fieldset>
+<br />
+<br />
+
+

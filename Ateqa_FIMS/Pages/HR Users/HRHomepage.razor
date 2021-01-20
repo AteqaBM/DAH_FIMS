@@ -1,13 +1,109 @@
-﻿@page "/HR/Homepage/{HRName}"
+﻿@*//This page is the Homepage for the HR Users
+    //This page contains one of the system's features and the user can access to it through this page*@
 
-<h3>HR Homepage</h3>
+@page "/HR/Homepage"
 
+@layout HRLayout
 
-@code {
+<title>FIMS | HR Users Homepage</title>
+<body>
+    <div class=" container-fluid">
+        <div class=" raw ">
+            <div class="row">
+                <div class="col">
+                    <main role="main">
+                        <h5>Faculties</h5>
+                        <hr />
+                        <center><p>@approveMessage</p></center><center><p>@rejectMessage</p></center>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr class="table-warning">
+                                        <th>Faculty Name</th>
+                                        <th>Position Title</th>
+                                        <th>Job Type</th>
+                                        <th>School Name</th>
+                                        <th>Department Name</th>
+                                        <th>Reqruitment Status</th>
+                                        <th>Tasks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mohammed Fares</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Part-Time</td>
+                                        <td>Business & Law</td>
+                                        <td>Cybersecurity</td>
+                                        <td>Pending</td>
+                                        <td>
+                                            <a href="/Profile/DetailsHR"><span class="oi oi-list"></span></a> &nbsp;
+                                            <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                            <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shaimaa Masry</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Full-Time</td>
+                                        <td>Computing Engineering & Informatic</td>
+                                        <td>Cybersecurity</td>
+                                        <td>Pending</td>
+                                        <td>
+                                            <a href="/Profile/DetailsHR"><span class="oi oi-list"></span></a> &nbsp;
+                                            <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                            <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mohammed Fares</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Part-Time</td>
+                                        <td>Business & Law</td>
+                                        <td>Cybersecurity</td>
+                                        <td>Pending</td>
+                                        <td>
+                                            <a href="/Profile/DetailsHR"><span class="oi oi-list"></span></a> &nbsp;
+                                            <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                            <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shaimaa Masry</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Full-Time</td>
+                                        <td>Computing Engineering & Informatic</td>
+                                        <td>Cybersecurity</td>
+                                        <td>Accepted</td>
+                                        <td>
+                                            <a href="/Profile/DetailsHR"><span class="oi oi-list"></span></a> &nbsp;
+                                            <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                                            <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </main>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>      
+</body>
 
-    [Parameter]
-    public string HRName { get; set; }
+@code
+{
+    string approveMessage;
+    string rejectMessage;
 
+    protected void messageAButtonClicked()
+    {
+        approveMessage = "The Profile Has Been Approved";
+    }
 
-
+    protected void messageBButtonClicked()
+    {
+        rejectMessage = "The Profile Has Been Rejected";
+    }
 }
+

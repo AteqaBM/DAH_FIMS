@@ -1,4 +1,4 @@
-﻿@*//This page to edit the faculty profile details*@
+﻿@*//This page to edit the faculty profile details
 
 @page "/Profile/Edit/{Id:int}"
 
@@ -22,7 +22,7 @@
 <title>FIMS | Edit Profile</title>
 
 <br />
-<h4>Add Profile</h4>
+<h4>Edit Profile</h4>
 <br />
 <form action="/" method="get" id="ProfileAdd">
     <fieldset>
@@ -74,13 +74,13 @@
                 <label class="col-form-label col-sm-3 pt-0"><b>Marital status:*</b></label>
                 <div class="col-sm-7">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" @bind="employee.FACULTY.Status">
                         <label class="form-check-label" for="inlineRadio1">
                             Single
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" @bind="employee.FACULTY.Status">
                         <label class="form-check-label" for="inlineRadio2">
                             Married
                         </label>
@@ -123,12 +123,12 @@
             <div class="form-group row">
                 <label for="schoolName" class="col-sm-3 col-form-label"><b>School Name:*</b></label>
                 <div class="col-sm-5">
-                    <select id="schoolName" class="form-control">
+                    <select id="schoolName" @bind="employee.Department.SchoolId" class="form-control">
                         <option selected>---Select a School---</option>
-                        <option>School of Business & Law</option>
-                        <option>School of Design & Architecture</option>
-                        <option>School of Health, Behavioral Sciences & Education</option>
-                        <option>School of Engineering, Computing & Informatics</option>
+                        <option value="1">School of Business & Law</option>
+                        <option value="2">School of Design & Architecture</option>
+                        <option value="3">School of Health, Behavioral Sciences & Education</option>
+                        <option value="4">School of Engineering, Computing & Informatics</option>
                     </select>
                 </div>
             </div>
@@ -136,7 +136,7 @@
             <div class="form-group row">
                 <label for="department" class="col-sm-3 col-form-label"><b>Department Name:*</b></label>
                 <div class="col-sm-5">
-                    <InputSelect @bind-Value="departmentId" id="department" class="form-control">
+                    <InputSelect @bind-Value="employee.DepartmentId" id="department" class="form-control">
                         <option value="">---Select a Department---</option>
                         @foreach (var department in departments)
                         {
@@ -150,7 +150,7 @@
             <div class="form-group row">
                 <label for="position" class="col-sm-3 col-form-label"><b>Position Title:*</b></label>
                 <div class="col-sm-5">
-                    <InputSelect @bind-Value="positionId" id="position" class="form-control">
+                    <InputSelect @bind-Value="employee.PositionId" id="position" class="form-control">
                         <option value="">---Select a Position---</option>
                         @foreach (var position in positions)
                         {
@@ -180,7 +180,7 @@
             <div class="form-group row">
                 <label for="officeNumber" class="col-sm-3 col-form-label"><b>Office Number:*</b></label>
                 <div class="col-sm-5">
-                    <InputSelect @bind-Value="officeId" id="officeNumber" class="form-control">
+                    <InputSelect @bind-Value="employee.OfficeId" id="officeNumber" class="form-control">
                         <option value="">---Select an Office---</option>
                         @foreach (var office in offices)
                         {
@@ -276,7 +276,7 @@
                 </div>
             </div>
 
-            @*<div class="form-group row">
+            <div class="form-group row">
                 <label for="hiringDocuments" class="col-sm-3 col-form-label">Hiring Documents Copy:*</label>
                 <div class="col-sm-5">
                     <div class="control_wrapper">
@@ -286,7 +286,7 @@
                         </SfUploader>
                     </div>
                 </div>
-            </div>*@
+            </div>
             <br />
             <br />
             <center>
@@ -314,6 +314,7 @@
     POSITION position = new POSITION();
     OFFICE office = new OFFICE();
 
+
     // Needed to get attributes of each table
     private List<EMPLOYEE> employees = new List<EMPLOYEE>();
     private List<FACULTY> faculties = new List<FACULTY>();
@@ -325,6 +326,7 @@
     private string departmentId = String.Empty;
     private string positionId = String.Empty;
     private string officeId = String.Empty;
+    //private string deptName;
 
     //Execute when component starts / initializes
     protected override void OnInitialized()
@@ -336,6 +338,8 @@
         offices = OffService.GetOffices();
 
         employee = EmpService.GetEmployee(Id);
+        //deptName = DepService.GetDepartmentName(Id);
+
         faculty = FacService.GetFaculty(Id);
         department = DepService.GetDepartment(Id);
         position = PosService.GetPosition(Id);
@@ -366,4 +370,4 @@
             await fileUpload.UploadAsync(file);
         }
     }
-}
+}*@

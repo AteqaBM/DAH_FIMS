@@ -21,6 +21,7 @@ namespace DAH_FIMS.Model
 
         [Key]
         public int EmployeeId { get; set; }
+       
         [Column(TypeName = "date")]
         [Required(ErrorMessage = "The Date Of Birth field is required ")]
         public DateTime? DateOfBirth { get; set; }
@@ -29,7 +30,7 @@ namespace DAH_FIMS.Model
         public string Nationality { get; set; }
         [Required(ErrorMessage = "The Status field is required ")]
         [StringLength(10)]
-        public string Status { get; set; }
+        public string Status { get; set; } = "";
         [Required(ErrorMessage = "The Mobile Number field is required ")]
         [StringLength(14)]
         [Phone(ErrorMessage = "Invalid Mobile Number Ex.(00966xxxxxxxxx)")]
@@ -70,9 +71,11 @@ namespace DAH_FIMS.Model
         public virtual ICollection<FACULTY_COURSE> FACULTY_COURSEs { get; set; }
         [InverseProperty(nameof(GENERATE_NOTIFICATION.Employee))]
         public virtual ICollection<GENERATE_NOTIFICATION> GENERATE_NOTIFICATIONs { get; set; }
+
+        [Required(ErrorMessage = "The Hiring Documents field is required ")]
         [InverseProperty(nameof(HIRING_DOCUMENT.Employee))]
         public virtual ICollection<HIRING_DOCUMENT> HIRING_DOCUMENTs { get; set; }
-        [InverseProperty(nameof(WORKLOAD.Employee))]
+        [InverseProperty(nameof(WORKLOAD.Faculty))]
         public virtual ICollection<WORKLOAD> WORKLOADs { get; set; }
     }
 
@@ -83,7 +86,29 @@ namespace DAH_FIMS.Model
 
     public enum Rank
     {
-        Professor = 1, AssociateProfessor, AssistantProfessor, Lecturer
+        Professor = 1, AssociateProfessor, AssistantProfessor, Lecturer, Demonstrator
     }
-        
+    
+    public enum Status
+    {
+        Single = 1, Married
+    }
+
+    public enum HighestEducation
+    {
+        BachelorDegree = 1, MasterDegree, DoctoralDegree, Other
+    }
+
+    public enum Division
+    {
+        HumanCapitalManagment = 1, Law, Marketing, DiplomacyAndInternationRelations, BankingAndFinance, Accounting,
+        VisualCommunication, FashionDesign, Architecture, InteriorDesign,
+        SpeachLanguageAndHearingSciences, Psychology,
+        Cybersecurity, ComputerScience, InformationSystem, Other 
+    }
+
+    public enum TypeOfContract
+    {
+        Permenant = 1, Temporary, Other
+    }
 }

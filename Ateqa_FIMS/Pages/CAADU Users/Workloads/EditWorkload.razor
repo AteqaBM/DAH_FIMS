@@ -1,0 +1,184 @@
+﻿@*//This page to Edit the assigned  Workload for a faculty in the databse with its information*@
+
+@page "/Workload/Edit"
+
+@layout CAADULayout
+
+@using DAH_FIMS.Model
+@using DAH_FIMS.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject FCService FCService
+
+<title>FIMS | Edit Workload</title>
+
+<br />
+<h4>Edit Workload</h4>
+<br />
+<form action="/" method="get" id="officeAdd">
+    <fieldset>
+        <EditForm Model="fCourse" OnValidSubmit="AddFCourse">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row">
+                <label for="fId" class="col-sm-3 col-form-label"><b>Faculty Id:*</b></label>
+                <div class="col-sm-5">
+                    <input type="text" id="cnumber6" name="cnumber6" @bind="fCourse.EmployeeId">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="fName" class="col-sm-3 col-form-label"><b>Faculty Name:*</b></label>
+                <div class="col-sm-5">
+                    <input type="text" id="cnumber6" name="cnumber6">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="rank" class="col-sm-3 col-form-label"><b>Rank:*</b></label>
+                <div class="col-sm-5">
+                    <input type="text" id="cnumber6" name="cnumber6" @bind="fCourse.CourseId">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="aYear" class="col-sm-3 col-form-label"><b>Academic Year:*</b></label>
+                <div class="col-sm-5">
+                    <input type="text" id="cnumber6" name="cnumber6" @bind="fCourse.AcademicYear">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="semester" class="col-sm-3 col-form-label"><b>Semester:*</b></label>
+                <div class="col-sm-5">
+                    <select @bind="fCourse.Semester" id="semester" class="form-control">
+                        <option value="">---Select a Semester---</option>
+                        @foreach (var semester in Enum.GetNames(typeof(Semester)))
+                        {
+                            <option>@semester</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="semester" class="col-sm-3 col-form-label"><b>Course Details:*</b></label>
+                <div class="col-sm-5">
+                    <div class="table-wrapper" style="overflow:auto; height:200px; width:600px">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr class="table-warning" style="background-color:#4d0000">
+                                    <th>Course</th>
+                                    <th>Course Code</th>
+                                    <th>Course Title</th>
+                                    <th>Course Credits</th>
+                                    <th>Section Number</th>
+                                    <th>Course Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" id="cnumber" name="cnumber"></td>
+                                    <td><input type="text" id="ccode" name="ccode"></td>
+                                    <td><input type="text" id="ctitle" name="ctitle"></td>
+                                    <td><input type="text" id="ccredits" name="ccredits"></td>
+                                    <td><input type="text" id="snumber" name="snumber"></td>
+                                    <td><input type="text" id="ctype" name="ctype"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="cnumber" name="cnumber"></td>
+                                    <td><input type="text" id="ccode" name="ccode"></td>
+                                    <td><input type="text" id="ctitle" name="ctitle"></td>
+                                    <td><input type="text" id="ccredits" name="ccredits"></td>
+                                    <td><input type="text" id="snumber" name="snumber"></td>
+                                    <td><input type="text" id="ctype" name="ctype"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="cnumber" name="cnumber"></td>
+                                    <td><input type="text" id="ccode" name="ccode"></td>
+                                    <td><input type="text" id="ctitle" name="ctitle"></td>
+                                    <td><input type="text" id="ccredits" name="ccredits"></td>
+                                    <td><input type="text" id="snumber" name="snumber"></td>
+                                    <td><input type="text" id="ctype" name="ctype"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="cnumber" name="cnumber"></td>
+                                    <td><input type="text" id="ccode" name="ccode"></td>
+                                    <td><input type="text" id="ctitle" name="ctitle"></td>
+                                    <td><input type="text" id="ccredits" name="ccredits"></td>
+                                    <td><input type="text" id="snumber" name="snumber"></td>
+                                    <td><input type="text" id="ctype" name="ctype"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="cnumber" name="cnumber"></td>
+                                    <td><input type="text" id="ccode" name="ccode"></td>
+                                    <td><input type="text" id="ctitle" name="ctitle"></td>
+                                    <td><input type="text" id="ccredits" name="ccredits"></td>
+                                    <td><input type="text" id="snumber" name="snumber"></td>
+                                    <td><input type="text" id="ctype" name="ctype"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="cnumber6" name="cnumber6"></td>
+                                    <td><input type="text" id="ccode6" name="ccode6"></td>
+                                    <td><input type="text" id="ctitle6" name="ctitle6"></td>
+                                    <td><input type="text" id="ccredits6" name="ccredits6"></td>
+                                    <td><input type="text" id="snumber6" name="snumber6"></td>
+                                    <td><input type="text" id="ctype6" name="ctype6"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="aYear" class="col-sm-3 col-form-label"><b>Total Workload:*</b></label>
+                <div class="col-sm-5">
+                    <input type="number" id="cnumber6" name="cnumber6">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="aYear" class="col-sm-3 col-form-label"><b>Total Contact Hours:*</b></label>
+                <div class="col-sm-5">
+                    <input type="number" id="cnumber6" name="cnumber6" @bind="fCourse.TotalContactHours">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="semester" class="col-sm-3 col-form-label"><b>Load Type:*</b></label>
+                <div class="col-sm-5">
+                    <select id="semester" class="form-control" @bind="fCourse.CourseTeachingType">
+                        <option value="">---Select a Type---</option>
+                        @foreach (var semester in Enum.GetNames(typeof(Semester)))
+                        {
+                            <option>Normal</option>
+                            <option>Over-Load</option>
+                            <option>Under-Load</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <button type="submit" class="button">Save</button>
+                <a href="/WorkloadCaadu/List" class="button" role="button">Cancel</a>
+            </center>
+            <br />
+        </EditForm>
+    </fieldset>
+</form>
+<br />
+<br />
+
+
+@code {
+
+    FACULTY_COURSE fCourse = new FACULTY_COURSE();
+  
+    //TO Assign New Workload Code
+    private void AddFCourse()
+    {
+    }
+}

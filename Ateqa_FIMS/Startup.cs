@@ -53,6 +53,10 @@ namespace DAH_FIMS
             services.AddScoped<OfficesService>();
             services.AddScoped<RequestsService>();
             services.AddScoped<ResourcesService>();
+            services.AddScoped<WorkloadService>();
+            services.AddScoped<CourseService>();
+            services.AddScoped<TAService>();
+            services.AddScoped<FCService>();
 
             services.AddSingleton<AppDataService>();
             services.AddScoped<AppDataService>();

@@ -1,64 +1,126 @@
-﻿@page "/CAADU/Homepage/{caaduName}"
+﻿@*//This page is the Homepage for the CAADU Users
+    //This page contains some features of the system and the user can access to it through this page*@
+
+@page "/CAADU/Homepage"
+
 @layout CAADULayout
 
-<div class=" raw ">
-    <div class=" col-10 ">
-        <table style=" width: 100%">
-            <tr>
-                <th>
-                    <h4>
-                        Pending List (Workloads)
-                    </h4>
-                </th>
-            <tr>
-                <th>
-                    <br />
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <br />
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <br />
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <br />
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <br />
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <br />
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <h4>
-                        Pending List (Teacher Assistants)
-                    </h4>
-                </th>
-            </tr>
-            </tr>
-        </table>
+<title>FIMS | CAADU Homepage</title>
+<body>
+    <div class=" container-fluid">
+        <div class=" raw ">
+            <div class="row">
+                <div class="col">
+                    <main role="main">
+                        <h5>Pending Workload List</h5>
+                        <hr />
+                        <div class="table-wrapper" style="overflow:auto; height:200px; width:1300px">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr class="table-warning">
+                                        <th>Faculty Name</th>
+                                        <th>Position Title</th>
+                                        <th>Job Type</th>
+                                        <th>Department Name</th>
+                                        <th>Workload</th>
+                                        <th>Approval Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mohammed Fares</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Part-Type</td>
+                                        <td>Cybersecurity</td>
+                                        <td>8</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shaimaa Masry</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Full-Type</td>
+                                        <td>Computer Science</td>
+                                        <td>9</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mohammed Fares</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Part-Type</td>
+                                        <td>Cybersecurity</td>
+                                        <td>8</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shaimaa Masry</td>
+                                        <td>Assisstant Professor</td>
+                                        <td>Full-Type</td>
+                                        <td>Computer Science</td>
+                                        <td>9</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <main role="main">
+                        <h5>Pending TA List</h5>
+                        <hr />
+                        <div class="table-wrapper" style="overflow:auto; height:200px; width:1300px">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr class="table-warning">
+                                        <th>TA Name</th>
+                                        <th>Department Name</th>
+                                        <th>Section Id</th>
+                                        <th>Workload</th>
+                                        <th>Approval Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sara Braik</td>
+                                        <td>Cybersecurity</td>
+                                        <td>23</td>
+                                        <td>12</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maha Alabed</td>
+                                        <td>Computer Science</td>
+                                        <td>25</td>
+                                        <td>9</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sara Braik</td>
+                                        <td>Cybersecurity</td>
+                                        <td>23</td>
+                                        <td>12</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maha Alabed</td>
+                                        <td>Computer Science</td>
+                                        <td>25</td>
+                                        <td>9</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <br />
+    <br />
+</body>
 
 
-
-@code {
-
-    [Parameter]
-    public string caaduName { get; set; }
-
-
-
-}

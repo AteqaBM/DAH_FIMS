@@ -16,7 +16,7 @@
 </div>
 
 <div style="float: right">
-    <a href="/Office/Assign"><span class="oi oi-plus"></span></a>&nbsp;
+    <a href="/Office/Add"><span class="oi oi-plus"></span></a>&nbsp;
     <b>Add Office</b>
 </div><div style="clear: both;"></div>
 
@@ -48,18 +48,21 @@ else
                     <td>@item.OfficeArea</td>
                     <td>@item.AvailableResources</td>
                     <td>
-                        @if (count == 0)
+                        @if (EmpService.GetOfficeEmployees(item.OfficeId).Count == 0)
                         {
                             <p> This Office Has Not Been Assigned </p>
                         }
                         else
                         {
-                            @foreach (var employee in officeEmployees)
+                            <p> This Office Has  Been Assigned To: </p>
+
+                            @foreach (var employee in (EmpService.GetOfficeEmployees(item.OfficeId).ToList()))
                             {
-                                @employee.FirstName @employee.LastName
+
+                    <p>@employee.FirstName @employee.LastName</p>           
                             }
                         }
-                        </td>
+                    </td>
 
                     <td>
                         <a href="Office/Details/@item.OfficeId"><span class="oi oi-list"></span></a> &nbsp;

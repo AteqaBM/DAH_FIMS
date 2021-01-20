@@ -1,0 +1,92 @@
+﻿@*//This page is viewing the list of all the facuties workloads that has been added to the
+    //databse and provide mutible actions that can be performed to the Workloads.*@
+
+@page "/WorkloadProv/List"
+
+@layout ProvostLayout2
+
+@inject WorkloadService WorkService
+@inject EmployeeService EmpService
+
+
+<title>FIMS | Workloads</title>
+
+<br />
+<div style="float: left">
+    <h4>Workloads</h4>
+</div>
+
+@*<div style="float: right">
+    <a href="/Workload/Add"><span class="oi oi-plus"></span></a>&nbsp;
+    <b>Add Workload</b>
+</div><div style="clear: both;"></div>*@
+
+<br />
+@if (workloads == null)
+{
+    <div class="d-flex align-items-center">
+        <strong>Loading data ...</strong>
+        <div class="spinner-border ml-auto"></div>
+    </div>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr class="table-warning">
+                <th>Faculty Name</th>
+                <th>Position Title</th>
+                <th>Department Name</th>
+                <th>Workload</th>
+                <th>Is It Approved</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in workloads)
+            {
+            <tr>
+                <td>@item.Employee.FirstName @item.Employee.LastName</td>
+                <td>@item.Employee.Position.PositionTitle</td>
+                <td>@item.Employee.Department.DepartmentName</td>
+                <td>@item.Workload1</td>
+                <td>@item.IsItApproved</td>
+                <td>
+                    <a href="Workload/DetailsProv"><span class="oi oi-list"></span></a> &nbsp;
+                    <a @onclick="messageAButtonClicked"><span class="oi oi-circle-check"></span></a> &nbsp;
+                    <a @onclick="messageBButtonClicked"><span class="oi oi-circle-x"></span></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<br />
+
+@code {
+
+    string approveMessage;
+    string rejectMessage;
+
+    protected void messageAButtonClicked()
+    {
+        approveMessage = "The Request Has Been Accepted";
+    }
+
+    protected void messageBButtonClicked()
+    {
+        rejectMessage = "The Request Has Been Rejected";
+    }
+
+    // Create a list of workloads to be displayed in the component
+    private List<WORKLOAD> workloads;
+
+    protected override void OnInitialized()
+    {
+        // Get the workloads from the service
+        workloads = WorkService.GetWorkloads();
+    }
+
+
+}
